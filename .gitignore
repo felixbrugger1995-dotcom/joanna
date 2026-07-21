@@ -1,0 +1,7 @@
+node_modules/
+*.log
+
+# Windows / macOS Datei-Ablage
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;family=Nunito+Sans:wght@400;600;700&amp;family=Bricolage+Grotesque:wght@400;500;600;700&amp;family=Outfit:wght@400;500;600;700&amp;family=Figtree:wght@400;500;600;700&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Spectral:wght@400;500;600&amp;family=Libre+Franklin:wght@400;500;600;700&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f4ede2;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#3a322b;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.nav-burger{display:none}
+@media(max-width:880px){
+  .nav-links-d{display:none !important}
+  .nav-burger{display:inline-flex !important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+image-slot{display:block !important;width:100% !important;height:100% !important}
+details>summary::-webkit-details-marker{display:none}
+details[open] .faq-mark{transform:rotate(45deg)}
+.paw{display:var(--paw-on,inline-flex);align-items:center;line-height:0;flex:none}
+.svc-track{scrollbar-width:none}
+.walktrail{position:absolute;top:0;left:42%;width:36%;height:62px;pointer-events:none;z-index:1}
+.walktrail .stepprint{position:absolute;color:var(--accentDeep,#8a5e3e);line-height:0;opacity:.16;animation:walkstep 3.4s ease-in-out infinite}
+@keyframes walkstep{0%,66%,100%{opacity:.16}12%,32%{opacity:.7}}
+@media(max-width:760px){.walktrail{display:none}.ablauf-line{display:none}}
+@media(prefers-reduced-motion:reduce){.walktrail .stepprint{animation:none;opacity:.3}}
+.svc-track::-webkit-scrollbar{display:none}
+@media(max-width:760px){.ueber-full>div:last-child{order:-1;min-height:300px}}
+.hero-full{position:relative;min-height:clamp(660px,96vh,1040px);display:flex;align-items:flex-end;overflow:hidden}
+.hero-full-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,50% 22%);filter:var(--hero-filter,none);transform:scale(var(--hero-scale,1))}
+.hero-full-glow{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,50% 22%);filter:blur(8px) brightness(1.18) saturate(1.2);transform:scale(1.08);mix-blend-mode:screen;opacity:var(--hero-haze,0.24);pointer-events:none}
+.hero-full-warm{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:var(--hero-warm,0);background:linear-gradient(120deg, rgba(255,150,60,.55) 0%, rgba(180,110,40,.4) 100%)}
+.hero-full-scrim{position:absolute;inset:0;pointer-events:none;opacity:var(--hero-overlay,0.8);mix-blend-mode:var(--hero-blend,normal);background:var(--hero-scrim,linear-gradient(180deg,rgba(20,14,9,.55) 0%,rgba(20,14,9,.2) 32%,rgba(20,14,9,.3) 58%,rgba(20,14,9,.8) 100%))}
+.hero-full-grain,.tex-grain{position:absolute;inset:0;pointer-events:none;opacity:var(--hero-grain,0);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:14px clamp(12px,4vw,24px)}
+.navbar-pill{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;max-width:1120px;padding:9px 10px 9px 26px;border-radius:999px;background:rgba(26,20,14,.46);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.15);box-shadow:0 12px 34px rgba(0,0,0,.2)}
+.nav-logo{font-family:var(--ff-logo,'Outfit',sans-serif);font-weight:700;font-size:22px;letter-spacing:.16em;text-decoration:none;color:#fff}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,1.7vw,26px)}
+.nav-links a{text-decoration:none;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.84);transition:color .2s}
+.nav-links a:not(.nav-cta):hover{color:#fff}
+.nav-links a.nav-cta{color:#fff;background:var(--accent,#b07d56);padding:10px 20px;border-radius:999px;font-weight:600}
+.nav-burger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.28);border-radius:12px;background:rgba(255,255,255,.1);cursor:pointer;flex-direction:column;gap:4px}
+.nav-burger span{width:18px;height:2px;background:#fff;border-radius:2px}
+.navbar[data-nav="classic"]{padding:0;background:color-mix(in srgb,var(--bg,#f4ede2) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line,rgba(58,50,43,.12))}
+.navbar[data-nav="classic"] .navbar-pill{max-width:1180px;margin:0 auto;height:64px;padding:0 clamp(18px,5vw,48px);border-radius:0;background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.navbar[data-nav="classic"] .nav-logo{color:var(--ink,#3a322b);font-weight:700;font-size:23px;letter-spacing:.18em}
+.navbar[data-nav="classic"] .nav-links a{color:var(--soft,#7d7264)}
+.navbar[data-nav="classic"] .nav-links a:not(.nav-cta):hover{color:var(--ink,#3a322b)}
+.navbar[data-nav="classic"] .nav-burger{border-color:var(--line,rgba(58,50,43,.12));background:var(--surface,#fcf8f1)}
+.navbar[data-nav="classic"] .nav-burger span{background:var(--ink,#3a322b)}
+.nav-mobile{position:absolute;top:100%;left:0;right:0}
+@media(max-width:880px){
+  .navbar-pill .nav-links-d{display:none !important}
+  .navbar-pill .nav-burger{display:flex !important}
+}
+.hero-full-inner{position:relative;z-index:1;max-width:1240px;width:100%;margin:0 auto;padding:0 clamp(18px,5vw,48px) clamp(40px,7vw,84px)}
+</style>
+</helmet>
+<div style="{{ themeStyle }}">
+
+<!-- ===== STICKY NAV ===== -->
+<header class="navbar" data-nav="{{ navMode }}">
+  <nav class="navbar-pill">
+    <a href="#home" class="nav-logo">JOANNA</a>
+    <div class="nav-links-d nav-links">
+      <a href="#ueber">Über mich</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#gebiet">Einzugsgebiet</a>
+      <a href="#preise">Preise</a>
+      <a href="Termin vereinbaren.dc.html" class="nav-cta">Termin vereinbaren</a>
+    </div>
+    <button class="nav-burger" onClick="{{ toggleMenu }}" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" style="{{ mobileMenuStyle }}">
+    <a href="#ueber" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Über mich</a>
+    <a href="#leistungen" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Leistungen</a>
+    <a href="#ablauf" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Ablauf</a>
+    <a href="#gebiet" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Einzugsgebiet</a>
+    <a href="#preise" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Preise</a>
+    <a href="#kontakt" onClick="{{ closeMenu }}" style="text-decoration:none;font-size:16px;font-weight:500;color:var(--ink,#3a322b);padding:8px 8px">Kontakt</a>
+    <a href="Termin vereinbaren.dc.html" style="text-decoration:none;text-align:center;font-size:15px;font-weight:600;color:#fff;background:var(--accent,#b07d56);padding:12px 18px;border-radius:999px;margin-top:6px">Termin vereinbaren</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="home">
+
+  <!-- VOLLBILD -->
+
+  <!-- VOLLBILD -->
+  <sc-if value="{{ heroFull }}" hint-placeholder-val="{{ true }}">
+    <div class="hero-full">
+      <img class="hero-full-photo" src="uploads/IMG_9613.jpg" alt="Joanna mit ihrem Hund">
+      <img class="hero-full-glow" src="uploads/IMG_9613.jpg" alt="" aria-hidden="true">
+      <div class="hero-full-warm"></div>
+      <div class="hero-full-scrim"></div>
+      <div class="hero-full-grain"></div>
+      <div class="hero-full-inner">
+        <h1 style="margin:0;font-family:var(--ff-logo,'Outfit',sans-serif);font-weight:500;line-height:.84;letter-spacing:-.01em;font-size:clamp(64px,15vw,180px);color:#fff;text-shadow:0 2px 36px rgba(0,0,0,.28)">JOANNA</h1>
+        <p style="margin:16px 0 0;font-size:clamp(18px,2.7vw,30px);font-weight:400;color:rgba(255,255,255,.96);text-shadow:0 1px 14px rgba(0,0,0,.35)">mobile Tierphysiotherapeutin für Kleintiere</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- GETEILT -->
+  <sc-if value="{{ heroSplit }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(40px,7vw,80px) clamp(18px,5vw,48px);display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,64px);align-items:center">
+      <div style="flex:1 1 340px;min-width:280px">
+        <p style="margin:0 0 16px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Tierphysiotherapie mit Herz</p>
+        <h1 style="margin:0;font-family:var(--ff-logo,'Outfit',sans-serif);font-weight:700;line-height:.94;letter-spacing:.02em;font-size:clamp(62px,10.5vw,132px);color:var(--ink,#3a322b)">JOANNA</h1>
+        <p style="margin:20px 0 32px;font-size:clamp(18px,2.7vw,27px);line-height:1.35;color:var(--soft,#7d7264);max-width:30ch">mobile Tierphysiotherapeutin für Kleintiere</p>
+        <a href="Termin vereinbaren.dc.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:16px;font-weight:600;color:#fff;background:var(--accent,#b07d56);padding:15px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(140,94,62,.28)"><span class="paw"><svg viewBox="0 0 28 26" width="1.05em" height="1.05em" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>Termin vereinbaren</a>
+      </div>
+      <div style="flex:1 1 340px;min-width:280px">
+        <img src="uploads/IMG_9613.jpg" alt="Joanna mit ihrem Hund" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:var(--hero-pos,50% 50%);filter:var(--hero-filter,none);border-radius:26px;box-shadow:0 24px 60px rgba(40,30,22,.18)">
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ZENTRIERT -->
+  <sc-if value="{{ heroCentered }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1080px;margin:0 auto;padding:clamp(48px,8vw,92px) clamp(18px,5vw,48px) 0;text-align:center">
+      <p style="margin:0 0 16px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Tierphysiotherapie mit Herz</p>
+      <h1 style="margin:0;font-family:var(--ff-logo,'Outfit',sans-serif);font-weight:700;line-height:.96;letter-spacing:.04em;font-size:clamp(58px,13vw,140px);color:var(--ink,#3a322b)">JOANNA</h1>
+      <p style="margin:18px auto 30px;font-size:clamp(17px,2.4vw,23px);color:var(--soft,#7d7264);max-width:34ch">mobile Tierphysiotherapeutin für Kleintiere</p>
+      <a href="Termin vereinbaren.dc.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:16px;font-weight:600;color:#fff;background:var(--accent,#b07d56);padding:15px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(140,94,62,.28)"><span class="paw"><svg viewBox="0 0 28 26" width="1.05em" height="1.05em" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>Termin vereinbaren</a>
+      <img src="uploads/IMG_9613.jpg" alt="Joanna mit ihrem Hund" style="width:100%;height:clamp(340px,52vw,620px);object-fit:cover;object-position:var(--hero-pos,50% 28%);filter:var(--hero-filter,none);border-radius:26px;margin-top:clamp(32px,5vw,56px)">
+    </div>
+  </sc-if>
+
+</section>
+
+<!-- ===== ÜBER MICH ===== -->
+<section id="ueber" style="scroll-margin-top:0px;padding:clamp(64px,10vw,120px) 0">
+
+  <!-- Variante: Editorial (bündig + Weiterlesen) -->
+  <sc-if value="{{ aboutEditorial }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,48px)">
+      <div data-reveal="" style="max-width:680px;margin:0 auto clamp(40px,5vw,60px);text-align:center">
+        <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Über mich</p>
+        <h2 style="margin:0;font-family:var(--ff-head,'Instrument Sans',sans-serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:var(--ink,#3a322b)">Hallo, ich bin Joanna.</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(32px,4vw,64px)" class="ueber-full">
+        <div data-reveal="" style="flex:1 1 440px;min-width:300px;display:flex">
+          <div style="max-width:560px;width:100%;display:flex;flex-direction:column">
+            <p style="margin:0 0 18px;font-size:17px;line-height:1.8;color:var(--soft,#7d7264)">Tiere begleiten mich mein Leben lang. Schon als Kind war es für mich selbstverständlich, für sie da zu sein – ob für die eigenen Hunde oder die Tiere auf der Straße, denen ich intuitiv geholfen habe. Früh habe ich gespürt, dass das Wohlergehen unserer treuen Begleiter für mich weit mehr ist als ein Hobby – es ist eine tiefe Überzeugung.</p>
+            <p style="margin:0 0 18px;font-size:17px;line-height:1.8;color:var(--soft,#7d7264)">Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. In jedem Beruf blieb mein eigentliches Ziel dasselbe: einen Beitrag für Tiere in Not zu leisten. Ein Coaching gab schließlich den entscheidenden Anstoß, diesem Herzenswunsch endlich zu folgen. Ich stellte mir die Frage: Warum nicht direkt dort helfen, wo mein Herz wirklich schlägt?</p>
+            <div style="{{ moreStyle }}">
+              <div style="min-height:0">
+                <p style="margin:0 0 18px;font-size:17px;line-height:1.8;color:var(--soft,#7d7264)">2025 habe ich meine Ausbildung zur <strong style="color:var(--ink,#3a322b);font-weight:600">Tierphysiotherapeutin für Kleintiere</strong> abgeschlossen. Seitdem arbeite ich mobil und komme zu Ihnen und Ihrem Tier nach Hause – in vertrauter, stressfreier Umgebung, in der sich Ihr Liebling rundum wohlfühlt.</p>
+                <p style="margin:0 0 18px;font-size:17px;line-height:1.8;color:var(--soft,#7d7264)">Mit ganzer Kraft und viel Einfühlungsvermögen setze ich mich dafür ein, die Beweglichkeit Ihres Tieres zu verbessern, Schmerzen zu lindern und gemeinsam mit Ihnen die passende Lösung für Ihren Liebling zu finden. Dabei ist mir eine vertrauensvolle, ehrliche Zusammenarbeit auf Augenhöhe besonders wichtig.</p>
+              </div>
+            </div>
+            <button onClick="{{ toggleAbout }}" style="align-self:flex-start;margin:6px 0 26px;display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;color:var(--accentDeep,#8a5e3e)">{{ aboutMoreLabel }} <span style="font-size:12px">▾</span></button>
+
+            <div style="display:flex;flex-wrap:nowrap;gap:8px;margin-top:auto;overflow-x:auto">
+              <div style="display:flex;align-items:center;gap:7px;background:var(--surface,#fcf8f1);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:500;white-space:nowrap;color:var(--ink,#3a322b);box-shadow:0 8px 20px rgba(40,36,28,.06)"><span class="paw" style="color:var(--accent,#b07d56)"><svg viewBox="0 0 28 26" width="11" height="10" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>Ausbildung 2025</div>
+              <div style="display:flex;align-items:center;gap:7px;background:var(--surface,#fcf8f1);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:500;white-space:nowrap;color:var(--ink,#3a322b);box-shadow:0 8px 20px rgba(40,36,28,.06)"><span class="paw" style="color:var(--accent,#b07d56)"><svg viewBox="0 0 28 26" width="11" height="10" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>Mobil vor Ort</div>
+              <div style="display:flex;align-items:center;gap:7px;background:var(--surface,#fcf8f1);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:500;white-space:nowrap;color:var(--ink,#3a322b);box-shadow:0 8px 20px rgba(40,36,28,.06)"><span class="paw" style="color:var(--accent,#b07d56)"><svg viewBox="0 0 28 26" width="11" height="10" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>Einfühlsam &amp; geduldig</div>
+            </div>
+          </div>
+        </div>
+        <div data-reveal="" style="flex:1 1 380px;min-width:300px;position:relative;overflow:hidden;min-height:clamp(400px,48vw,540px);border-radius:24px;background:var(--accentDeep,#8a5e3e);box-shadow:0 10px 26px rgba(40,36,28,.05)">
+          <img src="uploads/portrait-2.jpg" alt="Joanna mit ihrem Hund" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 48%">
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(28,20,12,0) 46%,rgba(28,20,12,.7) 100%)"></div>
+          <div style="position:absolute;left:24px;right:24px;bottom:22px;pointer-events:none"><span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.22);backdrop-filter:blur(4px);padding:5px 12px;border-radius:999px">Joanna &amp; Nala</span></div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Variante: Immersiv (2c) -->
+  <sc-if value="{{ aboutImmersive }}" hint-placeholder-val="{{ true }}">
+    <div data-reveal="" style="position:relative;min-height:clamp(560px,80vh,760px);display:flex;align-items:flex-end;overflow:hidden;margin:0 clamp(0px,3vw,40px);border-radius:clamp(0px,2vw,28px)">
+      <img src="uploads/portrait-2.jpg" alt="Joanna mit ihrem Hund" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 34%;filter:sepia(0.14) saturate(1.16) contrast(1.0) brightness(0.9)">
+      <img src="uploads/portrait-2.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 34%;filter:blur(9px) brightness(1.16) saturate(1.1);transform:scale(1.06);mix-blend-mode:screen;opacity:0.2;pointer-events:none">
+      <div style="position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;background:linear-gradient(120deg, rgba(255,160,80,.5) 0%, rgba(190,130,70,.4) 100%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(24,17,10,.82) 0%,rgba(24,17,10,.5) 42%,rgba(24,17,10,.08) 74%)"></div>
+      <div class="tex-grain" style="opacity:.08"></div>
+      <div style="position:relative;padding:clamp(32px,4.5vw,68px);max-width:620px;color:#f4efe3">
+        <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,239,227,.78)">Über mich</p>
+        <h2 style="margin:0 0 20px;font-family:var(--ff-head,'Instrument Sans',sans-serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:#fff">Hallo, ich bin Joanna.</h2>
+        <p style="margin:0 0 16px;font-size:17px;line-height:1.7;color:rgba(244,239,227,.92)">Tiere begleiten mich mein Leben lang. Schon als Kind war es für mich selbstverständlich, für sie da zu sein. Früh habe ich gespürt, dass ihr Wohlergehen für mich weit mehr ist als ein Hobby – es ist eine tiefe Überzeugung.</p>
+        <div style="{{ moreStyle }}">
+          <div style="min-height:0">
+            <p style="margin:0 0 16px;font-size:16.5px;line-height:1.8;color:rgba(244,239,227,.92)">Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. Ein Coaching gab den entscheidenden Anstoß, meinem Herzenswunsch endlich zu folgen. 2025 habe ich meine Ausbildung zur Tierphysiotherapeutin für Kleintiere abgeschlossen.</p>
+            <p style="margin:0 0 16px;font-size:16.5px;line-height:1.8;color:rgba(244,239,227,.92)">Seitdem arbeite ich mobil und komme zu Ihnen und Ihrem Tier nach Hause – in vertrauter Umgebung. Mit ganzer Kraft setze ich mich dafür ein, die Beweglichkeit Ihres Tieres zu verbessern und gemeinsam mit Ihnen die passende Lösung zu finden.</p>
+          </div>
+        </div>
+        <button onClick="{{ toggleAbout }}" style="margin:2px 0 24px;display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;color:#fff">{{ aboutMoreLabel }} <span style="font-size:12px">▾</span></button>
+        <div style="display:flex;flex-wrap:wrap;gap:9px">
+          <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:500;color:#fff">Ausbildung 2025</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:500;color:#fff">Mobil vor Ort</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:500;color:#fff">Einfühlsam &amp; geduldig</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</section>
+
+<!-- ===== LEISTUNGEN ===== -->
+<section id="leistungen" style="background:var(--surface,#fcf8f1);padding:clamp(64px,10vw,120px) clamp(18px,5vw,48px)">
+  <div style="max-width:1180px;margin:0 auto">
+    <div data-reveal="" style="max-width:680px;margin:0 auto clamp(40px,5vw,60px);text-align:center">
+      <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Leistungen</p>
+      <h2 style="margin:0 0 16px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:var(--ink,#3a322b)">Was ich für dein Tier tun kann</h2>
+      <p style="margin:0;font-size:17px;line-height:1.7;color:var(--soft,#7d7264)">Jede Behandlung wird individuell auf die Bedürfnisse deines Lieblings abgestimmt.</p>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-bottom:18px">
+      <button onClick="{{ svcPrev }}" aria-label="Zurück" style="width:46px;height:46px;border-radius:50%;border:1px solid var(--line,rgba(58,50,43,.14));background:var(--bg,#f4ede2);color:var(--ink,#3a322b);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">←</button>
+      <button onClick="{{ svcNext }}" aria-label="Weiter" style="width:46px;height:46px;border-radius:50%;border:1px solid var(--line,rgba(58,50,43,.14));background:var(--bg,#f4ede2);color:var(--ink,#3a322b);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">→</button>
+    </div>
+    <div id="svc-track" class="svc-track" style="display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px 2px;margin:0 -2px">
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-1" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Wohlbefinden</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">Schmerzlinderung &amp; Entspannung</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Für mehr Leichtigkeit im Alltag</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Durch gezielte Massagen und manuelle Therapie werden Verspannungen gelöst, die Durchblutung gefördert und Schmerzkreisläufe sanft durchbrochen.</p>
+        </div>
+      </article>
+
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-2" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Aufbau</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">Rehabilitation &amp; Wiederaufbau</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Sicher zurück zu alter Stärke</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Nach Operationen oder Verletzungen unterstütze ich Ihr Tier durch passive und aktive Bewegungstherapie, um die volle Mobilität sicher und kontrolliert wiederherzustellen.</p>
+        </div>
+      </article>
+
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-3" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Technologie</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">NOVAFON Schallwellentherapie</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Sanfte Tiefenwirkung bei Verspannungen</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Ergänzend zur manuellen Therapie nutze ich das NOVAFON. Die sanften Vibrationen dringen tief in das Gewebe ein, fördern die Regeneration und lösen selbst tiefe Verspannungen.</p>
+        </div>
+      </article>
+
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-4" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Geriatrie</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">Seniorenbegleitung</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Mobilität und Lebensfreude im Alter erhalten</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Ältere Tiere brauchen besondere Fürsorge. Ich helfe dabei, die Gelenkfunktion zu erhalten, Altersbeschwerden zu lindern und die Freude am Alltag zu bewahren.</p>
+        </div>
+      </article>
+
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-5" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Kraft</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">Muskelaufbau &amp; Koordination</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Balance und Stabilität für den Körper</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Durch gezielte Übungen und sanfte Reize für das Nervensystem stärken wir die Muskulatur und verbessern das Körpergefühl sowie die Balance Ihres Tieres.</p>
+        </div>
+      </article>
+
+
+      <article data-reveal="" style="flex:0 0 calc(50% - 12px);scroll-snap-align:start;display:flex;min-height:340px;border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(40,36,28,.05);background:var(--surface,#fcf8f1)">
+        <div style="flex:0 0 44%;position:relative;background:var(--accentDeep,#8a5e3e)">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="svc-6" shape="rect" fit="cover" placeholder="[ Hundefoto ]" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+          <div style="position:absolute;top:0;right:-1px;bottom:0;width:22%;pointer-events:none;background:linear-gradient(90deg,rgba(252,248,241,0) 0%,var(--surface,#fcf8f1) 100%)"></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center">
+          <span style="align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:5px 12px;border-radius:999px">Vorsorge</span>
+          <h3 style="margin:14px 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.15;color:var(--ink,#3a322b)">Prävention &amp; Prophylaxe</h3>
+          <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:var(--ink,#3a322b)">Vorsorge für ein langes, bewegtes Leben</p><p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264)">Gesundheit beginnt mit Vorsorge. Ein regelmäßiger Check-up hilft dabei, Fehlbelastungen frühzeitig zu erkennen und chronischen Problemen aktiv vorzubeugen.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <sc-if value="{{ svcOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeSvc }}" style="position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,15,9,.55);backdrop-filter:blur(6px)">
+        <div onClick="{{ stop }}" style="position:relative;max-width:520px;width:100%;background:var(--bg,#f2f1ec);border-radius:26px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.4)">
+          <button onClick="{{ closeSvc }}" aria-label="Schließen" style="position:absolute;top:16px;right:16px;z-index:2;width:40px;height:40px;border:none;border-radius:50%;background:rgba(20,15,9,.5);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center">×</button>
+          <sc-if value="{{ svcHasImg }}" hint-placeholder-val="{{ false }}">
+            {{ svcImgEl }}
+          </sc-if>
+          <div style="padding:30px 32px 34px">
+            <h3 style="margin:0 0 12px;font-family:var(--ff-head,'Newsreader',serif);font-weight:600;font-size:26px;color:var(--ink,#3a322b)">{{ svcTitle }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.7;color:var(--soft,#7d7264)">{{ svcDesc }}</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- ===== ABLAUF ===== -->
+<section id="ablauf" style="padding:clamp(64px,10vw,120px) clamp(18px,5vw,48px)">
+  <div style="max-width:1180px;margin:0 auto">
+    <div data-reveal="" style="max-width:680px;margin:0 auto clamp(40px,5vw,60px);text-align:center">
+      <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Behandlungsablauf</p>
+      <h2 style="margin:0;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:var(--ink,#3a322b)">So läuft eine Behandlung ab</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(10px,1.6vw,22px);max-width:840px;margin:0 auto;position:relative">
+      <div class="walktrail" aria-hidden="true">
+        <svg viewBox="0 0 120 40" width="100%" height="40" fill="none" aria-hidden="true" preserveAspectRatio="none" style="position:absolute;left:0;top:20px;opacity:.3"><path d="M2 20 C 20 6, 34 6, 50 20 S 82 34, 104 18" stroke="var(--accent,#b07d56)" stroke-width="1.5" stroke-dasharray="3 6" stroke-linecap="round"></path></svg>
+        <span style="position:absolute;left:6%;top:22px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(90deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:20%;top:33px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(102deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:34%;top:22px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(90deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:48%;top:33px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(102deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:62%;top:22px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(90deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:76%;top:33px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(102deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span><span style="position:absolute;left:90%;top:22px;opacity:.24;color:var(--accentDeep,#8a5e3e);transform:translateX(-50%) rotate(90deg)"><svg viewBox="0 0 28 26" width="12" height="11" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>
+      </div>
+      <div data-reveal="" style="text-align:left;padding:0 clamp(8px,1.5vw,20px)">
+        <div style="position:relative;z-index:2;width:56px;height:56px;border-radius:50%;background:var(--accent,#b07d56);color:#fff;font-family:var(--ff-head,'Newsreader',serif);font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 0 22px">01</div>
+        <h3 style="margin:0 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:22px;color:var(--ink,#3a322b)">Was ist Tierphysiotherapie?</h3>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">Ganzheitliche Behandlung für mehr Beweglichkeit – in jeder Lebensphase.</p>
+        <div style="{{ ab0Style }}"><div style="min-height:0"><p style="margin:12px 0 0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">Sie begleitet Ihr Tier von der Rehabilitation nach Operationen über chronische Beschwerden bis zur aktiven Prävention. Mein Ziel: Schmerzen lindern, Beweglichkeit erhalten und die Freude an der Bewegung zurückgeben.</p></div></div>
+        <button onClick="{{ toggleA0 }}" style="margin-top:14px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:var(--accentDeep,#8a5e3e)">{{ ab0Label }}</button>
+      </div>
+      <div data-reveal="" style="text-align:left;padding:0 clamp(8px,1.5vw,20px)">
+        <div style="position:relative;z-index:2;width:56px;height:56px;border-radius:50%;background:var(--accent,#b07d56);color:#fff;font-family:var(--ff-head,'Newsreader',serif);font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 0 22px">02</div>
+        <h3 style="margin:0 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:22px;color:var(--ink,#3a322b)">Erstbehandlung</h3>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">Ausführliche Anamnese, Befundung und erste individuelle Behandlung.</p>
+        <div style="{{ ab1Style }}"><div style="min-height:0"><p style="margin:12px 0 0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">Ein Ersttermin dauert ca. 60–120 Minuten: Anamnese, Gangbildanalyse und Beurteilung der Bemuskelung. Anschließend taste ich das Gewebe ab, prüfe die Gelenkfunktion und starte direkt mit der ersten, individuell abgestimmten Behandlung.</p></div></div>
+        <button onClick="{{ toggleA1 }}" style="margin-top:14px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:var(--accentDeep,#8a5e3e)">{{ ab1Label }}</button>
+      </div>
+      <div data-reveal="" style="text-align:left;padding:0 clamp(8px,1.5vw,20px)">
+        <div style="position:relative;z-index:2;width:56px;height:56px;border-radius:50%;background:var(--accent,#b07d56);color:#fff;font-family:var(--ff-head,'Newsreader',serif);font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 0 22px">03</div>
+        <h3 style="margin:0 0 10px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;font-size:22px;color:var(--ink,#3a322b)">Nachbehandlungen</h3>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">Maßgeschneiderter Therapieplan und Übungen für zuhause.</p>
+        <div style="{{ ab2Style }}"><div style="min-height:0"><p style="margin:12px 0 0;font-size:15px;line-height:1.65;color:var(--soft,#7d7264);max-width:36ch">In den Folgeterminen arbeiten wir gezielt an den Problemstellen – immer abgestimmt auf den aktuellen Fortschritt. Ich zeige Ihnen außerdem einfache Übungen für zuhause, damit Sie die Genesung täglich aktiv unterstützen können.</p></div></div>
+        <button onClick="{{ toggleA2 }}" style="margin-top:14px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:var(--accentDeep,#8a5e3e)">{{ ab2Label }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EINZUGSGEBIET ===== -->
+<section id="gebiet" style="padding:clamp(64px,10vw,120px) clamp(18px,5vw,48px)">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;background:var(--accentDeep,#8a5e3e);border-radius:28px;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;color:#fff">
+    <div style="flex:1 1 360px;min-width:280px;padding:clamp(36px,5vw,64px)">
+      <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75)">Einzugsgebiet</p>
+      <h2 style="margin:0 0 18px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px)">Ich komme zu dir nach Hause</h2>
+      <p style="margin:0 0 14px;font-size:17px;line-height:1.7;color:rgba(255,255,255,.9)">Als mobile Therapeutin behandle ich dein Tier in seiner gewohnten Umgebung – ganz ohne Stress durch An- und Abfahrt.</p>
+      <p style="margin:0;font-size:17px;line-height:1.7;color:rgba(255,255,255,.9)">Ich komme in <strong style="color:#fff;font-weight:600">Thannhausen und im Umkreis von ca. 30 km</strong> zu dir. Außerhalb dieses Gebiets gerne auf Anfrage.</p>
+    </div>
+    <div style="flex:1 1 300px;min-width:260px;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:clamp(28px,4vw,48px);background:rgba(255,255,255,.06)">
+      <div style="position:relative;width:min(280px,72vw);aspect-ratio:1;display:flex;align-items:center;justify-content:center">
+        <div style="position:absolute;inset:0;border-radius:50%;border:1.5px dashed rgba(255,255,255,.35)"></div>
+        <div style="position:absolute;inset:22%;border-radius:50%;border:1.5px dashed rgba(255,255,255,.5)"></div>
+        <span class="paw" style="position:absolute;top:12%;left:18%;color:#fff;opacity:.28;transform:rotate(-18deg)"><svg viewBox="0 0 28 26" width="20" height="19" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>
+        <span class="paw" style="position:absolute;top:30%;left:30%;color:#fff;opacity:.2;transform:rotate(8deg)"><svg viewBox="0 0 28 26" width="16" height="15" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>
+        <span class="paw" style="position:absolute;bottom:16%;right:18%;color:#fff;opacity:.26;transform:rotate(20deg)"><svg viewBox="0 0 28 26" width="22" height="20" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="11" rx="2.6" ry="3.1"></ellipse><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"></ellipse><ellipse cx="22" cy="11" rx="2.6" ry="3.1"></ellipse><path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"></path></svg></span>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+          <span style="width:16px;height:16px;border-radius:50% 50% 50% 0;background:#fff;transform:rotate(-45deg);box-shadow:0 0 0 5px rgba(255,255,255,.18)"></span>
+          <span style="font-size:15px;font-weight:600;margin-top:6px">Thannhausen</span>
+          <span style="font-size:13px;color:rgba(255,255,255,.8)">+ ca. 50 km Umkreis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<!-- ===== PREISE ===== -->
+<section id="preise" style="background:var(--surface,#fcf8f1);padding:clamp(64px,10vw,120px) clamp(18px,5vw,48px)">
+  <div data-reveal="" style="max-width:640px;margin:0 auto;text-align:center">
+    <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Preise</p>
+    <h2 style="margin:0 0 18px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:var(--ink,#3a322b)">Mit Herz behandelt, fair berechnet</h2>
+    <p style="margin:0 auto 30px;font-size:17px;line-height:1.7;color:var(--soft,#7d7264);max-width:52ch">Im Mittelpunkt steht immer dein Tier und seine Genesung. Damit du dich darauf verlassen kannst, findest du meine Preise klar und ehrlich aufgelistet – einfach, damit von Anfang an alles stimmt.</p>
+    <a href="Preisliste.dc.html" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:16px;font-weight:600;color:#fff;background:var(--accent,#b07d56);padding:15px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(140,94,62,.26)">Zur Preisliste →</a>
+  </div>
+</section>
+
+<!-- ===== KONTAKT ===== -->
+<section id="kontakt" style="padding:clamp(64px,10vw,120px) clamp(18px,5vw,48px)">
+  <div data-reveal="" style="max-width:760px;margin:0 auto;text-align:center">
+    <p style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accentDeep,#8a5e3e)">Kontakt</p>
+    <h2 style="margin:0 0 18px;font-family:var(--ff-head,'Newsreader',serif);font-weight:500;line-height:1.08;font-size:clamp(30px,4.5vw,46px);color:var(--ink,#3a322b)">Ich freue mich auf euch</h2>
+    <p style="margin:0 auto 32px;font-size:17px;line-height:1.7;color:var(--soft,#7d7264);max-width:48ch">Du hast Fragen oder möchtest einen Termin vereinbaren? Melde dich gerne bei mir – ich helfe dir und deinem Tier weiter.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+      <a href="Termin vereinbaren.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-width:210px;text-align:center;text-decoration:none;font-size:16px;font-weight:600;color:#fff;background:var(--accent,#b07d56);padding:15px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(140,94,62,.26)">Termin vereinbaren</a>
+      <a href="Nachricht senden.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-width:210px;text-align:center;text-decoration:none;font-size:16px;font-weight:600;color:var(--ink,#3a322b);background:var(--surface,#fcf8f1);padding:15px 30px;border-radius:999px;box-shadow:0 10px 26px rgba(40,36,28,.08)">Nachricht senden</a>
+      <a href="https://www.instagram.com/joannatierphysio/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:210px;text-decoration:none;font-size:16px;font-weight:600;color:var(--accentDeep,#8a5e3e);background:var(--tint,#ece0cf);padding:15px 30px;border-radius:999px">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1"></circle></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:var(--footer-bg,var(--ink,#3a322b));color:rgba(255,255,255,.82);padding:clamp(48px,7vw,72px) clamp(18px,5vw,48px) 32px">
+  <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between">
+    <div style="flex:1 1 280px;min-width:240px">
+      <p style="margin:0 0 10px;font-family:var(--ff-logo,'Outfit',sans-serif);font-weight:700;font-size:22px;letter-spacing:.18em;color:#fff">JOANNA</p>
+      <p style="margin:0 0 4px;font-size:15px;color:rgba(255,255,255,.7)">mobile Tierphysiotherapeutin für Kleintiere</p>
+      <p style="margin:0;font-size:14px;color:rgba(255,255,255,.6)">Tel. <a href="tel:+491746614553" style="color:rgba(255,255,255,.75);text-decoration:none">0174 661 4553</a> · <a href="mailto:info@joanna-tierphysio.de" style="color:rgba(255,255,255,.75);text-decoration:none">info@joanna-tierphysio.de</a></p><a href="https://www.instagram.com/joannatierphysio/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:14.5px;font-weight:500;color:#fff;background:rgba(255,255,255,.12);padding:9px 16px;border-radius:999px;margin-top:12px">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1"></circle></svg>
+        Instagram
+      </a>
+    </div>
+    <div style="flex:1 1 160px;min-width:150px">
+      <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Navigation</p>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <a href="#ueber" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Über mich</a>
+        <a href="#leistungen" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Leistungen</a>
+        <a href="#ablauf" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Ablauf</a>
+        <a href="#gebiet" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Einzugsgebiet</a>
+      </div>
+    </div>
+    <div style="flex:1 1 160px;min-width:150px">
+      <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Kontakt &amp; Rechtliches</p>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <a href="Termin vereinbaren.dc.html" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Termin vereinbaren</a>
+        <a href="Nachricht senden.dc.html" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Nachricht senden</a>
+        <a href="Preisliste.dc.html" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Preisliste</a>
+        <a href="Datenschutz.dc.html" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Datenschutz</a>
+        <a href="Impressum.dc.html" style="text-decoration:none;font-size:14.5px;color:rgba(255,255,255,.8)">Impressum</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;color:rgba(255,255,255,.6)">© 2025 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Oliv &amp; Warmweiß&quot;,&quot;options&quot;:[&quot;Studio Hell&quot;,&quot;Studio Sage&quot;,&quot;Terrakotta&quot;,&quot;Waldgrün&quot;,&quot;Taupe &amp; Mocca&quot;,&quot;Staubgrün&quot;,&quot;Beere &amp; Ton&quot;,&quot;Nachtgrün&quot;,&quot;Sand &amp; Ton&quot;,&quot;Salbei Grün&quot;,&quot;Lehm &amp; Rosé&quot;,&quot;Warmes Oliv&quot;,&quot;Oliv &amp; Creme&quot;,&quot;Oliv &amp; Warmweiß&quot;,&quot;Oliv &amp; Nebel&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Stil&quot;},&quot;fontTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Clean · Plus Jakarta&quot;,&quot;options&quot;:[&quot;Clean · Plus Jakarta&quot;,&quot;Clean · Onest&quot;,&quot;Inter Display&quot;,&quot;Klar &amp; ruhig&quot;,&quot;Weich &amp; warm&quot;,&quot;Elegant&quot;,&quot;Redaktionell fein&quot;,&quot;Freundlich &amp; rund&quot;,&quot;Modern &amp; klar&quot;,&quot;Warm &amp; schlicht&quot;,&quot;Klassisch (Serif)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Stil&quot;},&quot;navStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Schwebend (Glas)&quot;,&quot;options&quot;:[&quot;Schwebend (Glas)&quot;,&quot;Klassisch (Leiste)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Stil&quot;},&quot;aboutLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Editorial (bündig)&quot;,&quot;options&quot;:[&quot;Editorial (bündig)&quot;,&quot;Immersiv (2c)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Über mich&quot;},&quot;heroLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Vollbild&quot;,&quot;options&quot;:[&quot;Vollbild&quot;,&quot;Geteilt&quot;,&quot;Zentriert&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroTreatment&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Warm &amp; golden&quot;,&quot;options&quot;:[&quot;Hell &amp; klar&quot;,&quot;Sanft dunkel&quot;,&quot;Marken-Wash&quot;,&quot;Warm cinematic&quot;,&quot;Schwarz-weiß&quot;,&quot;Warm &amp; golden&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroWarmth&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:20,&quot;min&quot;:0,&quot;max&quot;:50,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroHaze&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:20,&quot;min&quot;:0,&quot;max&quot;:70,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroBlur&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:12,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroOverlay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:80,&quot;min&quot;:0,&quot;max&quot;:95,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;heroFocus&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:15,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;pawAccents&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Stil&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, aboutOpen: false, svc: null, ab: [false, false, false] };
+  toggleAbout = () => this.setState(s => ({ aboutOpen: !s.aboutOpen }));
+  toggleAb = (i) => this.setState(s => { const ab = s.ab.slice(); ab[i] = !ab[i]; return { ab }; });
+  abStyle = (i) => ({ display: 'grid', gridTemplateRows: this.state.ab[i] ? '1fr' : '0fr', transition: 'grid-template-rows .4s ease', overflow: 'hidden' });
+  openSvc = (e) => {
+    const art = e.currentTarget;
+    const h = art.querySelector('h3');
+    const p = art.querySelector('[data-svc-desc]');
+    const img = art.querySelector('img');
+    this.setState({ svc: {
+      title: h ? h.textContent : '',
+      desc: p ? p.textContent : '',
+      img: img ? img.getAttribute('src') : '',
+    }});
+  };
+  closeSvc = () => this.setState({ svc: null });
+  stop = (e) => { e.stopPropagation(); };
+  svcScroll = (dir) => {
+    const t = document.getElementById('svc-track');
+    if (!t) return;
+    const card = t.querySelector('article');
+    const step = card ? card.getBoundingClientRect().width + 22 : t.clientWidth * 0.8;
+    t.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+  svcPrev = () => this.svcScroll(-1);
+  svcNext = () => this.svcScroll(1);
+
+  FONTS = {
+    'Clean · Plus Jakarta': { head: "'Plus Jakarta Sans', sans-serif", body: "'Plus Jakarta Sans', sans-serif" },
+    'Clean · Onest':     { head: "'Onest', sans-serif",              body: "'Onest', sans-serif" },
+    'Inter Display':     { head: "'Inter', sans-serif",              body: "'Inter', sans-serif" },
+    'Klar & ruhig':      { head: "'Instrument Sans', sans-serif",    body: "'Instrument Sans', sans-serif" },
+    'Weich & warm':      { head: "'DM Sans', sans-serif",            body: "'DM Sans', sans-serif" },
+    'Elegant':           { head: "'Cormorant Garamond', serif",      body: "'DM Sans', sans-serif" },
+    'Redaktionell fein': { head: "'Spectral', serif",               body: "'Libre Franklin', sans-serif" },
+    'Freundlich & rund': { head: "'Quicksand', sans-serif",          body: "'Nunito Sans', sans-serif" },
+    'Modern & klar':     { head: "'Bricolage Grotesque', sans-serif", body: "'Hanken Grotesk', sans-serif" },
+    'Sanft geometrisch': { head: "'Outfit', sans-serif",             body: "'Inter', sans-serif" },
+    'Warm & schlicht':   { head: "'Schibsted Grotesk', sans-serif",  body: "'Schibsted Grotesk', sans-serif" },
+    'Klassisch (Serif)': { head: "'Newsreader', serif",              body: "'Hanken Grotesk', sans-serif" },
+  };
+
+  PALETTES = {
+    'Studio Hell': { bg:'#f2f1ec', surface:'#ffffff', ink:'#1f1f1c', soft:'#6b6a63', line:'rgba(31,31,28,.13)', accent:'#b0724c', accentDeep:'#8a5334', tint:'#eaddce' },
+    'Studio Sage': { bg:'#f0efea', surface:'#fbfbf7', ink:'#1e201b', soft:'#66655d', line:'rgba(30,32,27,.13)', accent:'#5f7355', accentDeep:'#43543b', tint:'#dee2d5' },
+    'Terrakotta':  { bg:'#f7f0e7', surface:'#fffaf3', ink:'#3a2e27', soft:'#7c6d60', line:'rgba(58,46,39,.12)', accent:'#c17a52', accentDeep:'#9c5a36', tint:'#efdcc9' },
+    'Waldgrün':    { bg:'#eef1ea', surface:'#f8faf4', ink:'#28302a', soft:'#657065', line:'rgba(40,48,42,.12)', accent:'#4f6b4a', accentDeep:'#3a5238', tint:'#dbe4d6' },
+    'Taupe & Mocca': { bg:'#f4efe8', surface:'#fdf9f2', ink:'#33291f', soft:'#7a6c5c', line:'rgba(51,41,31,.12)', accent:'#9a7b5f', accentDeep:'#6f5540', tint:'#e8ddce' },
+    'Staubgrün':   { bg:'#eef1f0', surface:'#f8faf9', ink:'#28302e', soft:'#66716e', line:'rgba(40,48,46,.12)', accent:'#6d8a8a', accentDeep:'#4d6a6a', tint:'#d9e4e2' },
+    'Beere & Ton': { bg:'#f4eef0', surface:'#fdf8fa', ink:'#352b30', soft:'#7b6d73', line:'rgba(53,43,48,.12)', accent:'#9c6d84', accentDeep:'#7a4f64', tint:'#e8d7de' },
+    'Nachtgrün':   { bg:'#eceeea', surface:'#f6f8f3', ink:'#20261f', soft:'#5f665b', line:'rgba(32,38,31,.13)', accent:'#3f6b52', accentDeep:'#2b4d3a', tint:'#d6e0d5' },
+    'Sand & Ton':  { bg:'#f4ede2', surface:'#fcf8f1', ink:'#3a322b', soft:'#7d7264', line:'rgba(58,50,43,.12)', accent:'#b07d56', accentDeep:'#8a5e3e', tint:'#ece0cf' },
+    'Salbei Grün': { bg:'#eef0e9', surface:'#f8faf4', ink:'#33392f', soft:'#6c7264', line:'rgba(40,50,38,.12)', accent:'#6f8f7d', accentDeep:'#506b5a', tint:'#dde4d6' },
+    'Lehm & Rosé': { bg:'#f3e9e2', surface:'#fcf7f2', ink:'#3c322c', soft:'#7e7066', line:'rgba(60,50,44,.12)', accent:'#bf7f63', accentDeep:'#9a5f44', tint:'#ecdacd' },
+    'Warmes Oliv': { bg:'#efe7da', surface:'#faf5ec', ink:'#383a2e', soft:'#73715f', line:'rgba(50,50,40,.12)', accent:'#7a8c5e', accentDeep:'#5c6e44', tint:'#e1dcc4' },
+    'Oliv & Creme': { bg:'#f6f3ea', surface:'#fffdf7', ink:'#2d3128', soft:'#6a6d5f', line:'rgba(45,49,40,.12)', accent:'#7a8c5e', accentDeep:'#566a44', tint:'#e6e6d5' },
+    'Oliv & Warmweiß': { bg:'#faf8f2', surface:'#ffffff', ink:'#2b2f26', soft:'#717466', line:'rgba(43,47,38,.11)', accent:'#7d9060', accentDeep:'#586d46', tint:'#eaeadd' },
+    'Oliv & Nebel': { bg:'#eeeee6', surface:'#f9f9f3', ink:'#2f322a', soft:'#6d6f63', line:'rgba(47,50,42,.12)', accent:'#788b5c', accentDeep:'#556941', tint:'#e0e1d3' },
+  };
+
+
+  componentDidMount() {
+    try { localStorage.setItem('joanna-palette', this.props.palette || 'Studio Hell'); } catch (e) {}
+    try {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) return;
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      els.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)';
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(el => io.observe(el));
+    } catch (err) {}
+  }
+
+  componentDidUpdate() {
+    try { localStorage.setItem('joanna-palette', this.props.palette || 'Studio Hell'); } catch (e) {}
+  }
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  renderVals() {
+    const P = this.PALETTES[this.props.palette] || this.PALETTES['Sand & Ton'];
+    const F = this.FONTS[this.props.fontTheme] || this.FONTS['Clean · Plus Jakarta'];
+    const TREATMENTS = {
+      'Hell & klar': {
+        filter: 'saturate(1.06) contrast(1.02)',
+        scrim: 'linear-gradient(180deg, rgba(20,14,9,0) 42%, rgba(20,14,9,.58) 100%)',
+        blend: 'normal',
+      },
+      'Sanft dunkel': {
+        filter: 'none',
+        scrim: 'linear-gradient(180deg, rgba(20,14,9,.55) 0%, rgba(20,14,9,.20) 32%, rgba(20,14,9,.30) 58%, rgba(20,14,9,.80) 100%)',
+        blend: 'normal',
+      },
+      'Marken-Wash': {
+        filter: 'saturate(0.7) contrast(1.03)',
+        scrim: 'linear-gradient(165deg, ' + P.accentDeep + ' 0%, ' + P.ink + ' 100%)',
+        blend: 'multiply',
+      },
+      'Warm cinematic': {
+        filter: 'sepia(0.28) saturate(1.38) contrast(1.05) brightness(1.02)',
+        scrim: 'radial-gradient(130% 110% at 50% 32%, rgba(20,12,6,0) 46%, rgba(20,12,6,.62) 100%)',
+        blend: 'normal',
+      },
+      'Schwarz-weiß': {
+        filter: 'grayscale(1) contrast(1.07) brightness(1.03)',
+        scrim: 'linear-gradient(180deg, rgba(18,14,12,.4) 0%, rgba(18,14,12,.12) 35%, rgba(18,14,12,.72) 100%)',
+        blend: 'normal',
+      },
+      'Warm & golden': {
+        filter: 'sepia(0.2) saturate(1.28) contrast(1.02) brightness(0.94)',
+        scrim: 'radial-gradient(112% 98% at 50% 42%, rgba(14,10,6,0) 54%, rgba(12,8,4,.5) 100%), linear-gradient(180deg, rgba(30,18,8,.24) 0%, rgba(30,18,8,.03) 38%, rgba(16,10,5,.3) 70%, rgba(16,10,5,.52) 100%)',
+        blend: 'normal',
+        grain: 0.14,
+        haze: 0.24,
+        warm: 0.2,
+      },
+    };
+    const T = TREATMENTS[this.props.heroTreatment] || TREATMENTS['Warm & golden'];
+    const blurPx = Number.isFinite(this.props.heroBlur) ? this.props.heroBlur : 3;
+    const heroFilter = (T.filter === 'none' ? '' : T.filter) + (blurPx > 0 ? ' blur(' + blurPx + 'px)' : '') || 'none';
+
+    const themeStyle = {
+      '--bg': P.bg, '--surface': P.surface, '--ink': P.ink, '--soft': P.soft,
+      '--line': P.line, '--accent': P.accent, '--accentDeep': P.accentDeep, '--tint': P.tint,
+      '--ff-head': F.head, '--ff-body': F.body, '--ff-logo': "'Outfit', sans-serif",
+      '--paw-on': (this.props.pawAccents === false ? 'none' : 'inline-flex'),
+      '--footer-bg': P.accentDeep,
+      '--hero-pos': '50% ' + (Number.isFinite(this.props.heroFocus) ? this.props.heroFocus : 15) + '%',
+      '--hero-overlay': (Number.isFinite(this.props.heroOverlay) ? this.props.heroOverlay : 80) / 100,
+      '--hero-filter': heroFilter,
+      '--hero-scale': blurPx > 0 ? (1 + blurPx / 60).toFixed(3) : '1',
+      '--hero-scrim': T.scrim,
+      '--hero-blend': T.blend,
+      '--hero-grain': (T.grain || 0),
+      '--hero-haze': (Number.isFinite(this.props.heroHaze) ? this.props.heroHaze : (T.haze || 0) * 100) / 100,
+      '--hero-warm': (Number.isFinite(this.props.heroWarmth) ? this.props.heroWarmth : (T.warm || 0) * 100) / 100,
+      background: P.bg, color: P.ink, minHeight: '100vh', overflowX: 'hidden',
+      fontFamily: F.body,
+    };
+
+    const layout = this.props.heroLayout || 'Vollbild';
+
+    const mobileMenuStyle = {
+      display: this.state.menuOpen ? 'flex' : 'none',
+      flexDirection: 'column',
+      gap: '2px',
+      margin: '8px clamp(12px,4vw,24px) 0',
+      padding: '12px',
+      borderRadius: '20px',
+      border: '1px solid var(--line,rgba(58,50,43,.12))',
+      background: 'var(--surface,#fcf8f1)',
+      boxShadow: '0 18px 44px rgba(0,0,0,.2)',
+    };
+    const navMode = (this.props.navStyle === 'Klassisch (Leiste)') ? 'classic' : 'float';
+
+    const aboutImmersive = (this.props.aboutLayout === 'Immersiv (2c)');
+    const aboutOpen = this.state.aboutOpen;
+    const moreStyle = {
+      display: 'grid',
+      gridTemplateRows: aboutOpen ? '1fr' : '0fr',
+      transition: 'grid-template-rows .4s ease',
+      overflow: 'hidden',
+    };
+
+    return {
+      themeStyle,
+      mobileMenuStyle,
+      heroFull: layout === 'Vollbild',
+      heroSplit: layout === 'Geteilt',
+      heroCentered: layout === 'Zentriert',
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      navMode,
+      aboutEditorial: !aboutImmersive,
+      aboutImmersive,
+      aboutOpen,
+      toggleAbout: this.toggleAbout,
+      aboutMoreLabel: aboutOpen ? 'Weniger anzeigen' : 'Weiterlesen',
+      moreStyle,
+      ab0Style: this.abStyle(0), ab1Style: this.abStyle(1), ab2Style: this.abStyle(2),
+      ab0Label: this.state.ab[0] ? 'Weniger' : 'Weiterlesen',
+      ab1Label: this.state.ab[1] ? 'Weniger' : 'Weiterlesen',
+      ab2Label: this.state.ab[2] ? 'Weniger' : 'Weiterlesen',
+      toggleA0: () => this.toggleAb(0), toggleA1: () => this.toggleAb(1), toggleA2: () => this.toggleAb(2),
+      openSvc: this.openSvc,
+      closeSvc: this.closeSvc,
+      stop: this.stop,
+      svcPrev: this.svcPrev,
+      svcNext: this.svcNext,
+      svcOpen: !!this.state.svc,
+      svcTitle: this.state.svc ? this.state.svc.title : '',
+      svcDesc: this.state.svc ? this.state.svc.desc : '',
+      svcImg: this.state.svc ? this.state.svc.img : '',
+      svcHasImg: !!(this.state.svc && this.state.svc.img),
+      svcImgEl: (this.state.svc && this.state.svc.img)
+        ? React.createElement('img', { src: this.state.svc.img, alt: '', style: { width: '100%', height: '260px', objectFit: 'cover', display: 'block' } })
+        : null,
+    };
+  }
+}
+</script>
+</body>
+</html>
