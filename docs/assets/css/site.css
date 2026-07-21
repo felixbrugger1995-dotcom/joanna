@@ -1,0 +1,771 @@
+/* ==========================================================================
+   Joanna – Mobile Tierphysiotherapie
+   --------------------------------------------------------------------------
+   Uebersetzt aus dem Claude-Design-Projekt. Dort waren Palette, Schriftpaar
+   und Hero-Behandlung noch waehlbar und wurden zur Laufzeit als CSS-Variablen
+   gesetzt. Getroffen wurde: Palette "Oliv & Warmweiss", Schrift
+   "Clean · Plus Jakarta", Nav "Schwebend (Glas)", Hero "Vollbild" mit der
+   Behandlung "Warm & golden". Die Werte stehen hier fest ausgerechnet.
+   ========================================================================== */
+
+:root {
+  /* Palette "Oliv & Warmweiss" */
+  --bg: #faf8f2;
+  --surface: #ffffff;
+  --ink: #2b2f26;
+  --soft: #717466;
+  --line: rgba(43, 47, 38, .11);
+  --accent: #7d9060;
+  --accentDeep: #586d46;
+  --tint: #eaeadd;
+  --footer-bg: #586d46;
+
+  /* Schriftpaar "Clean · Plus Jakarta"; das Logo bleibt Outfit */
+  --ff-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-logo: 'Outfit', system-ui, sans-serif;
+
+  --paw-on: inline-flex;
+
+  /* Hero "Warm & golden": Fokus 15 %, Overlay 80 %, Waerme 20 %, Haze 20 %,
+     Blur 0 — daher kein blur() im Filter und keine Ausgleichs-Skalierung. */
+  --hero-pos: 50% 15%;
+  --hero-filter: sepia(.2) saturate(1.28) contrast(1.02) brightness(.94);
+  --hero-scale: 1;
+  --hero-overlay: .8;
+  --hero-blend: normal;
+  --hero-grain: .14;
+  --hero-haze: .2;
+  --hero-warm: .2;
+  --hero-scrim:
+    radial-gradient(112% 98% at 50% 42%, rgba(14, 10, 6, 0) 54%, rgba(12, 8, 4, .5) 100%),
+    linear-gradient(180deg, rgba(30, 18, 8, .24) 0%, rgba(30, 18, 8, .03) 38%, rgba(16, 10, 5, .3) 70%, rgba(16, 10, 5, .52) 100%);
+}
+
+/* ── Grundlagen ─────────────────────────────────────────────────────────── */
+
+* { box-sizing: border-box }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block }
+a { color: inherit }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+}
+
+.wrap { max-width: 1180px; margin: 0 auto }
+
+/* Pfoten-Akzente. Im Design abschaltbar — hier an, per --paw-on. */
+.paw { display: var(--paw-on); align-items: center; line-height: 0; flex: none }
+
+/* ── Navigation ─────────────────────────────────────────────────────────── */
+
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 14px clamp(12px, 4vw, 24px);
+}
+
+.navbar-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 1120px;
+  padding: 9px 10px 9px 26px;
+  border-radius: 999px;
+  background: rgba(26, 20, 14, .46);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, .15);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .2);
+}
+
+.nav-logo {
+  font-family: var(--ff-logo);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: .16em;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-links { display: flex; align-items: center; gap: clamp(12px, 1.7vw, 26px) }
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .84);
+  transition: color .2s;
+}
+
+.nav-links a:not(.nav-cta):hover { color: #fff }
+
+.nav-links a.nav-cta {
+  color: #fff;
+  background: var(--accent);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.nav-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .1);
+  cursor: pointer;
+}
+
+.nav-burger span { width: 18px; height: 2px; background: #fff; border-radius: 2px }
+
+.nav-mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  margin: 8px clamp(12px, 4vw, 24px) 0;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .2);
+}
+
+.nav-mobile[data-open] { display: flex }
+
+.nav-mobile a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 8px;
+}
+
+.nav-mobile .nav-mobile-cta {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  padding: 12px 18px;
+  border-radius: 999px;
+  margin-top: 6px;
+}
+
+@media (max-width: 880px) {
+  .nav-links-d { display: none !important }
+  .nav-burger { display: flex !important }
+}
+
+/* ── Hero (Vollbild) ────────────────────────────────────────────────────── */
+
+.hero-full {
+  position: relative;
+  min-height: clamp(660px, 96vh, 1040px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-full-photo,
+.hero-full-glow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--hero-pos);
+}
+
+.hero-full-photo {
+  filter: var(--hero-filter);
+  transform: scale(var(--hero-scale));
+}
+
+/* Weichgezeichnete Kopie des Fotos, additiv darueber — laesst die Lichter
+   glimmen, ohne das Motiv aufzuhellen. */
+.hero-full-glow {
+  filter: blur(8px) brightness(1.18) saturate(1.2);
+  transform: scale(1.08);
+  mix-blend-mode: screen;
+  opacity: var(--hero-haze);
+  pointer-events: none;
+}
+
+.hero-full-warm,
+.hero-full-scrim,
+.hero-full-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-full-warm {
+  mix-blend-mode: overlay;
+  opacity: var(--hero-warm);
+  background: linear-gradient(120deg, rgba(255, 150, 60, .55) 0%, rgba(180, 110, 40, .4) 100%);
+}
+
+.hero-full-scrim {
+  opacity: var(--hero-overlay);
+  mix-blend-mode: var(--hero-blend);
+  background: var(--hero-scrim);
+}
+
+.hero-full-grain {
+  opacity: var(--hero-grain);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.hero-full-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 5vw, 48px) clamp(40px, 7vw, 84px);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--ff-logo);
+  font-weight: 500;
+  line-height: .84;
+  letter-spacing: -.01em;
+  font-size: clamp(64px, 15vw, 180px);
+  color: #fff;
+  text-shadow: 0 2px 36px rgba(0, 0, 0, .28);
+}
+
+.hero-sub {
+  margin: 16px 0 0;
+  font-size: clamp(18px, 2.7vw, 30px);
+  color: rgba(255, 255, 255, .96);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .35);
+}
+
+/* ── Abschnitts-Bausteine ───────────────────────────────────────────────── */
+
+.section { padding: clamp(64px, 10vw, 120px) clamp(18px, 5vw, 48px) }
+.section--flush { padding-left: 0; padding-right: 0 }
+.section--surface { background: var(--surface) }
+
+.section-head {
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 5vw, 60px);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+}
+
+.h2 {
+  margin: 0;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  line-height: 1.08;
+  font-size: clamp(30px, 4.5vw, 46px);
+  color: var(--ink);
+}
+
+.lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--soft);
+}
+
+/* ── Schaltflaechen ─────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 30px;
+  border-radius: 999px;
+}
+
+.btn--primary {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 10px 28px rgba(88, 109, 70, .28);
+}
+
+.btn--soft {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 10px 26px rgba(40, 36, 28, .08);
+}
+
+.btn--tint { color: var(--accentDeep); background: var(--tint) }
+
+.btn--wide { min-width: 210px; text-align: center }
+
+/* Aufklapper "Weiterlesen". Der Trick ist grid-template-rows 0fr -> 1fr:
+   das animiert die Hoehe, ohne sie zu kennen. */
+.more {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows .4s ease;
+}
+
+.more[data-open] { grid-template-rows: 1fr }
+.more > div { min-height: 0 }
+
+.more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--accentDeep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .more { transition: none }
+}
+
+/* ── Ueber mich ─────────────────────────────────────────────────────────── */
+
+.ueber-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: clamp(32px, 4vw, 64px);
+}
+
+.ueber-text { flex: 1 1 440px; min-width: 300px; display: flex }
+.ueber-text > div { max-width: 560px; width: 100%; display: flex; flex-direction: column }
+.ueber-text p { margin: 0 0 18px; font-size: 17px; line-height: 1.8; color: var(--soft) }
+.ueber-text strong { color: var(--ink); font-weight: 600 }
+
+.ueber-btn { align-self: flex-start; margin: 6px 0 26px; font-size: 15px }
+
+.chips {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-top: auto;
+  overflow-x: auto;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(40, 36, 28, .06);
+}
+
+.chip .paw { color: var(--accent) }
+
+.ueber-photo {
+  flex: 1 1 380px;
+  min-width: 300px;
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(400px, 48vw, 540px);
+  border-radius: 24px;
+  background: var(--accentDeep);
+  box-shadow: 0 10px 26px rgba(40, 36, 28, .05);
+}
+
+.ueber-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 32% 48%;
+}
+
+.ueber-photo-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(28, 20, 12, 0) 46%, rgba(28, 20, 12, .7) 100%);
+}
+
+.ueber-photo-tag {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, .22);
+  backdrop-filter: blur(4px);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* Auf schmalen Schirmen wandert das Portraet ueber den Text. */
+@media (max-width: 760px) {
+  .ueber-grid > .ueber-photo { order: -1; min-height: 300px }
+}
+
+/* ── Leistungen ─────────────────────────────────────────────────────────── */
+
+.svc-nav { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 18px }
+
+.svc-nav button {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svc-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 2px 18px;
+  margin: 0 -2px;
+  scrollbar-width: none;
+}
+
+.svc-track::-webkit-scrollbar { display: none }
+
+.svc-card {
+  flex: 0 0 calc(50% - 12px);
+  scroll-snap-align: start;
+  display: flex;
+  min-height: 340px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(40, 36, 28, .05);
+  background: var(--surface);
+}
+
+.svc-media { flex: 0 0 44%; position: relative; background: var(--accentDeep) }
+.svc-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+
+/* Weicher Uebergang vom Foto in die Kartenflaeche. */
+.svc-media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 22%;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, var(--surface) 100%);
+}
+
+.svc-body {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(22px, 2.4vw, 34px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.svc-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+  background: var(--tint);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.svc-title {
+  margin: 14px 0 10px;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.svc-claim { margin: 0 0 8px; font-size: 15px; font-weight: 700; color: var(--ink) }
+.svc-text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--soft) }
+
+@media (max-width: 760px) {
+  .svc-card { flex-basis: 88% }
+}
+
+/* ── Ablauf ─────────────────────────────────────────────────────────────── */
+
+.ablauf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(10px, 1.6vw, 22px);
+  max-width: 840px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.step { text-align: left; padding: 0 clamp(8px, 1.5vw, 20px) }
+
+.step-num {
+  position: relative;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ff-head);
+  font-size: 19px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 22px;
+}
+
+.step h3 {
+  margin: 0 0 10px;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.step p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--soft); max-width: 36ch }
+.step .more p { margin: 12px 0 0 }
+.step .more-btn { margin-top: 14px; font-size: 14px }
+
+/* Pfotenspur, die ueber die drei Schritte laeuft. */
+.walktrail {
+  position: absolute;
+  top: 0;
+  left: 42%;
+  width: 36%;
+  height: 62px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.walktrail .stepprint {
+  position: absolute;
+  color: var(--accentDeep);
+  line-height: 0;
+  opacity: .16;
+  animation: walkstep 3.4s ease-in-out infinite;
+}
+
+@keyframes walkstep {
+  0%, 66%, 100% { opacity: .16 }
+  12%, 32% { opacity: .7 }
+}
+
+@media (max-width: 760px) {
+  .walktrail { display: none }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .walktrail .stepprint { animation: none; opacity: .3 }
+}
+
+/* ── Einzugsgebiet ──────────────────────────────────────────────────────── */
+
+.gebiet {
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--accentDeep);
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #fff;
+}
+
+.gebiet-text { flex: 1 1 360px; min-width: 280px; padding: clamp(36px, 5vw, 64px) }
+.gebiet-text .eyebrow { color: rgba(255, 255, 255, .75) }
+.gebiet-text .h2 { color: #fff; margin-bottom: 18px }
+.gebiet-text p { margin: 0 0 14px; font-size: 17px; line-height: 1.7; color: rgba(255, 255, 255, .9) }
+.gebiet-text p:last-child { margin-bottom: 0 }
+.gebiet-text strong { color: #fff; font-weight: 600 }
+
+.gebiet-map {
+  flex: 1 1 300px;
+  min-width: 260px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 48px);
+  background: rgba(255, 255, 255, .06);
+}
+
+.radar {
+  position: relative;
+  width: min(280px, 72vw);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed rgba(255, 255, 255, .35) }
+.radar-ring--inner { inset: 22%; border-color: rgba(255, 255, 255, .5) }
+
+.radar-pin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50% 50% 50% 0;
+  background: #fff;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .18);
+}
+
+.radar-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.radar .paw { position: absolute; color: #fff }
+
+/* ── Fusszeile ──────────────────────────────────────────────────────────── */
+
+.footer {
+  background: var(--footer-bg);
+  color: rgba(255, 255, 255, .82);
+  padding: clamp(48px, 7vw, 72px) clamp(18px, 5vw, 48px) 32px;
+}
+
+.footer-cols {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.footer-brand { flex: 1 1 280px; min-width: 240px }
+
+.footer-logo {
+  margin: 0 0 10px;
+  font-family: var(--ff-logo);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: .18em;
+  color: #fff;
+}
+
+.footer-col { flex: 1 1 160px; min-width: 150px }
+
+.footer-col h2 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+}
+
+.footer-links { display: flex; flex-direction: column; gap: 9px }
+.footer-links a { text-decoration: none; font-size: 14.5px; color: rgba(255, 255, 255, .8) }
+
+.footer-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(255, 255, 255, .12);
+  padding: 9px 16px;
+  border-radius: 999px;
+  margin-top: 12px;
+}
+
+.footer-legal {
+  max-width: 1180px;
+  margin: 32px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, .6);
+}
+
+/* ── Einblenden beim Scrollen ───────────────────────────────────────────── */
+
+/* Nur wirksam, wenn JS die Elemente vorbereitet — ohne JS bleibt alles
+   sichtbar, statt unsichtbar haengen zu bleiben. */
+[data-reveal][data-reveal-armed] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s cubic-bezier(.22, .61, .36, 1),
+              transform .7s cubic-bezier(.22, .61, .36, 1);
+}
+
+[data-reveal][data-reveal-shown] { opacity: 1; transform: none }
