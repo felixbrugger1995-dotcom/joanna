@@ -22,13 +22,7 @@
     };
 
     burger.setAttribute('aria-expanded', 'false');
-
-    // stopPropagation, damit dieser Klick nicht gleich beim
-    // Aussenklick-Handler unten wieder als "ausserhalb" ankommt.
-    burger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setOpen(!menu.hasAttribute('data-open'));
-    });
+    burger.addEventListener('click', () => setOpen(!menu.hasAttribute('data-open')));
 
     // Die Links im Menue springen zu Ankern auf derselben Seite. Ohne
     // Schliessen bliebe das Panel ueber dem Ziel stehen.
@@ -36,10 +30,16 @@
       a.addEventListener('click', () => setOpen(false));
     });
 
-    // Tippen ausserhalb schliesst das Menue. Klicks im Panel selbst nicht —
-    // sonst ginge es beim Scrollen/Antippen im Menue sofort wieder zu.
-    document.addEventListener('click', (e) => {
-      if (menu.hasAttribute('data-open') && !menu.contains(e.target)) setOpen(false);
+    // Tippen ausserhalb schliesst das Menue. Bewusst pointerdown statt click:
+    // iOS Safari feuert click nicht zuverlaessig, wenn man auf eine nicht
+    // interaktive Flaeche (Body, Section) tippt — dann bliebe das Menue offen.
+    // Ausgenommen sind das Panel selbst (sonst ginge es beim Antippen darin
+    // sofort zu) und der Burger (der toggelt schon per eigenem click; ohne
+    // Ausnahme wuerde pointerdown erst schliessen und der Klick wieder oeffnen).
+    document.addEventListener('pointerdown', (e) => {
+      if (!menu.hasAttribute('data-open')) return;
+      if (menu.contains(e.target) || burger.contains(e.target)) return;
+      setOpen(false);
     });
 
     document.addEventListener('keydown', (e) => {
