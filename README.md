@@ -69,10 +69,9 @@ Betroffen sind vier Stellen, die derzeit Platzhalter zeigen: `hero.svg`,
 `docs/assets/img/` ablegen und die Verweise in `index.html` bzw. `404.html`
 umbiegen.
 
-**Inhaltlicher Widerspruch.** Der Text im Einzugsgebiet nennt „ca. 30 km", die
-Grafik daneben stand im Entwurf auf „ca. 50 km"; sie wurde vorläufig auf 30 km
-angeglichen. Welcher Wert stimmt, muss Joanna entscheiden — die Preisliste nennt
-zusätzlich 15 km als Radius, innerhalb dessen keine Fahrtkosten anfallen.
+**Einzugsgebiet:** einheitlich ca. 50 km um Thannhausen (Text und Grafik im
+Entwurf widersprachen sich, von Felix auf 50 km bestätigt). Die Preisliste nennt
+davon unabhängig 15 km als Radius, innerhalb dessen keine Fahrtkosten anfallen.
 
 ## Werkzeuge
 
