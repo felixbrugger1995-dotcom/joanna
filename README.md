@@ -32,15 +32,47 @@ Die Seiten unter `docs/` sind deshalb von Hand in statisches HTML übersetzt. Di
 Originale liegen in `_quelle/` und bleiben dort lauffähig, um Abweichungen
 nachschlagen zu können.
 
-## Bekannte Lücken beim Import
+## Seiten
 
-Die Design-API gibt pro Datei höchstens 256 KiB heraus. Davon betroffen:
+| Datei | Inhalt |
+|---|---|
+| `index.html` | Startseite (Hero, Über mich, Leistungen, Ablauf, Einzugsgebiet, Preise, Kontakt) |
+| `preise.html` | Preisliste |
+| `termin.html` | Terminanfrage über ein eingebettetes Tally-Formular |
+| `kontakt.html` | Direktkontakt: Telefon, E-Mail, Instagram |
+| `danke.html` | Bestätigung nach dem Absenden |
+| `impressum.html` | Impressum |
+| `datenschutz.html` | Datenschutzerklärung |
+| `404.html` | Fehlerseite (von GitHub Pages automatisch genutzt) |
+
+## Offene Punkte
+
+**Vor der Veröffentlichung zwingend zu erledigen:** Die Datenschutzerklärung
+sagt zu, dass die Schriftarten vom eigenen Server kommen. Solange oben in den
+HTML-Dateien noch `fonts.googleapis.com` steht, stimmt das nicht. Erst die
+Schriften lokal einbinden, dann live gehen.
+
+Die Datenschutzerklärung aus dem Design beschrieb eine andere Website — Hosting
+bei Framer, Google Analytics, Cookie-Banner, eingebettete Instagram-Inhalte.
+Nichts davon trifft hier zu. Sie wurde auf den tatsächlichen Aufbau umgeschrieben
+und sollte vor dem Livegang fachkundig geprüft werden.
+
+**Fehlende Fotos.** Die Design-API gibt pro Datei höchstens 256 KiB heraus:
 
 - `_quelle/.image-slots.state.json` ist abgeschnitten. Aus dem lesbaren Teil
-  konnten `svc-1` bis `svc-4` gerettet werden (siehe `docs/assets/img/`),
-  `svc-5` steckt im fehlenden Rest, `svc-6` war nie befüllt.
-- Die Fotos unter `uploads/` (iPhone-Aufnahmen) sind allesamt zu groß und
-  fehlen. Sie müssen separat aus Claude Design geladen werden.
+  konnten `svc-1` bis `svc-4` gerettet werden, `svc-5` steckt im fehlenden Rest,
+  `svc-6` war nie befüllt.
+- Die Fotos unter `uploads/` (iPhone-Aufnahmen) sind zu groß und fehlen ganz.
+
+Betroffen sind vier Stellen, die derzeit Platzhalter zeigen: `hero.svg`,
+`portrait.svg`, `svc-5.svg`, `svc-6.svg` und `404-dog.svg`. Echte Bilder in
+`docs/assets/img/` ablegen und die Verweise in `index.html` bzw. `404.html`
+umbiegen.
+
+**Inhaltlicher Widerspruch.** Der Text im Einzugsgebiet nennt „ca. 30 km", die
+Grafik daneben stand im Entwurf auf „ca. 50 km"; sie wurde vorläufig auf 30 km
+angeglichen. Welcher Wert stimmt, muss Joanna entscheiden — die Preisliste nennt
+zusätzlich 15 km als Radius, innerhalb dessen keine Fahrtkosten anfallen.
 
 ## Werkzeuge
 

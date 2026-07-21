@@ -342,6 +342,12 @@ a { color: inherit }
 
 .btn--tint { color: var(--accentDeep); background: var(--tint) }
 
+.btn--outline {
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
 .btn--wide { min-width: 210px; text-align: center }
 
 /* Aufklapper "Weiterlesen". Der Trick ist grid-template-rows 0fr -> 1fr:
@@ -755,6 +761,293 @@ a { color: inherit }
   border-top: 1px solid rgba(255, 255, 255, .14);
   font-size: 13.5px;
   color: rgba(255, 255, 255, .6);
+}
+
+/* ── Schmale, zentrierte Seiten (Danke, 404) ────────────────────────────── */
+
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px clamp(18px, 5vw, 40px);
+  overflow-x: hidden;
+}
+
+.page-center h1 {
+  margin: 0 0 16px;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  line-height: 1.08;
+  font-size: clamp(32px, 6vw, 54px);
+  color: var(--ink);
+}
+
+.page-center p { margin: 0 0 32px; font-size: 18px; line-height: 1.7; color: var(--soft); max-width: 46ch }
+.page-center .note { margin: 26px 0 0; font-size: 13.5px; color: #9c968b }
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 40px;
+  margin-bottom: 28px;
+  box-shadow: 0 14px 36px rgba(88, 109, 70, .3);
+  animation: pop .6s cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes pop {
+  0% { transform: scale(.4); opacity: 0 }
+  60% { transform: scale(1.08) }
+  100% { transform: scale(1); opacity: 1 }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark { animation: none }
+}
+
+/* Die 404 steht als "4 – Hundefoto – 4"; der Kreis ist die mittlere Null. */
+.fourofour {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  font-size: clamp(88px, 20vw, 180px);
+  line-height: .9;
+  color: var(--accent);
+}
+
+.fourofour-dog {
+  display: inline-block;
+  width: .92em;
+  height: .92em;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--tint);
+  box-shadow: inset 0 0 0 6px var(--accent);
+  margin: 0 .02em;
+}
+
+.fourofour-dog img { width: 100%; height: 100%; object-fit: cover }
+
+/* ── Rechtsseiten (Impressum, Datenschutz) ──────────────────────────────── */
+
+/* Textbreite. Impressum und Datenschutz laufen schmal, die Preisliste
+   etwas breiter — die Seite setzt --measure selbst. */
+.legal {
+  --measure: 760px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.legal-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-bar nav {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 clamp(18px, 5vw, 40px);
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legal-bar .nav-logo { color: var(--accentDeep) }
+.legal-bar .zurueck { text-decoration: none; font-size: 14.5px; font-weight: 500; color: var(--soft) }
+
+.legal-main {
+  flex: 1;
+  max-width: var(--measure);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 64px) clamp(18px, 5vw, 40px);
+}
+
+.legal-main h1 {
+  margin: 0 0 8px;
+  font-family: var(--ff-head);
+  font-weight: 500;
+  line-height: 1.06;
+  font-size: clamp(32px, 5.5vw, 50px);
+  color: var(--ink);
+}
+
+.legal-main h2 {
+  font-family: var(--ff-head);
+  font-weight: 500;
+  font-size: 23px;
+  color: var(--ink);
+  margin: 36px 0 12px;
+}
+
+.legal-main h3 { font-size: 17px; font-weight: 600; color: var(--ink); margin: 24px 0 8px }
+.legal-main p, .legal-main li { font-size: 16px; line-height: 1.72; color: #4a4843 }
+.legal-main p { margin: 0 0 14px }
+.legal-main ul { margin: 0 0 14px; padding-left: 20px }
+.legal-main a { color: var(--accentDeep) }
+
+.legal-foot {
+  background: var(--accentDeep);
+  color: rgba(255, 255, 255, .72);
+  padding: 32px clamp(18px, 5vw, 40px);
+  font-size: 13.5px;
+}
+
+.legal-foot > div {
+  max-width: var(--measure);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legal-foot a { color: rgba(255, 255, 255, .72); text-decoration: none }
+.legal-foot .links { display: flex; gap: 18px }
+
+/* ── Preisliste ─────────────────────────────────────────────────────────── */
+
+.karte {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.karte-block { padding: 24px 26px }
+.karte-block + .karte-block { border-top: 1px solid var(--line) }
+
+.preis-zeile {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.preis-zeile p { margin: 0; font-size: 20px; font-weight: 600; color: var(--ink) }
+.preis-zeile p span { font-weight: 400; color: var(--soft); font-size: 15px }
+.preis { font-size: 18px; font-weight: 700; color: var(--accentDeep); white-space: nowrap }
+
+.dauer { margin: 6px 0 12px; font-size: 14px; color: var(--soft) }
+
+.karte ul { margin: 0; padding-left: 18px; font-size: 14.5px; line-height: 1.7; color: var(--soft) }
+
+.kachel-reihe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.kachel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px 24px;
+}
+
+.kachel-titel {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+}
+
+.kachel-zeile {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.kachel-zeile strong { color: var(--accentDeep) }
+.kachel .klein { margin: 10px 0 0; font-size: 13px; color: var(--soft) }
+
+/* ── Eingebettetes Formular (Tally) ─────────────────────────────────────── */
+
+.formular {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.formular iframe { display: block; width: 100%; border: 0 }
+
+/* ── Direktkontakt ──────────────────────────────────────────────────────── */
+
+.kontakt-liste { display: grid; gap: 14px; margin: 0 0 32px }
+
+.kontakt-karte {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+
+.kontakt-karte:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(40, 36, 28, .07);
+}
+
+.kontakt-karte .icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--tint);
+  color: var(--accentDeep);
+}
+
+.kontakt-karte .was { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--soft) }
+.kontakt-karte .wert { margin: 3px 0 0; font-size: 18px; font-weight: 600; color: var(--ink) }
+.kontakt-karte .pfeil { margin-left: auto; color: var(--soft); font-size: 20px }
+
+@media (prefers-reduced-motion: reduce) {
+  .kontakt-karte:hover { transform: none }
+}
+
+/* ── Preisliste, Fortsetzung ────────────────────────────────────────────── */
+
+.hinweis-box {
+  background: color-mix(in srgb, var(--tint) 55%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accentDeep) 18%, transparent);
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-top: 16px;
 }
 
 /* ── Einblenden beim Scrollen ───────────────────────────────────────────── */

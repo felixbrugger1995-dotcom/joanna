@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Vielen Dank! | Joanna – Mobile Tierphysiotherapie</title>
+<meta name="description" content="Deine Anfrage ist angekommen. Joanna meldet sich innerhalb von ein bis zwei Werktagen.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<main class="page-center">
+  <span class="mark" aria-hidden="true">✓</span>
+  <h1>Vielen Dank!</h1>
+  <p>Ich habe deine Angaben erhalten und melde mich in der Regel innerhalb von 1–2 Werktagen, um einen passenden Termin zu vereinbaren.</p>
+  <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
+  <p class="note" id="hinweis">Du wirst in Kürze automatisch weitergeleitet …</p>
+</main>
+
+<script>
+  // Weiterleitung wie im Entwurf nach 7 Sekunden. Wer die Seite anfasst,
+  // will offenbar lesen — dann bleibt sie stehen, statt unter den Haenden
+  // wegzuspringen (WCAG 2.2.1).
+  (() => {
+    const hinweis = document.getElementById('hinweis');
+    const timer = setTimeout(() => { location.href = 'index.html'; }, 7000);
+
+    const abbrechen = () => {
+      clearTimeout(timer);
+      hinweis.hidden = true;
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((t) =>
+        document.removeEventListener(t, abbrechen));
+    };
+
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((t) =>
+      document.addEventListener(t, abbrechen, { passive: true }));
+  })();
+</script>
+</body>
+</html>
