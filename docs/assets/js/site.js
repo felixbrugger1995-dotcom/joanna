@@ -22,12 +22,24 @@
     };
 
     burger.setAttribute('aria-expanded', 'false');
-    burger.addEventListener('click', () => setOpen(!menu.hasAttribute('data-open')));
+
+    // stopPropagation, damit dieser Klick nicht gleich beim
+    // Aussenklick-Handler unten wieder als "ausserhalb" ankommt.
+    burger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!menu.hasAttribute('data-open'));
+    });
 
     // Die Links im Menue springen zu Ankern auf derselben Seite. Ohne
     // Schliessen bliebe das Panel ueber dem Ziel stehen.
     menu.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => setOpen(false));
+    });
+
+    // Tippen ausserhalb schliesst das Menue. Klicks im Panel selbst nicht —
+    // sonst ginge es beim Scrollen/Antippen im Menue sofort wieder zu.
+    document.addEventListener('click', (e) => {
+      if (menu.hasAttribute('data-open') && !menu.contains(e.target)) setOpen(false);
     });
 
     document.addEventListener('keydown', (e) => {
