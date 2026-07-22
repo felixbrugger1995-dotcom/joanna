@@ -57,17 +57,11 @@ bei Framer, Google Analytics, Cookie-Banner, eingebettete Instagram-Inhalte.
 Nichts davon trifft hier zu. Sie wurde auf den tatsächlichen Aufbau umgeschrieben
 und sollte vor dem Livegang fachkundig geprüft werden.
 
-**Fehlende Fotos.** Die Design-API gibt pro Datei höchstens 256 KiB heraus:
-
-- `_quelle/.image-slots.state.json` ist abgeschnitten. Aus dem lesbaren Teil
-  konnten `svc-1` bis `svc-4` gerettet werden, `svc-5` steckt im fehlenden Rest,
-  `svc-6` war nie befüllt.
-- Die Fotos unter `uploads/` (iPhone-Aufnahmen) sind zu groß und fehlen ganz.
-
-Betroffen sind vier Stellen, die derzeit Platzhalter zeigen: `hero.svg`,
-`portrait.svg`, `svc-5.svg`, `svc-6.svg` und `404-dog.svg`. Echte Bilder in
-`docs/assets/img/` ablegen und die Verweise in `index.html` bzw. `404.html`
-umbiegen.
+**Fotos.** Alle Bilder sind echte Aufnahmen von Joanna und ihrer Chihuahua-Hündin
+Nala, als optimierte WebP unter `docs/assets/img/`. Die iPhone-Originale (HEIC/JPG)
+liegen nicht im Repo; sie wurden mit `heic-convert` + `sharp` verkleinert und ins
+WebP-Format gebracht (Hero 1600 px, Portrait 1100 px, Leistungskarten 760 px,
+404-Rundbild 500 px Quadrat).
 
 **Einzugsgebiet:** einheitlich ca. 50 km um Thannhausen (Text und Grafik im
 Entwurf widersprachen sich, von Felix auf 50 km bestätigt). Die Preisliste nennt
