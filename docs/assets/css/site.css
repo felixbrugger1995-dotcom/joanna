@@ -25,6 +25,21 @@
   --ff-body: 'Plus Jakarta Sans', system-ui, sans-serif;
   --ff-logo: 'Outfit', system-ui, sans-serif;
 
+  /* ── Eine Skala fuer die ganze Website ──────────────────────────────────
+     Damit Schriftgroessen ueberall zusammenpassen: gleiche Rolle = gleicher
+     Token, statt Dutzender einzelner px-Werte. */
+  --fs-tag: 11px;      /* Uppercase-Pillen (Leistungs-Tags)                  */
+  --fs-eyebrow: 13px;  /* Section-Label, Meta, Fusszeilen-Navigation         */
+  --fs-small: 14px;    /* kleine Hinweise, Bildunterschriften, Chips         */
+  --fs-body: 16px;     /* Standard-Fliesstext, Listen, Formulartext          */
+  --fs-lead: 18px;     /* einleitender Absatz unter einer Ueberschrift       */
+  --fs-h3: 21px;       /* Karten-, Schritt- und Abschnittstitel (klein)      */
+  --fs-logo: 22px;     /* Wortmarke JOANNA in Nav und Fusszeile              */
+  --fs-h2: clamp(30px, 4.5vw, 46px);   /* Section-Ueberschriften            */
+  --fs-h1: clamp(32px, 5.5vw, 50px);   /* Seiten-Ueberschriften             */
+  --fs-sub: clamp(18px, 2.6vw, 27px);  /* Hero-Unterzeile                   */
+  --fs-display: clamp(72px, 15vw, 180px); /* JOANNA im Hero                 */
+
   --paw-on: inline-flex;
 
   /* Hero "Warm & golden": Fokus 15 %, Overlay 80 %, Waerme 20 %, Haze 20 %,
@@ -108,7 +123,7 @@ a { color: inherit }
 .nav-logo {
   font-family: var(--ff-logo);
   font-weight: 700;
-  font-size: 22px;
+  font-size: var(--fs-logo);
   letter-spacing: .16em;
   text-decoration: none;
   color: #fff;
@@ -118,7 +133,7 @@ a { color: inherit }
 
 .nav-links a {
   text-decoration: none;
-  font-size: 14.5px;
+  font-size: var(--fs-small);
   font-weight: 500;
   color: rgba(255, 255, 255, .84);
   transition: color .2s;
@@ -173,7 +188,7 @@ a { color: inherit }
 
 .nav-mobile a {
   text-decoration: none;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 500;
   color: rgba(255, 255, 255, .9);
   padding: 13px 14px;
@@ -189,7 +204,7 @@ a { color: inherit }
 
 .nav-mobile .nav-mobile-cta {
   text-align: center;
-  font-size: 15px;
+  font-size: var(--fs-body);
   font-weight: 600;
   color: #fff;
   background: var(--accent);
@@ -281,14 +296,14 @@ a { color: inherit }
   font-weight: 700;
   line-height: .84;
   letter-spacing: -.01em;
-  font-size: clamp(72px, 15vw, 180px);
+  font-size: var(--fs-display);
   color: #fff;
   text-shadow: 0 2px 30px rgba(0, 0, 0, .45);
 }
 
 .hero-sub {
   margin: 14px 0 0;
-  font-size: clamp(18px, 2.7vw, 30px);
+  font-size: var(--fs-sub);
   color: rgba(255, 255, 255, .97);
   text-shadow: 0 1px 14px rgba(0, 0, 0, .5);
 }
@@ -336,7 +351,7 @@ a { color: inherit }
 
 .eyebrow {
   margin: 0 0 14px;
-  font-size: 13px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -348,12 +363,12 @@ a { color: inherit }
   font-family: var(--ff-head);
   font-weight: 500;
   line-height: 1.08;
-  font-size: clamp(30px, 4.5vw, 46px);
+  font-size: var(--fs-h2);
   color: var(--ink);
 }
 
 .lead {
-  font-size: 17px;
+  font-size: var(--fs-lead);
   line-height: 1.7;
   color: var(--soft);
 }
@@ -366,7 +381,7 @@ a { color: inherit }
   justify-content: center;
   gap: 10px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 600;
   padding: 15px 30px;
   border-radius: 999px;
@@ -434,10 +449,10 @@ a { color: inherit }
 
 .ueber-text { flex: 1 1 440px; min-width: 300px; display: flex }
 .ueber-text > div { max-width: 560px; width: 100%; display: flex; flex-direction: column }
-.ueber-text p { margin: 0 0 18px; font-size: 17px; line-height: 1.8; color: var(--soft) }
+.ueber-text p { margin: 0 0 18px; font-size: var(--fs-body); line-height: 1.8; color: var(--soft) }
 .ueber-text strong { color: var(--ink); font-weight: 600 }
 
-.ueber-btn { align-self: flex-start; margin: 6px 0 26px; font-size: 15px }
+.ueber-btn { align-self: flex-start; margin: 6px 0 26px; font-size: var(--fs-body) }
 
 .chips {
   display: flex;
@@ -454,7 +469,7 @@ a { color: inherit }
   background: var(--surface);
   border-radius: 999px;
   padding: 8px 13px;
-  font-size: 13px;
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
   white-space: nowrap;
   color: var(--ink);
@@ -494,7 +509,7 @@ a { color: inherit }
   position: absolute;
   left: 24px;
   bottom: 22px;
-  font-size: 11px;
+  font-size: var(--fs-tag);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -560,7 +575,7 @@ a { color: inherit }
 
 .svc-tag {
   align-self: flex-start;
-  font-size: 11px;
+  font-size: var(--fs-tag);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -574,13 +589,13 @@ a { color: inherit }
   margin: 14px 0 8px;
   font-family: var(--ff-head);
   font-weight: 600;
-  font-size: 21px;
+  font-size: var(--fs-h3);
   line-height: 1.2;
   color: var(--ink);
 }
 
-.svc-claim { margin: 0 0 8px; font-size: 14.5px; font-weight: 700; color: var(--ink) }
-.svc-text { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--soft) }
+.svc-claim { margin: 0 0 8px; font-size: var(--fs-small); font-weight: 700; color: var(--ink) }
+.svc-text { margin: 0; font-size: var(--fs-small); line-height: 1.65; color: var(--soft) }
 
 /* ── Ablauf ─────────────────────────────────────────────────────────────── */
 
@@ -604,7 +619,7 @@ a { color: inherit }
   background: var(--accent);
   color: #fff;
   font-family: var(--ff-head);
-  font-size: 19px;
+  font-size: var(--fs-lead);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -616,13 +631,13 @@ a { color: inherit }
   margin: 0 0 10px;
   font-family: var(--ff-head);
   font-weight: 500;
-  font-size: 22px;
+  font-size: var(--fs-h3);
   color: var(--ink);
 }
 
-.step p { margin: 0; font-size: 15.5px; line-height: 1.68; color: #54584a; max-width: 36ch }
+.step p { margin: 0; font-size: var(--fs-body); line-height: 1.68; color: #54584a; max-width: 36ch }
 .step .more p { margin: 12px 0 0 }
-.step .more-btn { margin-top: 14px; font-size: 14px }
+.step .more-btn { margin-top: 14px; font-size: var(--fs-small) }
 
 /* Pfotenspur, die ueber die drei Schritte laeuft. */
 .walktrail {
@@ -673,7 +688,7 @@ a { color: inherit }
 .gebiet-text { flex: 1 1 360px; min-width: 280px; padding: clamp(36px, 5vw, 64px) }
 .gebiet-text .eyebrow { color: rgba(255, 255, 255, .75) }
 .gebiet-text .h2 { color: #fff; margin-bottom: 18px }
-.gebiet-text p { margin: 0 0 14px; font-size: 17px; line-height: 1.7; color: rgba(255, 255, 255, .9) }
+.gebiet-text p { margin: 0 0 14px; font-size: var(--fs-body); line-height: 1.7; color: rgba(255, 255, 255, .9) }
 .gebiet-text p:last-child { margin-bottom: 0 }
 .gebiet-text strong { color: #fff; font-weight: 600 }
 
@@ -743,7 +758,7 @@ a { color: inherit }
   margin: 0 0 10px;
   font-family: var(--ff-logo);
   font-weight: 700;
-  font-size: 22px;
+  font-size: var(--fs-logo);
   letter-spacing: .18em;
   color: #fff;
 }
@@ -752,7 +767,7 @@ a { color: inherit }
 
 .footer-col h2 {
   margin: 0 0 12px;
-  font-size: 12px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -760,14 +775,14 @@ a { color: inherit }
 }
 
 .footer-links { display: flex; flex-direction: column; gap: 9px }
-.footer-links a { text-decoration: none; font-size: 14.5px; color: rgba(255, 255, 255, .8) }
+.footer-links a { text-decoration: none; font-size: var(--fs-small); color: rgba(255, 255, 255, .8) }
 
 .footer-ig {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   text-decoration: none;
-  font-size: 14.5px;
+  font-size: var(--fs-small);
   font-weight: 500;
   color: #fff;
   background: rgba(255, 255, 255, .12);
@@ -781,7 +796,7 @@ a { color: inherit }
   margin: 32px auto 0;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, .14);
-  font-size: 13.5px;
+  font-size: var(--fs-small);
   color: rgba(255, 255, 255, .6);
 }
 
@@ -803,12 +818,12 @@ a { color: inherit }
   font-family: var(--ff-head);
   font-weight: 500;
   line-height: 1.08;
-  font-size: clamp(32px, 6vw, 54px);
+  font-size: var(--fs-h1);
   color: var(--ink);
 }
 
-.page-center p { margin: 0 0 32px; font-size: 18px; line-height: 1.7; color: var(--soft); max-width: 46ch }
-.page-center .note { margin: 26px 0 0; font-size: 13.5px; color: #9c968b }
+.page-center p { margin: 0 0 32px; font-size: var(--fs-lead); line-height: 1.7; color: var(--soft); max-width: 46ch }
+.page-center .note { margin: 26px 0 0; font-size: var(--fs-small); color: #9c968b }
 
 .mark {
   display: inline-flex;
@@ -894,7 +909,7 @@ a { color: inherit }
 }
 
 .legal-bar .nav-logo { color: var(--accentDeep) }
-.legal-bar .zurueck { text-decoration: none; font-size: 14.5px; font-weight: 500; color: var(--soft) }
+.legal-bar .zurueck { text-decoration: none; font-size: var(--fs-small); font-weight: 500; color: var(--soft) }
 
 .legal-main {
   flex: 1;
@@ -909,29 +924,33 @@ a { color: inherit }
   font-family: var(--ff-head);
   font-weight: 500;
   line-height: 1.06;
-  font-size: clamp(32px, 5.5vw, 50px);
+  font-size: var(--fs-h1);
   color: var(--ink);
 }
 
 .legal-main h2 {
   font-family: var(--ff-head);
   font-weight: 500;
-  font-size: 23px;
+  font-size: var(--fs-h3);
   color: var(--ink);
   margin: 36px 0 12px;
 }
 
-.legal-main h3 { font-size: 17px; font-weight: 600; color: var(--ink); margin: 24px 0 8px }
-.legal-main p, .legal-main li { font-size: 16px; line-height: 1.72; color: #4a4843 }
+.legal-main h3 { font-size: var(--fs-body); font-weight: 600; color: var(--ink); margin: 24px 0 8px }
+.legal-main p, .legal-main li { font-size: var(--fs-body); line-height: 1.72; color: #4a4843 }
 .legal-main p { margin: 0 0 14px }
 .legal-main ul { margin: 0 0 14px; padding-left: 20px }
 .legal-main a { color: var(--accentDeep) }
+
+/* Label-Klassen sind hier <p> und wuerden sonst von ".legal-main p" auf
+   Body-Groesse gezogen — explizit wieder auf die kleine Label-Groesse. */
+.legal-main .eyebrow, .legal-main .kachel-titel { font-size: var(--fs-eyebrow) }
 
 .legal-foot {
   background: var(--accentDeep);
   color: rgba(255, 255, 255, .72);
   padding: 32px clamp(18px, 5vw, 40px);
-  font-size: 13.5px;
+  font-size: var(--fs-small);
 }
 
 .legal-foot > div {
@@ -967,13 +986,13 @@ a { color: inherit }
 }
 
 /* Ruhige Typografie: nur drei Groessen — 18 (Titel/Preis), 15 (Text), 13 (Meta). */
-.preis-zeile p { margin: 0; font-size: 18px; font-weight: 600; color: var(--ink) }
-.preis-zeile p span { font-weight: 400; color: var(--soft); font-size: 15px }
-.preis { font-size: 18px; font-weight: 700; color: var(--accentDeep); white-space: nowrap }
+.preis-zeile p { margin: 0; font-size: var(--fs-lead); font-weight: 600; color: var(--ink) }
+.preis-zeile p span { font-weight: 400; color: var(--soft); font-size: var(--fs-body) }
+.preis { font-size: var(--fs-lead); font-weight: 700; color: var(--accentDeep); white-space: nowrap }
 
-.dauer { margin: 6px 0 12px; font-size: 15px; color: var(--soft) }
+.dauer { margin: 6px 0 12px; font-size: var(--fs-body); color: var(--soft) }
 
-.karte ul { margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.75; color: var(--soft) }
+.karte ul { margin: 0; padding-left: 18px; font-size: var(--fs-body); line-height: 1.75; color: var(--soft) }
 
 .kachel-reihe {
   display: grid;
@@ -991,7 +1010,7 @@ a { color: inherit }
 
 .kachel-titel {
   margin: 0 0 10px;
-  font-size: 13px;
+  font-size: var(--fs-eyebrow);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1001,13 +1020,13 @@ a { color: inherit }
 .kachel-zeile {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: var(--fs-body);
   color: var(--ink);
   margin-bottom: 6px;
 }
 
 .kachel-zeile strong { color: var(--accentDeep) }
-.kachel .klein { margin: 8px 0 0; font-size: 13px; color: var(--soft) }
+.kachel .klein { margin: 8px 0 0; font-size: var(--fs-eyebrow); color: var(--soft) }
 
 /* ── Eingebettetes Formular (Tally) ─────────────────────────────────────── */
 
@@ -1055,8 +1074,8 @@ a { color: inherit }
   color: var(--accentDeep);
 }
 
-.kontakt-karte .was { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--soft) }
-.kontakt-karte .wert { margin: 3px 0 0; font-size: 18px; font-weight: 600; color: var(--ink) }
+.kontakt-karte .was { margin: 0; font-size: var(--fs-eyebrow); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--soft) }
+.kontakt-karte .wert { margin: 3px 0 0; font-size: var(--fs-lead); font-weight: 600; color: var(--ink) }
 .kontakt-karte .pfeil { margin-left: auto; color: var(--soft); font-size: 20px }
 
 @media (prefers-reduced-motion: reduce) {
