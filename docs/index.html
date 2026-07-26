@@ -68,7 +68,10 @@
 <!-- ===== HERO ===== -->
 <section id="home">
   <div class="hero-full">
-    <img class="hero-full-photo" src="assets/img/hero.webp" alt="Joanna mit ihrem Hund Nala">
+    <picture>
+      <source media="(max-width:760px)" srcset="assets/img/hero-mobile.webp">
+      <img class="hero-full-photo" src="assets/img/hero.webp" alt="Joanna mit ihrem Hund Nala">
+    </picture>
     <img class="hero-full-glow" src="assets/img/hero.webp" alt="" aria-hidden="true">
     <div class="hero-full-warm"></div>
     <div class="hero-full-scrim"></div>
@@ -89,10 +92,10 @@
     </div>
 
     <div class="ueber-grid">
-      <div class="ueber-text" data-reveal>
+      <div class="ueber-text" data-reveal data-more-scope>
         <div>
           <p>Tiere begleiten mich mein Leben lang. Schon als Kind war es für mich selbstverständlich, für sie da zu sein – ob für die eigenen Hunde oder die Tiere auf der Straße, denen ich intuitiv geholfen habe. Früh habe ich gespürt, dass das Wohlergehen unserer treuen Begleiter für mich weit mehr ist als ein Hobby – es ist eine tiefe Überzeugung.</p>
-          <p>Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. In jedem Beruf blieb mein eigentliches Ziel dasselbe: einen Beitrag für Tiere in Not zu leisten. Ein Coaching gab schließlich den entscheidenden Anstoß, diesem Herzenswunsch endlich zu folgen. Ich stellte mir die Frage: Warum nicht direkt dort helfen, wo mein Herz wirklich schlägt?</p>
+          <p class="ueber-p2">Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. In jedem Beruf blieb mein eigentliches Ziel dasselbe: einen Beitrag für Tiere in Not zu leisten. Ein Coaching gab schließlich den entscheidenden Anstoß, diesem Herzenswunsch endlich zu folgen. Ich stellte mir die Frage: Warum nicht direkt dort helfen, wo mein Herz wirklich schlägt?</p>
 
           <div class="more" data-more="ueber">
             <div>
@@ -132,12 +135,7 @@
       <p class="lead" style="margin:0">Jede Behandlung wird individuell auf die Bedürfnisse deines Lieblings abgestimmt.</p>
     </div>
 
-    <div class="svc-nav">
-      <button data-svc-scroll="prev" aria-label="Zurück" aria-controls="svc-track">←</button>
-      <button data-svc-scroll="next" aria-label="Weiter" aria-controls="svc-track">→</button>
-    </div>
-
-    <div class="svc-track" id="svc-track" data-svc-track>
+    <div class="svc-grid">
 
       <article class="svc-card" data-reveal>
         <div class="svc-media"><img src="assets/img/svc-1.webp" alt="Entspannte Behandlung: Nala liegt ruhig während einer sanften Therapie" loading="lazy"></div>

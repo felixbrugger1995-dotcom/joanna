@@ -62,32 +62,19 @@
     panel.setAttribute('aria-hidden', 'true');
     btn.setAttribute('aria-expanded', 'false');
 
+    // Optionaler weiterer Bereich, der mit demselben Knopf auf-/zugeht — mobil
+    // wird so ein zusaetzlicher Absatz eingeklappt (siehe .ueber-p2 im CSS).
+    const scope = btn.closest('[data-more-scope]');
+
     btn.addEventListener('click', () => {
       const nowOpen = !panel.hasAttribute('data-open');
       panel.toggleAttribute('data-open', nowOpen);
       panel.setAttribute('aria-hidden', String(!nowOpen));
       btn.setAttribute('aria-expanded', String(nowOpen));
       labelEl.textContent = nowOpen ? open : closed;
+      if (scope) scope.toggleAttribute('data-open', nowOpen);
     });
   });
-
-  /* ── Leistungs-Slider ─────────────────────────────────────────────────── */
-
-  const track = document.querySelector('[data-svc-track]');
-
-  if (track) {
-    // Um genau eine Karte weiterschieben. Die 24 px sind der gap aus dem CSS;
-    // faellt die Kartenmessung aus, bleibt ein Bildschirm-Naeherungswert.
-    const step = () => {
-      const card = track.querySelector('.svc-card');
-      return card ? card.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
-    };
-
-    document.querySelectorAll('[data-svc-scroll]').forEach((btn) => {
-      const dir = btn.dataset.svcScroll === 'prev' ? -1 : 1;
-      btn.addEventListener('click', () => track.scrollBy({ left: dir * step(), behavior: 'smooth' }));
-    });
-  }
 
   /* ── Einblenden beim Scrollen ─────────────────────────────────────────── */
 
