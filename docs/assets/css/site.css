@@ -150,6 +150,8 @@ a { color: inherit }
 
 .nav-burger span { width: 18px; height: 2px; background: #fff; border-radius: 2px }
 
+/* Dunkles Glas passend zur schwebenden Pille — statt eines weissen Kastens,
+   der billig wirkte. Heller Text, Blur, feine Trennlinien. */
 .nav-mobile {
   position: absolute;
   top: 100%;
@@ -157,13 +159,14 @@ a { color: inherit }
   right: 0;
   display: none;
   flex-direction: column;
-  gap: 2px;
   margin: 8px clamp(12px, 4vw, 24px) 0;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, .2);
+  padding: 10px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(24, 19, 13, .82);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, .35);
 }
 
 .nav-mobile[data-open] { display: flex }
@@ -172,9 +175,17 @@ a { color: inherit }
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  color: var(--ink);
-  padding: 8px;
+  color: rgba(255, 255, 255, .9);
+  padding: 13px 14px;
+  border-radius: 12px;
+  transition: background .15s, color .15s;
 }
+
+/* Feine Trennlinie zwischen den Links, ausser vor der CTA. */
+.nav-mobile a + a:not(.nav-mobile-cta) { border-top: 1px solid rgba(255, 255, 255, .08) }
+
+.nav-mobile a:not(.nav-mobile-cta):active,
+.nav-mobile a:not(.nav-mobile-cta):hover { background: rgba(255, 255, 255, .08); color: #fff }
 
 .nav-mobile .nav-mobile-cta {
   text-align: center;
@@ -182,9 +193,10 @@ a { color: inherit }
   font-weight: 600;
   color: #fff;
   background: var(--accent);
-  padding: 12px 18px;
+  padding: 13px 18px;
   border-radius: 999px;
-  margin-top: 6px;
+  margin-top: 8px;
+  border-top: 0;
 }
 
 @media (max-width: 880px) {
@@ -954,13 +966,14 @@ a { color: inherit }
   align-items: baseline;
 }
 
-.preis-zeile p { margin: 0; font-size: 20px; font-weight: 600; color: var(--ink) }
+/* Ruhige Typografie: nur drei Groessen — 18 (Titel/Preis), 15 (Text), 13 (Meta). */
+.preis-zeile p { margin: 0; font-size: 18px; font-weight: 600; color: var(--ink) }
 .preis-zeile p span { font-weight: 400; color: var(--soft); font-size: 15px }
 .preis { font-size: 18px; font-weight: 700; color: var(--accentDeep); white-space: nowrap }
 
-.dauer { margin: 6px 0 12px; font-size: 14px; color: var(--soft) }
+.dauer { margin: 6px 0 12px; font-size: 15px; color: var(--soft) }
 
-.karte ul { margin: 0; padding-left: 18px; font-size: 14.5px; line-height: 1.7; color: var(--soft) }
+.karte ul { margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.75; color: var(--soft) }
 
 .kachel-reihe {
   display: grid;
@@ -994,7 +1007,7 @@ a { color: inherit }
 }
 
 .kachel-zeile strong { color: var(--accentDeep) }
-.kachel .klein { margin: 10px 0 0; font-size: 13px; color: var(--soft) }
+.kachel .klein { margin: 8px 0 0; font-size: 13px; color: var(--soft) }
 
 /* ── Eingebettetes Formular (Tally) ─────────────────────────────────────── */
 
