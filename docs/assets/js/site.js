@@ -89,9 +89,13 @@
     const frontPad = front.querySelector('.flip-pad');
     const backPad = back.querySelector('.flip-pad');
 
-    flip.setAttribute('data-enhanced', '');
+    // Nur auf schmalen Schirmen ist die Karte eine 3D-Karte. Ab 900px stehen
+    // Foto und Text nebeneinander (siehe site.css) — dort wuerden das
+    // Stapeln und die feste Hoehe das Grid zerstoeren.
+    const schmal = window.matchMedia('(max-width: 899px)');
 
     const resize = () => {
+      if (!flip.hasAttribute('data-enhanced')) return;
       const pad = flip.hasAttribute('data-flipped') ? backPad : frontPad;
       inner.style.height = pad.offsetHeight + 'px';
     };
@@ -102,7 +106,6 @@
       front.setAttribute('aria-hidden', String(toBack));
       back.setAttribute('aria-hidden', String(!toBack));
     };
-    setSide(false);
 
     const show = (side) => {
       const toBack = side === 'back';
@@ -118,6 +121,27 @@
       btn.addEventListener('click', () => show(btn.dataset.flipTo));
     });
 
+    // Beim Wechsel der Breite den Modus umstellen — auch waehrend das Fenster
+    // gezogen wird, ohne Neuladen.
+    const modus = () => {
+      if (schmal.matches) {
+        flip.setAttribute('data-enhanced', '');
+        setSide(flip.hasAttribute('data-flipped'));
+        resize();
+      } else {
+        // Nebeneinander: keine Stapelung, keine feste Hoehe, beide Seiten
+        // sichtbar — also auch nichts vor Screenreadern verstecken.
+        flip.removeAttribute('data-enhanced');
+        flip.removeAttribute('data-flipped');
+        inner.style.height = '';
+        front.removeAttribute('aria-hidden');
+        back.removeAttribute('aria-hidden');
+      }
+    };
+
+    schmal.addEventListener('change', modus);
+    modus();
+
     // Die Kartenhoehe folgt automatisch der aktiven Seite — auch waehrend
     // "mehr lesen" auf-/zuklappt oder ein Bild nachlaedt. Kein Timing-Raten.
     if ('ResizeObserver' in window) {
@@ -125,7 +149,6 @@
       ro.observe(frontPad);
       ro.observe(backPad);
     } else {
-      resize();
       window.addEventListener('resize', resize);
     }
   });

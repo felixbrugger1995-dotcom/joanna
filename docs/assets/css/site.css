@@ -582,6 +582,42 @@ a { color: inherit }
   .flip[data-enhanced] .flip-inner { transition: none }
 }
 
+/* Ab Tablet-quer nebeneinander statt drehen: eine 460-px-Karte stuende sonst
+   verloren in einem 1280-px-Fenster, waehrend die Leistungen darunter die
+   vollen 1180 px nutzen. Dasselbe Markup, nur anderes Layout — site.js nimmt
+   hier die 3D-Karte zurueck (kein data-enhanced, keine feste Hoehe). */
+@media (min-width: 900px) {
+  .ueber-card { max-width: 1180px }
+
+  .flip-inner {
+    display: grid;
+    grid-template-columns: .85fr 1fr;
+    gap: clamp(32px, 4vw, 64px);
+    align-items: center;
+  }
+
+  /* Stapelung und Drehung aufheben — beide Seiten stehen nebeneinander. */
+  .flip-face {
+    position: static;
+    width: auto;
+    transform: none;
+  }
+
+  /* Neben dem Foto wirkt eine zweite Box zu kastig; der Text steht frei. */
+  .flip-back {
+    margin-top: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+  .flip-back .flip-pad { padding: 0 }
+
+  /* Rein flip-spezifische Bedienelemente entfallen hier. */
+  .flip-cta,
+  .flip-back-close,
+  .flip-front-title { display: none }
+}
+
 /* Chips (auf der Rueckseite) */
 .chips { display: flex; flex-wrap: wrap; gap: 8px }
 
