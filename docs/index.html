@@ -15,10 +15,10 @@
 <meta property="og:description" content="Beweglich und schmerzfrei bleiben – Tierphysiotherapie zu Hause in Thannhausen und Umkreis.">
 <meta property="og:url" content="https://joanna-tierphysio.de/">
 
-<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/fonts.css?v=6h1y">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=6h1y">
 </head>
 <body>
 
@@ -84,43 +84,66 @@
 </section>
 
 <!-- ===== ÜBER MICH ===== -->
-<section id="ueber" class="section section--flush">
-  <div class="wrap" style="padding:0 clamp(18px,5vw,48px)">
-    <div class="section-head" data-reveal>
-      <p class="eyebrow">Über mich</p>
-      <h2 class="h2">Hallo, ich bin Joanna.</h2>
-    </div>
+<section id="ueber" class="section">
+  <div class="section-head" data-reveal>
+    <p class="eyebrow">Über mich</p>
+    <h2 class="h2">Hallo, ich bin Joanna.</h2>
+  </div>
 
-    <div class="ueber-grid">
-      <div class="ueber-text" data-reveal data-more-scope>
-        <div>
-          <p>Tiere begleiten mich mein Leben lang. Schon als Kind war es für mich selbstverständlich, für sie da zu sein – ob für die eigenen Hunde oder die Tiere auf der Straße, denen ich intuitiv geholfen habe. Früh habe ich gespürt, dass das Wohlergehen unserer treuen Begleiter für mich weit mehr ist als ein Hobby – es ist eine tiefe Überzeugung.</p>
-          <p class="ueber-p2">Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. In jedem Beruf blieb mein eigentliches Ziel dasselbe: einen Beitrag für Tiere in Not zu leisten. Ein Coaching gab schließlich den entscheidenden Anstoß, diesem Herzenswunsch endlich zu folgen. Ich stellte mir die Frage: Warum nicht direkt dort helfen, wo mein Herz wirklich schlägt?</p>
+  <!-- Flip-Karte: Foto vorne, Geschichte auf der Rueckseite. Ohne JavaScript
+       stehen beide Seiten untereinander (Fallback); site.js macht daraus die
+       3D-Karte und regelt die Hoehe. -->
+  <div class="ueber-card" data-reveal>
+    <div class="flip" data-flip>
+      <div class="flip-inner">
 
-          <div class="more" data-more="ueber">
-            <div>
-              <p>2025 habe ich meine Ausbildung zur <strong>Tierphysiotherapeutin für Kleintiere</strong> abgeschlossen. Seitdem arbeite ich mobil und komme zu Ihnen und Ihrem Tier nach Hause – in vertrauter, stressfreier Umgebung, in der sich Ihr Liebling rundum wohlfühlt.</p>
-              <p>Mit ganzer Kraft und viel Einfühlungsvermögen setze ich mich dafür ein, die Beweglichkeit Ihres Tieres zu verbessern, Schmerzen zu lindern und gemeinsam mit Ihnen die passende Lösung für Ihren Liebling zu finden. Dabei ist mir eine vertrauensvolle, ehrliche Zusammenarbeit auf Augenhöhe besonders wichtig.</p>
+        <!-- Vorderseite -->
+        <div class="flip-face flip-front">
+          <div class="flip-pad">
+            <img src="assets/img/portrait.webp" alt="Joanna mit ihrem Hund Nala">
+            <div class="flip-front-warm"></div>
+            <div class="flip-front-veil"></div>
+            <div class="flip-front-body">
+              <span class="flip-tag">Joanna &amp; Nala</span>
+              <p class="flip-front-title">Wer hinter JOANNA steckt</p>
+              <button class="flip-cta" type="button" data-flip-to="back" aria-label="Meine Geschichte lesen">
+                Meine Geschichte
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
             </div>
           </div>
+        </div>
 
-          <button class="more-btn ueber-btn" data-more-toggle="ueber"
-                  data-label-closed="Weiterlesen" data-label-open="Weniger anzeigen">
-            <span data-more-label>Weiterlesen</span> <span style="font-size:12px">▾</span>
-          </button>
+        <!-- Rueckseite -->
+        <div class="flip-face flip-back">
+          <div class="flip-pad">
+            <button class="flip-back-close" type="button" data-flip-to="front" aria-label="Zurück zum Foto">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            </button>
+            <p class="eyebrow">Meine Geschichte</p>
+            <p>Tiere begleiten mich mein Leben lang. Schon als Kind war es für mich selbstverständlich, für sie da zu sein – ob für die eigenen Hunde oder die Tiere auf der Straße, denen ich intuitiv geholfen habe. Früh habe ich gespürt, dass das Wohlergehen unserer treuen Begleiter für mich weit mehr ist als ein Hobby – es ist eine tiefe Überzeugung.</p>
 
-          <div class="chips">
-            <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Ausbildung 2025</div>
-            <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Mobil vor Ort</div>
-            <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Einfühlsam &amp; geduldig</div>
+            <div class="more" data-more="ueber">
+              <div>
+                <p>Lange bin ich den klassischen Weg im Büro gegangen, doch die Erfüllung fehlte. In jedem Beruf blieb mein eigentliches Ziel dasselbe: einen Beitrag für Tiere in Not zu leisten. Ein Coaching gab schließlich den entscheidenden Anstoß, diesem Herzenswunsch endlich zu folgen. Ich stellte mir die Frage: Warum nicht direkt dort helfen, wo mein Herz wirklich schlägt?</p>
+                <p>2025 habe ich meine Ausbildung zur <strong>Tierphysiotherapeutin für Kleintiere</strong> abgeschlossen. Seitdem arbeite ich mobil und komme zu Ihnen und Ihrem Tier nach Hause – in vertrauter, stressfreier Umgebung, in der sich Ihr Liebling rundum wohlfühlt.</p>
+                <p>Mit ganzer Kraft und viel Einfühlungsvermögen setze ich mich dafür ein, die Beweglichkeit Ihres Tieres zu verbessern, Schmerzen zu lindern und gemeinsam mit Ihnen die passende Lösung für Ihren Liebling zu finden. Dabei ist mir eine vertrauensvolle, ehrliche Zusammenarbeit auf Augenhöhe besonders wichtig.</p>
+              </div>
+            </div>
+
+            <button class="more-btn ueber-more" type="button" data-more-toggle="ueber"
+                    data-label-closed="mehr lesen …" data-label-open="weniger anzeigen">
+              <span data-more-label>mehr lesen …</span>
+            </button>
+
+            <div class="chips">
+              <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Ausbildung 2025</div>
+              <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Mobil vor Ort</div>
+              <div class="chip"><span class="paw"><svg width="11" height="10" fill="currentColor" aria-hidden="true"><use href="#paw"></use></svg></span>Einfühlsam &amp; geduldig</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="ueber-photo" data-reveal>
-        <img src="assets/img/portrait.webp" alt="Joanna mit ihrem Hund Nala">
-        <div class="ueber-photo-veil"></div>
-        <span class="ueber-photo-tag">Joanna &amp; Nala</span>
       </div>
     </div>
   </div>
@@ -350,6 +373,6 @@
   <div class="footer-legal">© 2025 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</div>
 </footer>
 
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=6h1y"></script>
 </body>
 </html>

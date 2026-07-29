@@ -76,6 +76,60 @@
     });
   });
 
+  /* ── Ueber-mich Flip-Karte ────────────────────────────────────────────── */
+
+  // Macht aus den zwei gestapelten Seiten eine 3D-Karte. Ohne JS bleibt der
+  // gestapelte Fallback stehen. Die Karten-Hoehe folgt der sichtbaren Seite —
+  // auch wenn sich diese durch "mehr lesen" aendert.
+  document.querySelectorAll('[data-flip]').forEach((flip) => {
+    const inner = flip.querySelector('.flip-inner');
+    const front = flip.querySelector('.flip-front');
+    const back = flip.querySelector('.flip-back');
+    if (!inner || !front || !back) return;
+    const frontPad = front.querySelector('.flip-pad');
+    const backPad = back.querySelector('.flip-pad');
+
+    flip.setAttribute('data-enhanced', '');
+
+    const resize = () => {
+      const pad = flip.hasAttribute('data-flipped') ? backPad : frontPad;
+      inner.style.height = pad.offsetHeight + 'px';
+    };
+
+    // Die abgewandte Seite ist optisch weg (backface-visibility), fuer
+    // Screenreader aber weiterhin da — deshalb ausblenden.
+    const setSide = (toBack) => {
+      front.setAttribute('aria-hidden', String(toBack));
+      back.setAttribute('aria-hidden', String(!toBack));
+    };
+    setSide(false);
+
+    const show = (side) => {
+      const toBack = side === 'back';
+      flip.toggleAttribute('data-flipped', toBack);
+      setSide(toBack);
+      resize();
+      const target = toBack ? back : front;
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    };
+
+    flip.querySelectorAll('[data-flip-to]').forEach((btn) => {
+      btn.addEventListener('click', () => show(btn.dataset.flipTo));
+    });
+
+    // Die Kartenhoehe folgt automatisch der aktiven Seite — auch waehrend
+    // "mehr lesen" auf-/zuklappt oder ein Bild nachlaedt. Kein Timing-Raten.
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(resize);
+      ro.observe(frontPad);
+      ro.observe(backPad);
+    } else {
+      resize();
+      window.addEventListener('resize', resize);
+    }
+  });
+
   /* ── Einblenden beim Scrollen ─────────────────────────────────────────── */
 
   // Die Startwerte setzt erst JS (data-reveal-armed). Ohne JS oder ohne
