@@ -224,7 +224,11 @@ a { color: inherit }
 
 .hero-full {
   position: relative;
-  min-height: clamp(660px, 96vh, 1040px);
+  /* Immer volle Bildschirmhoehe — die naechste Sektion soll nicht
+     hereinlugen. dvh statt vh, weil mobile Browser ihre Adressleiste ein-
+     und ausblenden; vh bleibt als Rueckfalloption fuer aeltere Browser. */
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -300,7 +304,8 @@ a { color: inherit }
    kraeftigerer Verlauf unten, damit "JOANNA" klar lesbar ist. */
 @media (max-width: 760px) {
   .hero-full {
-    min-height: clamp(500px, 82vh, 720px);
+    min-height: 100vh;
+    min-height: 100dvh;
   }
   .hero-full-photo {
     object-position: 46% 42%;
