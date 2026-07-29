@@ -347,8 +347,10 @@ a { color: inherit }
     min-height: 100vh;
     min-height: 100dvh;
   }
+  /* Der Handy-Ausschnitt ist bereits hochformatig auf Joanna und Nala
+     zugeschnitten — mittig zeigen genuegt, es faellt kaum etwas weg. */
   .hero-full-photo {
-    object-position: 46% 42%;
+    object-position: 50% 50%;
   }
   .hero-full-inner {
     padding-bottom: clamp(54px, 15vw, 96px);
