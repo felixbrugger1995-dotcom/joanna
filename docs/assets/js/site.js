@@ -16,8 +16,13 @@
   const burger = document.querySelector('[data-menu-toggle]');
 
   if (menu && burger) {
+    // Die Leiste bekommt den Zustand mit, damit die Pille bei offenem Menue
+    // unten eckig wird und mit dem Panel zu einem Block verschmilzt.
+    const leiste = menu.closest('.navbar');
+
     const setOpen = (open) => {
       menu.toggleAttribute('data-open', open);
+      if (leiste) leiste.toggleAttribute('data-menu-open', open);
       burger.setAttribute('aria-expanded', String(open));
     };
 
