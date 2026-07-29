@@ -45,16 +45,17 @@
   /* Hero "Warm & golden": Fokus 15 %, Overlay 80 %, Waerme 20 %, Haze 20 %,
      Blur 0 — daher kein blur() im Filter und keine Ausgleichs-Skalierung. */
   --hero-pos: 50% 15%;
-  /* Waermer und satter als der Design-Default, damit das sonnige Foto golden
-     gluent statt blass zu wirken: mehr sepia + saturation, etwas dunkler.
-     Der Haze (Schleier) ist halbiert — er war die Hauptursache der Blaesse. */
-  --hero-filter: sepia(.3) saturate(1.4) contrast(1.06) brightness(.9);
+  /* Fotos laufen ohne Farbfilter, Koernung und Schleier — die liessen die
+     Aufnahmen stumpf und wie schlecht aufgeloest wirken. Der abdunkelnde
+     Verlauf (--hero-scrim/--hero-overlay) bleibt: Ohne ihn waere die weisse
+     Schrift auf dem hellen Foto nicht lesbar. */
+  --hero-filter: none;
   --hero-scale: 1;
-  --hero-overlay: .8;
+  --hero-overlay: .72;
   --hero-blend: normal;
-  --hero-grain: .09;
-  --hero-haze: .1;
-  --hero-warm: .34;
+  --hero-grain: 0;
+  --hero-haze: 0;
+  --hero-warm: 0;
   --hero-scrim:
     radial-gradient(112% 98% at 50% 42%, rgba(14, 10, 6, 0) 54%, rgba(12, 8, 4, .5) 100%),
     linear-gradient(180deg, rgba(30, 18, 8, .24) 0%, rgba(30, 18, 8, .03) 38%, rgba(16, 10, 5, .3) 70%, rgba(16, 10, 5, .52) 100%);
@@ -464,9 +465,10 @@ a { color: inherit }
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 44% 40%;
-  filter: var(--hero-filter);   /* gleicher warmer Look wie der Header */
 }
 .flip-front-warm, .flip-front-veil { position: absolute; inset: 0; pointer-events: none }
+/* Die Waerme-Ebene liegt still (siehe --hero-warm); der Verlauf unten bleibt,
+   damit die Bildbeschriftung lesbar ist. */
 .flip-front-warm {
   mix-blend-mode: overlay;
   opacity: var(--hero-warm);
