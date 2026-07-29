@@ -230,29 +230,15 @@ a { color: inherit }
   overflow: hidden;
 }
 
-.hero-full-photo,
-.hero-full-glow {
+.hero-full-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: var(--hero-pos);
-}
-
-.hero-full-photo {
   filter: var(--hero-filter);
   transform: scale(var(--hero-scale));
-}
-
-/* Weichgezeichnete Kopie des Fotos, additiv darueber — laesst die Lichter
-   glimmen, ohne das Motiv aufzuhellen. */
-.hero-full-glow {
-  filter: blur(8px) brightness(1.18) saturate(1.2);
-  transform: scale(1.08);
-  mix-blend-mode: screen;
-  opacity: var(--hero-haze);
-  pointer-events: none;
 }
 
 .hero-full-warm,
@@ -309,18 +295,15 @@ a { color: inherit }
   text-shadow: 0 1px 14px rgba(0, 0, 0, .5);
 }
 
-/* Mobil: engerer Kopf-Schulter-Ausschnitt (eigenes Bild via <picture>),
-   kein Haze-Layer, und der Titel sitzt hoeher statt am aeussersten Rand.
-   Zusaetzlich ein kraeftigerer Verlauf unten, damit "JOANNA" klar lesbar ist. */
+/* Mobil: engerer Kopf-Schulter-Ausschnitt (eigenes Bild via <picture>) und
+   der Titel sitzt hoeher statt am aeussersten Rand. Zusaetzlich ein
+   kraeftigerer Verlauf unten, damit "JOANNA" klar lesbar ist. */
 @media (max-width: 760px) {
   .hero-full {
     min-height: clamp(500px, 82vh, 720px);
   }
   .hero-full-photo {
     object-position: 46% 42%;
-  }
-  .hero-full-glow {
-    display: none;
   }
   .hero-full-inner {
     padding-bottom: clamp(54px, 15vw, 96px);
