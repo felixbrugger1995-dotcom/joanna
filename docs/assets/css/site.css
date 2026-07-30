@@ -84,6 +84,11 @@ body {
 img { max-width: 100%; display: block }
 a { color: inherit }
 
+/* Deutsche Komposita werden schnell laenger als ein schmales Fenster —
+   "Behandlungsvereinbarung" ragte als ein einziges Wort heraus. Silbentrennung
+   greift dank lang="de" im html-Element. */
+h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
 }
@@ -1217,7 +1222,27 @@ a { color: inherit }
 .info-karte li, .info-karte p { color: var(--soft) }
 .info-karte p { margin: 0 }
 
-/* Hinweiskasten in Markenfarbe, fuer wichtige Einordnungen. */
+/* ── Ordnung auf den Unterseiten ─────────────────────────────────────────
+   Drei Rollen, die sich nie vermischen:
+     1. Inhaltskarte  weiss mit Rahmen   — der eigentliche Inhalt
+     2. Hinweis       beige mit Symbol   — Zusatzinfo, NIE mit Schaltflaeche
+     3. Abschluss     beige, mittig      — genau einer pro Seite, ganz unten
+   Vorher stand Beige mal fuer Hinweis, mal fuer Inhalt, mal fuer Aktion —
+   dadurch sagte die Farbe nichts mehr aus. */
+
+/* Zwischenueberschrift ueber einer Gruppe von Karten. */
+.legal-main .gruppe-titel {
+  margin: 40px 0 14px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+}
+
+.legal-main .gruppe-titel:first-of-type { margin-top: 0 }
+
+/* Hinweiskasten in Markenfarbe, fuer Zusatzinformationen. */
 .merk-hinweis {
   display: flex;
   gap: 12px;
@@ -1228,8 +1253,15 @@ a { color: inherit }
   margin-bottom: 32px;
 }
 
+.merk-hinweis + .merk-hinweis { margin-top: -20px }
 .merk-hinweis svg { flex: none; margin-top: 2px; color: var(--accentDeep) }
 .legal-main .merk-hinweis p { margin: 0; font-size: var(--fs-small); color: #4a4d40 }
+.legal-main .merk-hinweis .titel {
+  margin: 0 0 4px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink);
+}
 
 /* Zwei Dokumentkarten, damit Merkblatt und Vereinbarung nicht als
    Textlinks untergehen. Nebeneinander, ab schmalen Schirmen untereinander. */
@@ -1319,17 +1351,21 @@ a { color: inherit }
 
 .legal-main .feinabdruck { margin: 24px 0 0; font-size: var(--fs-eyebrow); color: #9a9c8e }
 
-/* Abschlusskasten mit Handlungsaufforderung. */
+/* Abschlussblock: beendet jede Unterseite auf dieselbe Weise. */
 .abschluss {
   background: var(--tint);
   border-radius: 20px;
   padding: clamp(24px, 4vw, 36px);
+  margin-top: 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
 }
+
+/* Schaltflaechen im Abschluss stehen nebeneinander, mobil untereinander. */
+.abschluss .aktionen { margin-top: 6px; justify-content: center }
 
 .abschluss .siegel {
   display: inline-flex;
@@ -1408,15 +1444,6 @@ a { color: inherit }
   .kontakt-karte:hover { transform: none }
 }
 
-/* ── Preisliste, Fortsetzung ────────────────────────────────────────────── */
-
-.hinweis-box {
-  background: color-mix(in srgb, var(--tint) 55%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--accentDeep) 18%, transparent);
-  border-radius: 18px;
-  padding: 22px 24px;
-  margin-top: 16px;
-}
 
 /* ── Einblenden beim Scrollen ───────────────────────────────────────────── */
 
