@@ -264,11 +264,14 @@ a { color: inherit }
 
 .hero-full {
   position: relative;
-  /* Immer volle Bildschirmhoehe — die naechste Sektion soll nicht
-     hereinlugen. dvh statt vh, weil mobile Browser ihre Adressleiste ein-
-     und ausblenden; vh bleibt als Rueckfalloption fuer aeltere Browser. */
+  /* Immer volle Bildschirmhoehe — die naechste Sektion darf nie hereinlugen.
+     lvh ist die Hoehe OHNE die Browserleisten, also die groesstmoegliche.
+     Damit ist der Header nie kuerzer als der Bildschirm. Mit dvh (aktuell
+     sichtbare Hoehe) entstand auf dem iPhone genau dann ein Streifen, wenn
+     Safari beim Scrollen seine Leisten einzog und das Fenster waechst.
+     vh bleibt als Rueckfall fuer aeltere Browser (dort ohnehin = lvh). */
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100lvh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -343,10 +346,6 @@ a { color: inherit }
    der Titel sitzt hoeher statt am aeussersten Rand. Zusaetzlich ein
    kraeftigerer Verlauf unten, damit "JOANNA" klar lesbar ist. */
 @media (max-width: 760px) {
-  .hero-full {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
   /* Der Handy-Ausschnitt ist bereits hochformatig auf Joanna und Nala
      zugeschnitten — mittig zeigen genuegt, es faellt kaum etwas weg. */
   .hero-full-photo {
@@ -354,6 +353,11 @@ a { color: inherit }
   }
   .hero-full-inner {
     padding-bottom: clamp(54px, 15vw, 96px);
+    /* Weil der Header auf die volle Hoehe ohne Leisten geht, liegt sein
+       unterer Rand hinter Safaris Leiste. (100lvh - 100svh) ist genau deren
+       Hoehe — so viel Abstand mehr, und "JOANNA" bleibt sichtbar. Sind keine
+       Leisten da (etwa als Web-App), ist die Differenz null. */
+    padding-bottom: calc(clamp(54px, 15vw, 96px) + (100lvh - 100svh));
   }
   /* Extra Abdunklung nur unten, unabhaengig vom Design-Scrim. */
   .hero-full::after {
