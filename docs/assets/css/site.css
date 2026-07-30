@@ -508,8 +508,9 @@ a { color: inherit }
   opacity: var(--hero-warm);
   background: linear-gradient(120deg, rgba(255, 150, 60, .55), rgba(180, 110, 40, .4));
 }
+/* Nur noch so viel Abdunklung, dass die Schaltflaeche sicher lesbar ist. */
 .flip-front-veil {
-  background: linear-gradient(180deg, rgba(18, 12, 6, 0) 38%, rgba(14, 9, 4, .84) 100%);
+  background: linear-gradient(180deg, rgba(18, 12, 6, 0) 55%, rgba(14, 9, 4, .7) 100%);
 }
 .flip-front-body {
   position: absolute;
@@ -517,29 +518,6 @@ a { color: inherit }
   line-height: normal;
   padding: clamp(20px, 5vw, 30px);
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
-.flip-tag {
-  font-size: var(--fs-tag);
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(255, 255, 255, .22);
-  backdrop-filter: blur(4px);
-  padding: 5px 12px;
-  border-radius: 999px;
-}
-.flip-front-title {
-  margin: 0;
-  color: #fff;
-  font-family: var(--ff-head);
-  font-weight: 600;
-  font-size: var(--fs-h3);
-  line-height: 1.15;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, .45);
 }
 /* Dezente Glas-Pille in derselben Sprache wie die schwebende Navigation —
    statt einer gruenen Vollflaeche, die auf dem Foto zu laut wirkte. */
@@ -650,8 +628,7 @@ a { color: inherit }
 
   /* Rein flip-spezifische Bedienelemente entfallen hier. */
   .flip-cta,
-  .flip-back-close,
-  .flip-front-title { display: none }
+  .flip-back-close { display: none }
 }
 
 /* Chips (auf der Rueckseite) */
@@ -875,6 +852,28 @@ a { color: inherit }
 }
 
 .radar .paw { position: absolute; color: #fff }
+
+/* Pfotenspur: jede Pfote leuchtet kurz auf, versetzt ueber --takt, danach
+   pausiert die Schleife einen Moment, bevor sie von vorn beginnt.
+   Die Drehung steckt im style-Attribut und muss in den Keyframes erhalten
+   bleiben — deshalb nur opacity animieren. */
+.radar .pfote {
+  opacity: 0;
+  animation: pfotenspur 5s ease-in-out infinite;
+  animation-delay: var(--takt, 0s);
+}
+
+@keyframes pfotenspur {
+  0%      { opacity: 0 }
+  6%, 40% { opacity: .32 }
+  70%     { opacity: 0 }
+  100%    { opacity: 0 }
+}
+
+/* Ohne Bewegung: alle Pfoten ruhig sichtbar. */
+@media (prefers-reduced-motion: reduce) {
+  .radar .pfote { animation: none; opacity: .26 }
+}
 
 /* ── Fusszeile ──────────────────────────────────────────────────────────── */
 
@@ -1126,12 +1125,21 @@ a { color: inherit }
   align-items: baseline;
 }
 
-/* Ruhige Typografie: nur drei Groessen — 18 (Titel/Preis), 15 (Text), 13 (Meta). */
+/* Ruhige Typografie: drei Groessen und nur EINE Betonungsstufe. Der Preis hatte
+   700 und stand damit neben dem Titel (600) als zweite Betonung im Raum. */
 .preis-zeile p { margin: 0; font-size: var(--fs-lead); font-weight: 600; color: var(--ink) }
-.preis-zeile p span { font-weight: 400; color: var(--soft); font-size: var(--fs-body) }
-.preis { font-size: var(--fs-lead); font-weight: 700; color: var(--accentDeep); white-space: nowrap }
+.preis { font-size: var(--fs-lead); font-weight: 600; color: var(--accentDeep); white-space: nowrap }
 
-.dauer { margin: 6px 0 12px; font-size: var(--fs-body); color: var(--soft) }
+/* Mit .legal-main davor, sonst gewinnt die allgemeine Absatzregel dieser
+   Seite und die Meta-Zeile waere so gross wie der Fliesstext. */
+.legal-main .dauer { margin: 6px 0 14px; font-size: var(--fs-small); color: var(--soft) }
+.legal-main .klein { font-size: var(--fs-eyebrow) }
+
+/* Auf schmalen Schirmen untereinander — nebeneinander wurde der Titel sonst
+   zwischen Text und Preis zerquetscht. */
+@media (max-width: 520px) {
+  .preis-zeile { flex-direction: column; align-items: flex-start; gap: 2px }
+}
 
 .karte ul { margin: 0; padding-left: 18px; font-size: var(--fs-body); line-height: 1.75; color: var(--soft) }
 
@@ -1168,6 +1176,117 @@ a { color: inherit }
 
 .kachel-zeile strong { color: var(--accentDeep) }
 .kachel .klein { margin: 8px 0 0; font-size: var(--fs-eyebrow); color: var(--soft) }
+
+/* ── Merkblatt & Vereinbarung ───────────────────────────────────────────── */
+
+/* Karte mit Symbol und Ueberschrift (Merkblatt). */
+.info-karten { display: flex; flex-direction: column; gap: 16px }
+
+.info-karte {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px 26px;
+}
+
+.info-kopf { display: flex; align-items: center; gap: 12px; margin-bottom: 12px }
+
+.info-kopf .icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--tint);
+  color: var(--accentDeep);
+}
+
+.legal-main .info-karte h2 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.info-karte ul { margin: 0; padding-left: 20px }
+.info-karte li, .info-karte p { color: var(--soft) }
+.info-karte p { margin: 0 }
+
+/* Hinweiskasten in Markenfarbe, fuer wichtige Einordnungen. */
+.merk-hinweis {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--tint);
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+
+.merk-hinweis svg { flex: none; margin-top: 2px; color: var(--accentDeep) }
+.legal-main .merk-hinweis p { margin: 0; font-size: var(--fs-small); color: #4a4d40 }
+
+/* Nummerierte Abschnitte der Vereinbarung. */
+.vereinbarung {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 40px);
+  margin-bottom: 32px;
+}
+
+.punkte { display: flex; flex-direction: column; gap: 22px }
+
+.legal-main .punkt-nr {
+  margin: 0 0 8px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+}
+
+.punkte ul { margin: 0; padding-left: 20px }
+.punkte li { color: #4a4d40 }
+
+.legal-main .feinabdruck { margin: 24px 0 0; font-size: var(--fs-eyebrow); color: #9a9c8e }
+
+/* Abschlusskasten mit Handlungsaufforderung. */
+.abschluss {
+  background: var(--tint);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 36px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.abschluss .siegel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accentDeep);
+}
+
+.legal-main .abschluss h2 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.legal-main .abschluss p { margin: 0; max-width: 48ch; color: #4a4d40 }
+
+/* Schaltflaechen-Reihe am Seitenende. */
+.aktionen { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 36px }
 
 /* ── Eingebettetes Formular (Tally) ─────────────────────────────────────── */
 
