@@ -1080,7 +1080,10 @@ a { color: inherit }
 .legal-main p, .legal-main li { font-size: var(--fs-body); line-height: 1.72; color: #4a4843 }
 .legal-main p { margin: 0 0 14px }
 .legal-main ul { margin: 0 0 14px; padding-left: 20px }
-.legal-main a { color: var(--accentDeep) }
+/* Nur Fliesstext-Links einfaerben. Ohne :not(.btn) gewinnt diese Regel gegen
+   .btn--primary & Co. — die Schaltflaechen bekamen dadurch gruene statt
+   weisser Schrift, auf gruener Flaeche kaum lesbar. */
+.legal-main a:not(.btn) { color: var(--accentDeep) }
 
 /* Label-Klassen sind hier <p> und wuerden sonst von ".legal-main p" auf
    Body-Groesse gezogen — explizit wieder auf die kleine Label-Groesse. */
@@ -1227,6 +1230,69 @@ a { color: inherit }
 
 .merk-hinweis svg { flex: none; margin-top: 2px; color: var(--accentDeep) }
 .legal-main .merk-hinweis p { margin: 0; font-size: var(--fs-small); color: #4a4d40 }
+
+/* Zwei Dokumentkarten, damit Merkblatt und Vereinbarung nicht als
+   Textlinks untergehen. Nebeneinander, ab schmalen Schirmen untereinander. */
+.doku-reihe {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 0 32px;
+}
+
+@media (min-width: 620px) {
+  .doku-reihe { grid-template-columns: 1fr 1fr }
+}
+
+.doku-karte {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+
+.doku-karte:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(40, 36, 28, .08);
+}
+
+.doku-karte .icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--tint);
+  color: var(--accentDeep);
+}
+
+.legal-main .doku-karte .titel {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.legal-main .doku-karte .zusatz {
+  margin: 2px 0 0;
+  font-size: var(--fs-eyebrow);
+  color: var(--soft);
+}
+
+.doku-karte .pfeil { margin-left: auto; color: var(--soft) }
+
+@media (prefers-reduced-motion: reduce) {
+  .doku-karte:hover { transform: none }
+}
 
 /* Nummerierte Abschnitte der Vereinbarung. */
 .vereinbarung {
