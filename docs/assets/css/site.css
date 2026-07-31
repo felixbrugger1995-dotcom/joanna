@@ -1131,6 +1131,17 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .legal-main p, .legal-main li { font-size: var(--fs-body); line-height: 1.72; color: #4a4843 }
 .legal-main p { margin: 0 0 14px }
 .legal-main ul { margin: 0 0 14px; padding-left: 20px }
+
+/* Cookie- und Speichernamen in der Datenschutzerklaerung: als solche
+   erkennbar, ohne dass eine zweite Schriftart geladen werden muss. */
+.legal-main code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .92em;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--tint);
+  color: var(--accentDeep);
+}
 /* Nur Fliesstext-Links einfaerben. Ohne :not(.btn) gewinnt diese Regel gegen
    .btn--primary & Co. — die Schaltflaechen bekamen dadurch gruene statt
    weisser Schrift, auf gruener Flaeche kaum lesbar. */
@@ -1556,3 +1567,90 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 }
 
 [data-reveal][data-reveal-shown] { opacity: 1; transform: none }
+
+
+/* ── Einwilligungsbanner ────────────────────────────────────────────────── */
+
+/* Sitzt unten links statt quer ueber dem Bild: Der Hero soll beim ersten
+   Aufschlagen sichtbar bleiben. Auf schmalen Schirmen wird daraus eine
+   Karte ueber die volle Breite. Erzeugt wird er von assets/js/consent.js —
+   ohne JavaScript gibt es weder Banner noch Analytics. */
+.einwilligung {
+  position: fixed;
+  z-index: 200;
+  left: 20px;
+  bottom: 20px;
+  width: min(420px, calc(100vw - 40px));
+  padding: 24px 26px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(40, 36, 28, .18);
+
+  /* Nur die Position wird animiert, nicht die Deckkraft. Ein Banner, der
+     wegen einer haengenden Animation unsichtbar ueber der Seite liegt, wuerde
+     Klicks abfangen und liesse sich nicht mehr beantworten — 14 px Versatz
+     dagegen faellt niemandem auf. Der sichtbare Zustand ist der Normalfall,
+     die Animation nur Zierde. */
+  animation: einwilligung-auf .35s ease both;
+}
+
+@keyframes einwilligung-auf {
+  from { transform: translateY(14px) }
+}
+
+.einwilligung[hidden] { display: none }
+
+.einwilligung h2 {
+  margin: 0 0 8px;
+  font-family: var(--ff-head);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.einwilligung p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--soft);
+}
+
+/* Beide Knoepfe teilen sich die Zeile zu gleichen Teilen und tragen dieselbe
+   Groesse, Schrift und Form. Wer ablehnen will, soll das genauso leicht
+   finden wie das Zustimmen — alles andere waere eine erschlichene
+   Einwilligung. Unterschiedlich ist nur die Fuellfarbe. */
+.einwilligung-knoepfe {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 14px;
+}
+
+.einwilligung-knoepfe button {
+  flex: 1 1 0;
+  padding: 13px 18px;
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.einwilligung-knoepfe button:hover { filter: brightness(.94) }
+.einwilligung-knoepfe button:focus-visible { outline: 2px solid var(--accentDeep); outline-offset: 3px }
+
+.einwilligung-knoepfe [data-einwilligung="nein"] { color: var(--accentDeep); background: var(--tint) }
+.einwilligung-knoepfe [data-einwilligung="ja"] { color: #fff; background: var(--accent) }
+
+.einwilligung-fuss { font-size: var(--fs-eyebrow) }
+.einwilligung-fuss a { color: var(--accentDeep); text-decoration: underline }
+
+@media (max-width: 520px) {
+  .einwilligung { left: 12px; right: 12px; bottom: 12px; width: auto; padding: 20px 20px 16px }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .einwilligung { animation: none }
+}

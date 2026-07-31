@@ -45,17 +45,38 @@ nachschlagen zu können.
 | `datenschutz.html` | Datenschutzerklärung |
 | `404.html` | Fehlerseite (von GitHub Pages automatisch genutzt) |
 
+## Einwilligung und Reichweitenmessung
+
+Google Analytics 4 (`G-WHWF9CP9E3`) läuft nur mit Einwilligung. Im HTML steht
+kein Google-Schnipsel; `docs/assets/js/consent.js` lädt `gtag.js` erst, nachdem
+jemand im Banner zugestimmt hat. Ohne Zustimmung — und ohne JavaScript —
+entsteht keine Verbindung zu Google und es wird nichts auf dem Gerät abgelegt.
+Werbefunktionen (Google Signals, personalisierte Werbung) sind abgeschaltet.
+
+Die Entscheidung liegt als `joanna-einwilligung` im localStorage und gilt ein
+Jahr; danach wird erneut gefragt. Beim Widerruf werden die `_ga`-Cookies
+gelöscht und die Seite neu geladen. Der Widerrufs-Link steht im Fuß jeder Seite
+und im Abschnitt „Cookies und Einwilligung" der Datenschutzerklärung.
+
+Kommt ein weiterer einwilligungspflichtiger Dienst dazu, in `consent.js` die
+Konstante `FASSUNG` hochzählen — dann wird jede gespeicherte Entscheidung
+ungültig und erneut gefragt.
+
+Das Tally-Formular hängt bewusst **nicht** am Banner. Es holt seine Einwilligung
+per Zwei-Klick-Lösung an Ort und Stelle (siehe `termin.html`): konkreter im
+Kontext, datensparsamer für alle, die nie auf die Terminseite gehen, und
+unabhängig davon, ob am Banner etwas kaputtgeht.
+
 ## Offene Punkte
 
-**Vor der Veröffentlichung zwingend zu erledigen:** Die Datenschutzerklärung
-sagt zu, dass die Schriftarten vom eigenen Server kommen. Solange oben in den
-HTML-Dateien noch `fonts.googleapis.com` steht, stimmt das nicht. Erst die
-Schriften lokal einbinden, dann live gehen.
+**Vor dem Livegang im Google-Analytics-Konto zu erledigen:** den Vertrag zur
+Auftragsverarbeitung nach Art. 28 DSGVO annehmen (Verwaltung → Kontoeinstellungen
+→ Zusatz zur Datenverarbeitung) und die Aufbewahrung der Nutzungsdaten auf
+14 Monate stellen. Die Datenschutzerklärung sagt beides zu.
 
 Die Datenschutzerklärung aus dem Design beschrieb eine andere Website — Hosting
-bei Framer, Google Analytics, Cookie-Banner, eingebettete Instagram-Inhalte.
-Nichts davon trifft hier zu. Sie wurde auf den tatsächlichen Aufbau umgeschrieben
-und sollte vor dem Livegang fachkundig geprüft werden.
+bei Framer, eingebettete Instagram-Inhalte, andere Dienste. Sie wurde auf den
+tatsächlichen Aufbau umgeschrieben und sollte fachkundig geprüft werden.
 
 **Fotos.** Alle Bilder sind echte Aufnahmen von Joanna und ihrer Chihuahua-Hündin
 Nala, als optimierte WebP unter `docs/assets/img/`. Die iPhone-Originale (HEIC/JPG)
@@ -73,8 +94,11 @@ davon unabhängig 15 km als Radius, innerhalb dessen keine Fahrtkosten anfallen.
 |---|---|
 | `tools/dc-extract.mjs` | packt eine per Design-API geholte Datei auf die Platte aus |
 | `tools/extract-images.mjs` | schneidet die Leistungs-Fotos aus dem image-slot-Sidecar |
+| `tools/fetch-fonts.mjs` | holt die Schriften zu `docs/assets/fonts/`, damit nichts von Google nachgeladen wird |
+| `tools/bump-assets.mjs` | setzt den Versionsstempel `?v=…` — nach jeder Änderung unter `assets/` ausführen |
 
-Beide werden nur beim Import gebraucht, nicht im laufenden Betrieb.
+Die ersten drei werden nur beim Import gebraucht, `bump-assets.mjs` im
+laufenden Betrieb.
 
 ## Veröffentlichen
 
