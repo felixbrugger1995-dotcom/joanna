@@ -137,10 +137,12 @@
     el.setAttribute('aria-describedby', 'einwilligung-text');
     el.hidden = true;
 
-    // Kurzfassung mit Verweis, keine Vollinformation: Auf der ersten Ebene
-    // muessen Dienst, Zweck, Speicherung auf dem Geraet, Empfaenger samt
-    // Drittland und die Freiwilligkeit stehen — alles Weitere darf in der
-    // Datenschutzerklaerung folgen.
+    // Kurzfassung, keine Vollinformation: Auf der ersten Ebene muessen Dienst,
+    // Zweck, Speicherung auf dem Geraet, Empfaenger samt Drittland und die
+    // Freiwilligkeit stehen — alles Weitere darf in der Datenschutzerklaerung
+    // folgen. Den Weg dorthin traegt der Verweis in der Fusszeile; ein zweiter
+    // im Fliesstext waere derselbe Link ein paar Zeilen hoeher und kostet auf
+    // kleinen Displays eine Zeile, die dem Banner besser erspart bleibt.
     //
     // Dass hier nichts ueber Zugriffe von US-Behoerden steht, haengt an einer
     // Bedingung: Die Uebermittlung stuetzt sich auf den Angemessenheitsbeschluss
@@ -157,8 +159,7 @@
       <p id="einwilligung-text">Mit Google Analytics würde ich gern sehen, welche Seiten gelesen
         werden — das hilft mir, die Website zu verbessern. Dabei werden Cookies auf deinem Gerät
         gespeichert und Daten an Google übertragen, auch in die USA. Nötig ist das nicht: Die
-        Website funktioniert ohne genauso. Näheres in der
-        <a href="/datenschutz#analytics">Datenschutzerklärung</a>.</p>
+        Website funktioniert ohne genauso.</p>
       <div class="einwilligung-knoepfe">
         <button type="button" data-einwilligung="nein">Ablehnen</button>
         <button type="button" data-einwilligung="ja">Einverstanden</button>
@@ -168,7 +169,7 @@
         <button type="button" data-tally-widerruf>Freigabe zurücknehmen</button>
       </div>
       <p class="einwilligung-fuss">Du kannst das jederzeit ändern.
-        <a href="/datenschutz">Datenschutz</a> · <a href="/impressum">Impressum</a></p>`;
+        <a href="/datenschutz#analytics">Datenschutz</a> · <a href="/impressum">Impressum</a></p>`;
 
     el.querySelectorAll('[data-einwilligung]').forEach((btn) => {
       btn.addEventListener('click', () => entscheiden(btn.dataset.einwilligung === 'ja'));

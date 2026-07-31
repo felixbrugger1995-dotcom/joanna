@@ -1692,10 +1692,9 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 
 .einwilligung-fuss { font-size: var(--fs-eyebrow) }
 
-/* Gilt fuer beide Verweise im Banner: den auf die Datenschutzerklaerung im
-   Fliesstext und die Fusszeile darunter. Der erste traegt die Details, die
-   der kurze Bannertext bewusst weglaesst — er muss als Link erkennbar sein,
-   sonst fehlt der Einwilligung die Information, auf die sie sich stuetzt. */
+/* Der Verweis in der Fusszeile traegt die Einzelheiten, die der kurze
+   Bannertext bewusst weglaesst. Er muss als Link erkennbar sein, sonst fehlt
+   der Einwilligung die Information, auf die sie sich stuetzt. */
 .einwilligung p a { color: var(--accentDeep); text-decoration: underline }
 
 @media (max-width: 520px) {
