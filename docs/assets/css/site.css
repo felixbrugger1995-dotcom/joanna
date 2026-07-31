@@ -1644,6 +1644,37 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .einwilligung-knoepfe [data-einwilligung="nein"] { color: var(--accentDeep); background: var(--tint) }
 .einwilligung-knoepfe [data-einwilligung="ja"] { color: #fff; background: var(--accent) }
 
+/* Zweite Zeile fuer das Terminformular. Steht nur da, wenn es dort etwas
+   zurueckzunehmen gibt — beim ersten Aufschlagen bleibt der Banner deshalb
+   genau so kurz wie vorher. Bewusst als Nachtrag gestaltet und nicht als
+   zweite Frage: Entschieden wird ueber Tally auf der Terminseite. */
+.einwilligung-zusatz {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.einwilligung-zusatz[hidden] { display: none }
+.einwilligung-zusatz p { flex: 1; font-size: var(--fs-eyebrow) }
+
+.einwilligung-zusatz button {
+  flex: none;
+  padding: 0;
+  font-family: var(--ff-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  color: var(--accentDeep);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.einwilligung-zusatz button:focus-visible { outline: 2px solid var(--accentDeep); outline-offset: 3px }
+
 .einwilligung-fuss { font-size: var(--fs-eyebrow) }
 .einwilligung-fuss a { color: var(--accentDeep); text-decoration: underline }
 

@@ -53,19 +53,42 @@ jemand im Banner zugestimmt hat. Ohne Zustimmung — und ohne JavaScript —
 entsteht keine Verbindung zu Google und es wird nichts auf dem Gerät abgelegt.
 Werbefunktionen (Google Signals, personalisierte Werbung) sind abgeschaltet.
 
-Die Entscheidung liegt als `joanna-einwilligung` im localStorage und gilt ein
-Jahr; danach wird erneut gefragt. Beim Widerruf werden die `_ga`-Cookies
-gelöscht und die Seite neu geladen. Der Widerrufs-Link steht im Fuß jeder Seite
-und im Abschnitt „Cookies und Einwilligung" der Datenschutzerklärung.
+Die Entscheidungen liegen als `joanna-einwilligung` im localStorage, ein
+Eintrag je Dienst mit eigenem Zeitstempel:
 
-Kommt ein weiterer einwilligungspflichtiger Dienst dazu, in `consent.js` die
-Konstante `FASSUNG` hochzählen — dann wird jede gespeicherte Entscheidung
-ungültig und erneut gefragt.
+```json
+{ "fassung": 2,
+  "analyse": { "ja": false, "zeit": 1785497397025 },
+  "tally":   { "ja": true,  "zeit": 1785497391013 } }
+```
 
-Das Tally-Formular hängt bewusst **nicht** am Banner. Es holt seine Einwilligung
-per Zwei-Klick-Lösung an Ort und Stelle (siehe `termin.html`): konkreter im
-Kontext, datensparsamer für alle, die nie auf die Terminseite gehen, und
-unabhängig davon, ob am Banner etwas kaputtgeht.
+Getrennte Zeitstempel, weil die Entscheidungen an verschiedenen Stellen fallen —
+eine gemeinsame Frist würde eine frische Zustimmung mit einer alten ablaufen
+lassen. Jeder Eintrag gilt ein Jahr, danach wird erneut gefragt. Beim Widerruf
+von `analyse` werden die `_ga`-Cookies gelöscht und die Seite neu geladen. Der
+Widerrufs-Link steht im Fuß jeder Seite und im Abschnitt „Cookies und
+Einwilligung" der Datenschutzerklärung.
+
+Ändert sich das Format oder kommt ein Dienst dazu, in `consent.js` die Konstante
+`FASSUNG` hochzählen. Gespeicherte Entscheidungen werden dann verworfen und neu
+erfragt — bei einem Formatwechsel die einzig sichere Richtung, eine alte
+Zustimmung darf nie stillschweigend auf einen neuen Umfang übertragen werden.
+
+## Das Terminformular
+
+Tally hängt bewusst **nicht** am Banner, sondern holt seine Einwilligung per
+Zwei-Klick-Lösung auf `termin.html` selbst ab. Der Grund ist nicht nur
+rechtlich: Der Banner könnte das Tor gar nicht ersetzen. Wer dort ablehnt,
+bräuchte auf der Terminseite trotzdem eines — man hätte also beides, nur den
+Banner länger. Und die Frage käme zu einem Zeitpunkt, zu dem noch niemand
+weiß, dass es ein Formular gibt.
+
+Was der Banner sehr wohl übernimmt, ist der Widerruf: Wurde Tally freigegeben,
+erscheint dort eine zusätzliche Zeile. `termin.html` fragt über
+`window.Einwilligung.erteilt('tally')` ab, ob schon zugestimmt wurde, und lädt
+das Formular dann sofort. Fehlt `consent.js`, ist die Schnittstelle nicht da
+und es bleibt beim Tor bei jedem Besuch — lieber einmal zu viel fragen als
+ungefragt laden.
 
 ## Offene Punkte
 

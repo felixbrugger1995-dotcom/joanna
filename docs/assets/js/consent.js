@@ -21,42 +21,57 @@
   'use strict';
 
   const SCHLUESSEL = 'joanna-einwilligung';
-  const FASSUNG = 1;          // hochzaehlen, wenn neue Dienste dazukommen
+  const FASSUNG = 2;          // hochzaehlen, wenn neue Dienste dazukommen
   const GUELTIG_TAGE = 365;   // danach wird erneut gefragt (Empfehlung der DSK)
   const MESS_ID = 'G-WHWF9CP9E3';
 
-  /* ── Gespeicherte Entscheidung ─────────────────────────────────────────── */
+  /* ── Gespeicherte Entscheidungen ───────────────────────────────────────── */
 
-  // Gibt true, false oder null zurueck. null heisst: noch nicht gefragt,
-  // Fassung veraltet oder abgelaufen — in allen drei Faellen wird gefragt.
-  const gespeichert = () => {
-    let roh;
-    // Im privaten Modus mancher Browser wirft schon der Zugriff.
-    try { roh = localStorage.getItem(SCHLUESSEL); } catch { return null; }
-    if (!roh) return null;
-
+  // Ein Eintrag je Dienst, jeder mit eigenem Zeitstempel:
+  //   { fassung: 2, analyse: { ja: false, zeit: … }, tally: { ja: true, zeit: … } }
+  // Getrennte Zeitstempel, weil die Entscheidungen an verschiedenen Stellen
+  // und zu verschiedenen Zeiten fallen — eine gemeinsame Frist wuerde eine
+  // frische Zustimmung mit einer alten zusammen ablaufen lassen.
+  const alles = () => {
     try {
-      const eintrag = JSON.parse(roh);
-      if (eintrag.fassung !== FASSUNG) return null;
-      if (Date.now() - eintrag.zeit > GUELTIG_TAGE * 86400000) return null;
-      return eintrag.analyse === true;
+      // Im privaten Modus mancher Browser wirft schon der Zugriff.
+      const eintrag = JSON.parse(localStorage.getItem(SCHLUESSEL));
+      return eintrag && eintrag.fassung === FASSUNG ? eintrag : null;
     } catch {
       return null;
     }
   };
 
-  const merken = (analyse) => {
+  // true, false oder null. null heisst: nicht gefragt, Fassung veraltet oder
+  // abgelaufen — in allen drei Faellen wird erneut gefragt.
+  const stand = (dienst) => {
+    const eintrag = (alles() || {})[dienst];
+    if (!eintrag) return null;
+    if (Date.now() - eintrag.zeit > GUELTIG_TAGE * 86400000) return null;
+    return eintrag.ja === true;
+  };
+
+  const sichern = (eintrag) => {
     try {
-      localStorage.setItem(SCHLUESSEL, JSON.stringify({
-        fassung: FASSUNG,
-        analyse,
-        zeit: Date.now(),
-      }));
+      localStorage.setItem(SCHLUESSEL, JSON.stringify(eintrag));
     } catch {
       // Kein Speicher verfuegbar: Die Entscheidung gilt dann nur fuer diesen
       // Besuch und wird beim naechsten Aufruf erneut erfragt. Lieber einmal
-      // zu viel fragen als ungefragt messen.
+      // zu viel fragen als ungefragt messen oder laden.
     }
+  };
+
+  const merken = (dienst, ja) => {
+    const eintrag = alles() || { fassung: FASSUNG };
+    eintrag[dienst] = { ja, zeit: Date.now() };
+    sichern(eintrag);
+  };
+
+  const vergessen = (dienst) => {
+    const eintrag = alles();
+    if (!eintrag) return;
+    delete eintrag[dienst];
+    sichern(eintrag);
   };
 
   /* ── Google Analytics ──────────────────────────────────────────────────── */
@@ -134,12 +149,18 @@
         <button type="button" data-einwilligung="nein">Ablehnen</button>
         <button type="button" data-einwilligung="ja">Einverstanden</button>
       </div>
+      <div class="einwilligung-zusatz" data-tally-zeile hidden>
+        <p>Das Terminformular von Tally hast du freigegeben — es lädt jetzt ohne Nachfrage.</p>
+        <button type="button" data-tally-widerruf>Freigabe zurücknehmen</button>
+      </div>
       <p class="einwilligung-fuss">Du kannst das jederzeit ändern.
         <a href="/datenschutz.html">Datenschutz</a> · <a href="/impressum.html">Impressum</a></p>`;
 
     el.querySelectorAll('[data-einwilligung]').forEach((btn) => {
       btn.addEventListener('click', () => entscheiden(btn.dataset.einwilligung === 'ja'));
     });
+
+    el.querySelector('[data-tally-widerruf]').addEventListener('click', tallyZuruecknehmen);
 
     // Ganz vorn im Body, nicht am Ende: So ist der Banner fuer Tastatur und
     // Screenreader das Erste auf der Seite. Sichtbar sitzt er trotzdem unten,
@@ -150,6 +171,11 @@
 
   const zeigen = (fokussieren) => {
     banner = banner || bannerBauen();
+    // Die Tally-Zeile nur zeigen, wenn es dort etwas zurueckzunehmen gibt.
+    // Beim ersten Aufschlagen ist das nie der Fall — die Frage nach Tally
+    // stellt die Terminseite, und dorthin kommt niemand vor dem Banner.
+    banner.querySelector('[data-tally-zeile]').hidden = stand('tally') !== true;
+
     // Das Einblenden macht das CSS von allein: Der Wechsel von display:none
     // zu sichtbar startet die Animation, auch beim erneuten Oeffnen.
     banner.hidden = false;
@@ -173,8 +199,20 @@
     vorheriger = null;
   };
 
+  // Nimmt die gemerkte Freigabe fuer das Terminformular zurueck. Liegt auf
+  // dieser Seite schon ein Tally-Rahmen, muss die Seite neu geladen werden —
+  // einen geladenen iframe bekommt man nicht zurueck, nur weg.
+  const tallyZuruecknehmen = () => {
+    vergessen('tally');
+    if (document.querySelector('iframe[src*="tally.so"], iframe[data-tally-src]')) {
+      location.reload();
+      return;
+    }
+    banner.querySelector('[data-tally-zeile]').hidden = true;
+  };
+
   const entscheiden = (analyse) => {
-    merken(analyse);
+    merken('analyse', analyse);
     verbergen();
 
     if (analyse) {
@@ -203,12 +241,23 @@
     });
   };
 
+  /* ── Schnittstelle fuer die Seiten ─────────────────────────────────────── */
+
+  // Die Terminseite fragt hierueber, ob das Formular schon einmal freigegeben
+  // wurde, und meldet eine neue Freigabe zurueck. Bleibt diese Datei aus,
+  // ist window.Einwilligung schlicht nicht da — die Terminseite faellt dann
+  // auf ihr Tor zurueck und fragt wie bisher bei jedem Besuch.
+  window.Einwilligung = {
+    erteilt: (dienst) => stand(dienst) === true,
+    erteilen: (dienst) => merken(dienst, true),
+  };
+
   /* ── Start ─────────────────────────────────────────────────────────────── */
 
   const start = () => {
     widerrufVerdrahten();
 
-    const entscheidung = gespeichert();
+    const entscheidung = stand('analyse');
     if (entscheidung === true) analyticsLaden();
     else if (entscheidung === null) zeigen(false);
   };
