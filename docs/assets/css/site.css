@@ -1469,6 +1469,37 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 
 .formular iframe { display: block; width: 100%; border: 0 }
 
+/* Zwei-Klick-Tor: steht anstelle des Formulars, bis jemand es anfordert. */
+.formular-tor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: clamp(6px, 2vw, 18px) 0;
+}
+
+.formular-tor .siegel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--tint);
+  color: var(--accentDeep);
+}
+
+.legal-main .formular-tor h2 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.legal-main .formular-tor p { margin: 0; max-width: 52ch }
+.legal-main .formular-tor .klein { font-size: var(--fs-small); color: var(--soft) }
+
 /* ── Direktkontakt ──────────────────────────────────────────────────────── */
 
 .kontakt-liste { display: grid; gap: 14px; margin: 0 0 32px }

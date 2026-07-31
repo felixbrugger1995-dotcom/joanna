@@ -7,10 +7,10 @@
 <title>Termin vereinbaren | Joanna – Mobile Tierphysiotherapie</title>
 <meta name="description" content="Termin für die mobile Tierphysiotherapie anfragen – Joanna kommt zu dir nach Hause, in Thannhausen und Umkreis.">
 <link rel="canonical" href="https://joanna-tierphysio.de/termin.html">
-<link rel="stylesheet" href="assets/css/fonts.css?v=6iqn">
+<link rel="stylesheet" href="assets/css/fonts.css?v=6iro">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css?v=6iqn">
+<link rel="stylesheet" href="assets/css/site.css?v=6iro">
 </head>
 <body class="legal" style="--measure:980px">
 
@@ -28,17 +28,21 @@
 
   <p class="gruppe-titel">Terminanfrage</p>
 
+  <!-- Zwei-Klick-Loesung: Solange niemand geklickt hat, geht keine einzige
+       Anfrage an Tally. Das Formular bringt Google Fonts, Cloudflare-Analytics
+       und Sentry mit und legt eine dauerhafte Kennung im Speicher des Geraets
+       ab — ohne aktive Entscheidung waere dafuer nach § 25 TDDDG eine
+       Einwilligung noetig, also ein Banner auf der ganzen Website. -->
   <div class="formular">
-    <!-- Tally laedt das Formular in den iframe und passt seine Hoehe per
-         postMessage an. Ohne JavaScript bleibt der Verweis darunter. -->
-    <iframe data-tally-src="https://tally.so/embed/44xK1X?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
-            loading="lazy" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0"
-            title="Terminanfrage"></iframe>
-
-    <noscript>
-      <p style="margin:0 0 16px">Für das eingebettete Formular wird JavaScript benötigt.</p>
-      <a href="https://tally.so/r/44xK1X" class="btn btn--primary">Formular in neuem Fenster öffnen</a>
-    </noscript>
+    <div class="formular-tor" data-tally-tor>
+      <span class="siegel">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </span>
+      <h2>Formular laden</h2>
+      <p>Das Terminformular stellt der Anbieter Tally bereit. Beim Laden wird eine Verbindung zu Tally hergestellt, dabei wird deine IP-Adresse übertragen und es werden Informationen auf deinem Gerät gespeichert. Deshalb passiert das erst, wenn du es möchtest. Näheres in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      <button type="button" class="btn btn--primary" data-tally-laden>Formular laden</button>
+      <p class="klein">Lieber ohne Einbettung? <a href="https://tally.so/r/44xK1X" target="_blank" rel="noopener">Formular direkt bei Tally öffnen</a></p>
+    </div>
   </div>
 
   <p class="gruppe-titel">Zum Nachlesen</p>
@@ -89,6 +93,36 @@
   </div>
 </footer>
 
-<script async src="https://tally.so/widgets/embed.js"></script>
+<script>
+  // Erst auf Klick wird Tally geholt: der iframe, und danach das Skript von
+  // Tally, das ihm die Quelle einsetzt und seine Hoehe nachfuehrt. Vorher
+  // verlaesst nichts das eigene Hosting.
+  (() => {
+    const tor = document.querySelector('[data-tally-tor]');
+    if (!tor) return;
+
+    const QUELLE = 'https://tally.so/embed/44xK1X?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
+
+    tor.querySelector('[data-tally-laden]').addEventListener('click', () => {
+      const rahmen = document.createElement('iframe');
+      // data-tally-src statt src: daran erkennt das Tally-Skript den Rahmen
+      // und uebernimmt die Hoehenanpassung per postMessage.
+      rahmen.setAttribute('data-tally-src', QUELLE);
+      rahmen.width = '100%';
+      rahmen.height = '520';
+      rahmen.frameBorder = '0';
+      rahmen.title = 'Terminanfrage';
+      tor.replaceWith(rahmen);
+
+      const skript = document.createElement('script');
+      skript.src = 'https://tally.so/widgets/embed.js';
+      // Bleibt das Skript aus, traegt der Rahmen die Quelle selbst ein — dann
+      // fehlt nur die mitwachsende Hoehe, nicht das Formular.
+      const notfall = setTimeout(() => { if (!rahmen.src) rahmen.src = QUELLE; }, 2500);
+      skript.onerror = () => { clearTimeout(notfall); rahmen.src = QUELLE; };
+      document.body.appendChild(skript);
+    });
+  })();
+</script>
 </body>
 </html>
