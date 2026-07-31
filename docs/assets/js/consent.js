@@ -137,6 +137,19 @@
     el.setAttribute('aria-describedby', 'einwilligung-text');
     el.hidden = true;
 
+    // Kurzfassung mit Verweis, keine Vollinformation: Auf der ersten Ebene
+    // muessen Dienst, Zweck, Speicherung auf dem Geraet, Empfaenger samt
+    // Drittland und die Freiwilligkeit stehen — alles Weitere darf in der
+    // Datenschutzerklaerung folgen.
+    //
+    // Dass hier nichts ueber Zugriffe von US-Behoerden steht, haengt an einer
+    // Bedingung: Die Uebermittlung stuetzt sich auf den Angemessenheitsbeschluss
+    // zum EU-US Data Privacy Framework (Art. 45 DSGVO), ergaenzt um die
+    // Standardvertragsklauseln. Sollte der Beschluss einmal fallen und die
+    // Datenschutzerklaerung wieder auf Art. 49 Abs. 1 lit. a DSGVO ausweichen,
+    // muss die Risikoaufklaerung zurueck in diesen Text — jene Ausnahme traegt
+    // nur, wenn vor dem Klick aufgeklaert wird, und ein Link genuegt dafuer nicht.
+    //
     // Absolute Pfade: 404.html wird von GitHub Pages auch unter tiefen
     // Adressen ausgeliefert, relative Verweise zeigten dort ins Leere.
     el.innerHTML = `
@@ -144,7 +157,8 @@
       <p id="einwilligung-text">Mit Google Analytics würde ich gern sehen, welche Seiten gelesen
         werden — das hilft mir, die Website zu verbessern. Dabei werden Cookies auf deinem Gerät
         gespeichert und Daten an Google übertragen, auch in die USA. Nötig ist das nicht: Die
-        Website funktioniert ohne genauso.</p>
+        Website funktioniert ohne genauso. Näheres in der
+        <a href="/datenschutz#analytics">Datenschutzerklärung</a>.</p>
       <div class="einwilligung-knoepfe">
         <button type="button" data-einwilligung="nein">Ablehnen</button>
         <button type="button" data-einwilligung="ja">Einverstanden</button>
