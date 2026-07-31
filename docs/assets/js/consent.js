@@ -252,14 +252,42 @@
     erteilen: (dienst) => merken(dienst, true),
   };
 
+  /* ── Abgleich mit dem gespeicherten Stand ──────────────────────────────── */
+
+  // Bringt die Seite auf den Stand des Speichers. Laeuft beim Aufbau und noch
+  // einmal, wenn die Seite aus dem Vor/Zurueck-Speicher zurueckkommt.
+  const abgleichen = () => {
+    const entscheidung = stand('analyse');
+
+    // Anderswo widerrufen, hier laeuft die Messung noch: Ein geladenes gtag
+    // bekommt man nicht zurueck, nur weg — also neu laden.
+    if (entscheidung !== true && laeuft) {
+      analyticsCookiesLoeschen();
+      location.reload();
+      return;
+    }
+
+    // Dasselbe fuer ein Terminformular, dessen Freigabe inzwischen weg ist.
+    if (stand('tally') !== true
+        && document.querySelector('iframe[src*="tally.so"], iframe[data-tally-src]')) {
+      location.reload();
+      return;
+    }
+
+    if (entscheidung === null) {
+      zeigen(false);
+      return;
+    }
+
+    if (banner) banner.hidden = true;
+    if (entscheidung === true) analyticsLaden();
+  };
+
   /* ── Start ─────────────────────────────────────────────────────────────── */
 
   const start = () => {
     widerrufVerdrahten();
-
-    const entscheidung = stand('analyse');
-    if (entscheidung === true) analyticsLaden();
-    else if (entscheidung === null) zeigen(false);
+    abgleichen();
   };
 
   if (document.readyState === 'loading') {
@@ -267,4 +295,11 @@
   } else {
     start();
   }
+
+  // Zurueck-Taste: Der Browser holt die Seite aus dem Vor/Zurueck-Speicher und
+  // stellt das DOM wieder her, wie es beim Verlassen war — die Skripte laufen
+  // nicht neu. Eine inzwischen woanders getroffene Entscheidung waere hier
+  // also nie angekommen: Der Banner staende wieder da, obwohl laengst
+  // geantwortet wurde, und schlimmer, eine widerrufene Messung liefe weiter.
+  window.addEventListener('pageshow', (e) => { if (e.persisted) abgleichen(); });
 })();

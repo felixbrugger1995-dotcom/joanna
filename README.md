@@ -69,6 +69,12 @@ von `analyse` werden die `_ga`-Cookies gelöscht und die Seite neu geladen. Der
 Widerrufs-Link steht im Fuß jeder Seite und im Abschnitt „Cookies und
 Einwilligung" der Datenschutzerklärung.
 
+Beim Zurückgehen holt der Browser die Seite aus dem Vor/Zurück-Speicher und
+stellt das DOM wieder her, ohne die Skripte neu laufen zu lassen. `consent.js`
+gleicht deshalb auch bei `pageshow` mit `persisted` erneut ab — sonst stünde
+dort noch der Banner, obwohl längst geantwortet wurde, oder eine widerrufene
+Messung liefe weiter.
+
 Ändert sich das Format oder kommt ein Dienst dazu, in `consent.js` die Konstante
 `FASSUNG` hochzählen. Gespeicherte Entscheidungen werden dann verworfen und neu
 erfragt — bei einem Formatwechsel die einzig sichere Richtung, eine alte
