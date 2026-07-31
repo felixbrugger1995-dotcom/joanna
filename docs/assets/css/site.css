@@ -169,6 +169,12 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   font-weight: 500;
   color: rgba(255, 255, 255, .84);
   transition: color .2s;
+  /* Kein Umbruch innerhalb eines Eintrags. Wird es zu eng, staucht die Leiste
+     sonst "Ueber mich" auf zwei Zeilen und wird dadurch ploetzlich doppelt so
+     hoch — ein kaum sichtbarer Ueberlauf ist das kleinere Uebel und faellt
+     beim Testen sofort auf. Der Umschaltpunkt zum Burger ist so gesetzt, dass
+     es gar nicht erst dazu kommt. */
+  white-space: nowrap;
 }
 
 .nav-links a:not(.nav-cta):hover { color: #fff }
@@ -275,7 +281,7 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   border-top: 0;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 939px) {
   .nav-links-d { display: none !important }
   .nav-burger { display: flex !important }
 }
@@ -363,13 +369,13 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 }
 
 /* Solange die Navigation zum Burger eingeklappt ist, gibt es im ersten
-   Bildschirm sonst keine Handlungsmoeglichkeit — ab 881px steht der Button
+   Bildschirm sonst keine Handlungsmoeglichkeit — ab 940px steht der Button
    sichtbar in der Leiste und waere hier doppelt.
    (.btn steht weiter unten in der Datei; mit beiden Klassen gewinnt diese
    Regel, ohne dass die Reihenfolge eine Rolle spielt.) */
 .btn.hero-cta { display: none }
 
-@media (max-width: 880px) {
+@media (max-width: 939px) {
   .btn.hero-cta {
     display: inline-flex;
     margin-top: 22px;
