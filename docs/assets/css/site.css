@@ -416,6 +416,11 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .section--flush { padding-left: 0; padding-right: 0 }
 .section--surface { background: var(--surface) }
 
+/* Fuer Abschnitte, die unten mit einer Schaltflaeche enden: Die schliesst den
+   Abschnitt optisch schon ab, darunter wirkt der volle Abstand wie ein Loch.
+   Nur unten gekuerzt — oben bleibt der Rhythmus der Seite erhalten. */
+.section--knapp-unten { padding-bottom: clamp(30px, 4.5vw, 56px) }
+
 .section-head {
   max-width: 680px;
   margin: 0 auto clamp(40px, 5vw, 60px);
@@ -796,10 +801,14 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .step .more-btn { margin-top: 14px; font-size: var(--fs-small) }
 
 /* Zweiter Einstieg unter den drei Schritten — nur Satz und Schaltflaeche,
-   bewusst ohne eigenen Kasten. */
+   bewusst ohne eigenen Kasten. Laeuft in derselben Spur wie die Schritte und
+   traegt deren Innenabstand, damit der Satz genau unter der "01" beginnt und
+   nicht frei in der Mitte haengt. */
 .ablauf-cta {
-  margin: clamp(38px, 5vw, 58px) auto 0;
-  text-align: center;
+  max-width: 840px;
+  margin: clamp(30px, 4vw, 46px) auto 0;
+  padding: 0 clamp(8px, 1.5vw, 20px);
+  text-align: left;
 }
 
 .ablauf-cta p {

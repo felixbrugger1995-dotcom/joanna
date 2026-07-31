@@ -154,7 +154,7 @@
         <button type="button" data-tally-widerruf>Freigabe zurücknehmen</button>
       </div>
       <p class="einwilligung-fuss">Du kannst das jederzeit ändern.
-        <a href="/datenschutz.html">Datenschutz</a> · <a href="/impressum.html">Impressum</a></p>`;
+        <a href="/datenschutz">Datenschutz</a> · <a href="/impressum">Impressum</a></p>`;
 
     el.querySelectorAll('[data-einwilligung]').forEach((btn) => {
       btn.addEventListener('click', () => entscheiden(btn.dataset.einwilligung === 'ja'));
@@ -229,7 +229,7 @@
 
   /* ── Widerruf ──────────────────────────────────────────────────────────── */
 
-  // <a href="datenschutz.html#einwilligung" data-einwilligung-oeffnen>
+  // <a href="/datenschutz#einwilligung" data-einwilligung-oeffnen>
   // Ohne JavaScript bleibt der Link ein normaler Verweis auf den Abschnitt in
   // der Datenschutzerklaerung — dann gibt es auch nichts zu widerrufen.
   const widerrufVerdrahten = () => {
