@@ -347,6 +347,19 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   text-shadow: 0 1px 14px rgba(0, 0, 0, .5);
 }
 
+/* Die einzige Handlungsmoeglichkeit im ersten Bildschirm. Bewusst als
+   Glas-Pille und nicht als gruene Flaeche — sie soll im Foto liegen, nicht
+   davor. */
+/* .btn steht weiter unten in der Datei — mit beiden Klassen gewinnt diese
+   Regel, ohne dass die Reihenfolge eine Rolle spielt. */
+.btn.hero-cta {
+  margin-top: 22px;
+  /* Bewusst kleiner als die Standard-Schaltflaeche — dieselbe Groesse wie die
+     Pille auf der Ueber-mich-Karte, damit der Hero ruhig bleibt. */
+  font-size: var(--fs-small);
+  padding: 12px 22px;
+}
+
 /* Mobil: engerer Kopf-Schulter-Ausschnitt (eigenes Bild via <picture>) und
    der Titel sitzt hoeher statt am aeussersten Rand. Zusaetzlich ein
    kraeftigerer Verlauf unten, damit "JOANNA" klar lesbar ist. */
@@ -448,6 +461,25 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 }
 
 .btn--wide { min-width: 210px; text-align: center }
+
+/* Glas-Pille fuer Schaltflaechen auf Fotos — fuegt sich ins Bild ein, statt
+   sich als gruene Vollflaeche davorzustellen. Dieselbe Sprache wie die
+   schwebende Navigation. */
+.btn--glas {
+  color: #fff;
+  background: rgba(255, 255, 255, .16);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, .38);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+  transition: background .15s, transform .15s;
+}
+
+.btn--glas:hover { background: rgba(255, 255, 255, .28); transform: translateY(-1px) }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--glas:hover { transform: none }
+}
 
 /* Aufklapper "Weiterlesen". Der Trick ist grid-template-rows 0fr -> 1fr:
    das animiert die Hoehe, ohne sie zu kennen. */
@@ -761,6 +793,19 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .step p { margin: 0; font-size: var(--fs-body); line-height: 1.68; color: #54584a; max-width: 36ch }
 .step .more p { margin: 12px 0 0 }
 .step .more-btn { margin-top: 14px; font-size: var(--fs-small) }
+
+/* Zweiter Einstieg unter den drei Schritten — nur Satz und Schaltflaeche,
+   bewusst ohne eigenen Kasten. */
+.ablauf-cta {
+  margin: clamp(38px, 5vw, 58px) auto 0;
+  text-align: center;
+}
+
+.ablauf-cta p {
+  margin: 0 0 16px;
+  font-size: var(--fs-body);
+  color: var(--soft);
+}
 
 /* Pfotenspur, die ueber die drei Schritte laeuft. */
 .walktrail {
@@ -1325,6 +1370,28 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 @media (prefers-reduced-motion: reduce) {
   .doku-karte:hover { transform: none }
 }
+
+/* Dankesseite: die Bestaetigung steht mittig ueber dem sonst linksbuendigen
+   Unterseiten-Inhalt. */
+.danke-kopf { text-align: center; margin-bottom: clamp(36px, 5vw, 52px) }
+.danke-kopf .mark { margin-bottom: 22px }
+.legal-main .danke-kopf p { margin: 0 auto; max-width: 46ch }
+
+/* "Was jetzt passiert" — dieselben Nummernkreise wie der Ablauf auf der
+   Startseite, hier aber neben dem Text statt darueber. */
+.folge { display: grid; gap: clamp(16px, 2.4vw, 22px); margin: 0 0 34px }
+
+.folge-schritt { display: flex; align-items: center; gap: 16px }
+
+.folge-schritt .step-num {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  font-size: var(--fs-body);
+  margin: 0;
+}
+
+.legal-main .folge-schritt p { margin: 0 }
 
 /* Nummerierte Abschnitte der Vereinbarung. */
 .vereinbarung {

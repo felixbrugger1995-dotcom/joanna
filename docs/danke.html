@@ -7,39 +7,93 @@
 <title>Vielen Dank! | Joanna – Mobile Tierphysiotherapie</title>
 <meta name="description" content="Deine Anfrage ist angekommen. Joanna meldet sich innerhalb von ein bis zwei Werktagen.">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="assets/css/fonts.css?v=6ia6">
+<link rel="stylesheet" href="assets/css/fonts.css?v=6ipr">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css?v=6ia6">
+<link rel="stylesheet" href="assets/css/site.css?v=6ipr">
 </head>
-<body>
+<body class="legal" style="--measure:760px">
 
-<main class="page-center">
-  <span class="mark" aria-hidden="true">✓</span>
-  <h1>Vielen Dank!</h1>
-  <p>Ich habe deine Angaben erhalten und melde mich in der Regel innerhalb von 1–2 Werktagen, um einen passenden Termin zu vereinbaren.</p>
-  <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
-  <p class="note" id="hinweis">Du wirst in Kürze automatisch weitergeleitet …</p>
+<header class="legal-bar">
+  <nav>
+    <a href="index.html" class="nav-logo">JOANNA</a>
+    <a href="index.html" class="zurueck">← Zur Startseite</a>
+  </nav>
+</header>
+
+<main class="legal-main">
+  <div class="danke-kopf">
+    <span class="mark" aria-hidden="true">✓</span>
+    <h1>Vielen Dank!</h1>
+    <p>Deine Anfrage ist angekommen. Ich melde mich in der Regel innerhalb von 1–2 Werktagen bei dir.</p>
+  </div>
+
+  <p class="gruppe-titel">Was jetzt passiert</p>
+
+  <div class="folge">
+    <div class="folge-schritt">
+      <div class="step-num">01</div>
+      <p>Ich schaue mir deine Angaben in Ruhe an und melde mich innerhalb von 1–2 Werktagen – per Telefon oder E-Mail, ganz wie es dir lieber ist.</p>
+    </div>
+    <div class="folge-schritt">
+      <div class="step-num">02</div>
+      <p>Gemeinsam finden wir einen Termin, der zu dir und deinem Tier passt. Ich komme zu euch nach Hause.</p>
+    </div>
+    <div class="folge-schritt">
+      <div class="step-num">03</div>
+      <p>Beim ersten Termin gehen wir die Behandlungsvereinbarung kurz gemeinsam durch – ich bringe sie ausgedruckt mit.</p>
+    </div>
+  </div>
+
+  <p class="gruppe-titel">So bereitest du dich vor</p>
+
+  <div class="doku-reihe">
+    <a class="doku-karte" href="merkblatt.html">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+      </span>
+      <span>
+        <p class="titel">Merkblatt zum Erstbesuch</p>
+        <p class="zusatz">Was du vorbereiten kannst</p>
+      </span>
+      <span class="pfeil" aria-hidden="true">→</span>
+    </a>
+
+    <a class="doku-karte" href="vereinbarung.html">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c3-1 5-6 7-6s2 3 4 3 3-4 6-4"/><path d="M3 21h18"/></svg>
+      </span>
+      <span>
+        <p class="titel">Behandlungsvereinbarung</p>
+        <p class="zusatz">Zum Nachlesen vor dem Termin</p>
+      </span>
+      <span class="pfeil" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <div class="merk-hinweis">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0 8 7 15 15 15l1.5-3.5-4-1.5-1.5 2c-2.5-1.2-5.3-4-6.5-6.5l2-1.5-1.5-4z"/></svg>
+    <p>Es ist dringend oder du hast noch etwas vergessen? Ruf mich gerne an unter <a href="tel:+491746614553">0174 661 4553</a> oder schreib mir an <a href="mailto:info@joanna-tierphysio.de">info@joanna-tierphysio.de</a>.</p>
+  </div>
+
+  <div class="abschluss">
+    <h2>Bis bald bei euch zuhause</h2>
+    <p>In der Zwischenzeit findest du auf der Startseite alles rund um die Behandlungen und das Einzugsgebiet.</p>
+    <div class="aktionen" style="margin-top:6px">
+      <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
+    </div>
+  </div>
 </main>
 
-<script>
-  // Weiterleitung wie im Entwurf nach 7 Sekunden. Wer die Seite anfasst,
-  // will offenbar lesen — dann bleibt sie stehen, statt unter den Haenden
-  // wegzuspringen (WCAG 2.2.1).
-  (() => {
-    const hinweis = document.getElementById('hinweis');
-    const timer = setTimeout(() => { location.href = 'index.html'; }, 7000);
+<footer class="legal-foot">
+  <div>
+    <span>© 2025 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</span>
+    <span class="links">
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
+    </span>
+  </div>
+</footer>
 
-    const abbrechen = () => {
-      clearTimeout(timer);
-      hinweis.hidden = true;
-      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((t) =>
-        document.removeEventListener(t, abbrechen));
-    };
-
-    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((t) =>
-      document.addEventListener(t, abbrechen, { passive: true }));
-  })();
-</script>
 </body>
 </html>
