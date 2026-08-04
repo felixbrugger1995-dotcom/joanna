@@ -350,8 +350,13 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   padding: 0 clamp(18px, 5vw, 48px) clamp(40px, 7vw, 84px);
 }
 
-.hero-title {
-  margin: 0;
+/* Die h1 umfasst Name und Unterzeile und gibt selbst keine Form vor; das
+   tun die beiden Kinder. Deshalb hier nur die Aussenabstaende zuruecksetzen
+   — h1 braeuchte sonst den Browser-Standardabstand. */
+.hero-title { margin: 0 }
+
+.hero-name {
+  display: block;
   font-family: var(--ff-logo);
   font-weight: 700;
   line-height: .84;
@@ -361,8 +366,14 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   text-shadow: 0 2px 30px rgba(0, 0, 0, .45);
 }
 
+/* Schriftart, -groesse und -staerke stehen ausdruecklich da: als Kind einer
+   h1 wuerde die Zeile sonst fett und in der Ueberschriftengroesse erben. */
 .hero-sub {
+  display: block;
   margin: 14px 0 0;
+  font-family: var(--ff-body);
+  font-weight: 400;
+  line-height: 1.35;
   font-size: var(--fs-sub);
   color: rgba(255, 255, 255, .97);
   text-shadow: 0 1px 14px rgba(0, 0, 0, .5);

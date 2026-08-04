@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- <priority> stand hier frueher; Google wertet es seit Jahren nicht aus.
+     <lastmod> dagegen schon — es sagt dem Crawler, welche Seite sich
+     geaendert hat, und muss darum bei inhaltlichen Aenderungen mitgezogen
+     werden. Ein Datum, das nicht stimmt, ist schlechter als keines. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://joanna-tierphysio.de/</loc><priority>1.0</priority></url>
-  <url><loc>https://joanna-tierphysio.de/preise</loc><priority>0.8</priority></url>
-  <url><loc>https://joanna-tierphysio.de/termin</loc><priority>0.8</priority></url>
-  <url><loc>https://joanna-tierphysio.de/kontakt</loc><priority>0.6</priority></url>
-  <url><loc>https://joanna-tierphysio.de/merkblatt</loc><priority>0.5</priority></url>
-  <url><loc>https://joanna-tierphysio.de/vereinbarung</loc><priority>0.5</priority></url>
-  <url><loc>https://joanna-tierphysio.de/impressum</loc><priority>0.2</priority></url>
-  <url><loc>https://joanna-tierphysio.de/datenschutz</loc><priority>0.2</priority></url>
+  <url><loc>https://joanna-tierphysio.de/</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/preise</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/termin</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/kontakt</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/merkblatt</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/vereinbarung</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/impressum</loc><lastmod>2026-08-04</lastmod></url>
+  <url><loc>https://joanna-tierphysio.de/datenschutz</loc><lastmod>2026-08-04</lastmod></url>
 </urlset>
