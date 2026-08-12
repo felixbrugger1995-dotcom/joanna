@@ -20,10 +20,10 @@
 <meta property="og:image:alt" content="Joanna mit ihrer Chihuahua-Hündin Nala im Garten">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="stylesheet" href="assets/css/fonts.css?v=6nqq">
+<link rel="stylesheet" href="assets/css/fonts.css?v=6woy">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css?v=6nqq">
+<link rel="stylesheet" href="assets/css/site.css?v=6woy">
 
 <!-- Strukturierte Daten. Was hier steht, sagt Google, dass hinter der Seite
      ein Unternehmen steht — mit Ort, Telefonnummer, Einzugsgebiet und
@@ -49,7 +49,22 @@
   "founder": {
     "@type": "Person",
     "name": "Joanna Aleksandra Korkuz",
-    "jobTitle": "Tierphysiotherapeutin für Kleintiere"
+    "jobTitle": "Tierphysiotherapeutin für Kleintiere",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "ATM Akademie für Tiernaturheilkunde und Tierphysiotherapie GmbH",
+      "url": "https://www.atm.de/"
+    },
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Tierphysiotherapeutin für Kleintiere",
+      "credentialCategory": "Abgeschlossene Ausbildung",
+      "dateCreated": "2025",
+      "recognizedBy": {
+        "@type": "EducationalOrganization",
+        "name": "ATM Akademie für Tiernaturheilkunde und Tierphysiotherapie GmbH"
+      }
+    }
   },
   "address": {
     "@type": "PostalAddress",
@@ -459,7 +474,7 @@
   <div style="max-width:640px;margin:0 auto;text-align:center" data-reveal>
     <p class="eyebrow">Preise</p>
     <h2 class="h2" style="margin-bottom:18px">Hier findest du meine Preise</h2>
-    <p class="lead" style="margin:0 auto 30px;max-width:52ch">Alle notwendigen Therapieformen sind in der Behandlung enthalten. Dazu kommen nur die Fahrtkosten, wenn du weiter als 15 km entfernt wohnst.</p>
+    <p class="lead" style="margin:0 auto 30px;max-width:52ch">Im Mittelpunkt stehen immer dein Liebling und seine Genesung. Damit du dich darauf verlassen kannst, findest du meine Preise klar und ehrlich aufgelistet – einfach, damit von Anfang an alles stimmt.</p>
     <a href="/preise" class="btn btn--primary">Zur Preisliste →</a>
   </div>
 </section>
@@ -518,12 +533,29 @@
         <a href="/datenschutz#einwilligung" data-einwilligung-oeffnen>Cookie-Einstellungen</a>
       </div>
     </div>
+
+    <!-- Absolventen-Siegel der ATM Akademie.
+         Der Code stammt unveraendert von atm.de/atm-logo-download; die Akademie
+         verlangt ausdruecklich diese Einbindung und untersagt, die Grafik selbst
+         auszuliefern. Deshalb laedt sie bei jedem Seitenaufruf von atm.de und
+         uebertraegt dabei die IP-Adresse des Besuchers — der einzige Drittzugriff
+         dieser Website, der ohne Einwilligung geschieht. Er ist im Abschnitt
+         "Absolventen-Siegel der ATM Akademie" der Datenschutzerklaerung genannt,
+         so wie die Akademie es fordert.
+         rel="noopener" fehlt, weil der Code nicht veraendert werden darf; seit
+         2021 setzen Browser es bei target="_blank" von sich aus. -->
+    <div class="footer-col">
+      <h2>Ausbildung</h2>
+      <div class="footer-siegel">
+        <a href="https://www.atm.de/tierphysiotherapie-ausbildung" target="_blank" title="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie"><img width="302" height="302" decoding="async" style="max-width: 100%;" title="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie" src="https://www.atm.de/wp-content/uploads/2022/10/atm-absolvent-tierphysiotherapie-ausbildung-atm-akademie_v1.png" alt="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie" /> </a>
+      </div>
+    </div>
   </div>
 
   <div class="footer-legal">© 2026 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</div>
 </footer>
 
-<script src="assets/js/site.js?v=6nqq"></script>
-<script src="assets/js/consent.js?v=6nqq" defer></script>
+<script src="assets/js/site.js?v=6woy"></script>
+<script src="assets/js/consent.js?v=6woy" defer></script>
 </body>
 </html>

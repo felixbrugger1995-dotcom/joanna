@@ -19,10 +19,10 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Joanna mit ihrer Chihuahua-Hündin Nala im Garten">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/css/fonts.css?v=6nqq">
+<link rel="stylesheet" href="assets/css/fonts.css?v=6woy">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css?v=6nqq">
+<link rel="stylesheet" href="assets/css/site.css?v=6woy">
 </head>
 <body class="legal" style="--measure:980px">
 
@@ -106,7 +106,15 @@
 
 <footer class="legal-foot">
   <div>
-    <span>© 2026 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</span>
+    <!-- Siegel und Copyright bilden einen Block — als eigenstaendiges
+         Flex-Kind rutschte das Siegel sonst allein in eine eigene Zeile.
+         Unveraenderter Einbindungscode von atm.de; zum Drittzugriff siehe
+         den Kommentar in index.html und den Abschnitt "Absolventen-Siegel
+         der ATM Akademie" der Datenschutzerklaerung. -->
+    <span class="legal-foot-marke">
+      <span class="footer-siegel"><a href="https://www.atm.de/tierphysiotherapie-ausbildung" target="_blank" title="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie"><img width="302" height="302" decoding="async" style="max-width: 100%;" title="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie" src="https://www.atm.de/wp-content/uploads/2022/10/atm-absolvent-tierphysiotherapie-ausbildung-atm-akademie_v1.png" alt="ATM Tierphysiotherapie Absolvent - Tierphysiotherapie Ausbildung - ATM Akademie" /> </a></span>
+      <span>© 2026 JOANNA · mobile Tierphysiotherapeutin für Kleintiere</span>
+    </span>
     <span class="links">
       <a href="/datenschutz#einwilligung" data-einwilligung-oeffnen>Cookie-Einstellungen</a>
       <a href="/datenschutz">Datenschutz</a>
@@ -165,6 +173,6 @@
     });
   })();
 </script>
-<script src="assets/js/consent.js?v=6nqq" defer></script>
+<script src="assets/js/consent.js?v=6woy" defer></script>
 </body>
 </html>

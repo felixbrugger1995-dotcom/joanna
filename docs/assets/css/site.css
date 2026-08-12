@@ -460,6 +460,10 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   line-height: 1.08;
   font-size: var(--fs-h2);
   color: var(--ink);
+  /* Plus Jakarta Sans ersetzt "fi" durch die Ligatur; in Ueberschriftsgroesse
+     verschmilzt der i-Punkt sichtbar mit dem f. Im Fliesstext faellt das nicht
+     auf, hier schon — deshalb nur fuer Ueberschriften abgeschaltet. */
+  font-variant-ligatures: none;
 }
 
 .lead {
@@ -1007,6 +1011,36 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   border-radius: 999px;
   margin-top: 12px;
 }
+
+/* Das ATM-Siegel ist rund, hat durchsichtige Ecken und besteht aus Gruen und
+   einem mittleren Grau. Auf dem olivgruenen Grund der Fusszeile saeuft
+   besonders das Grau ab — daher die helle Scheibe darunter.
+   height ist ausdruecklich auto: ATMs Code bringt width="302" height="302" als
+   Attribute mit. Ohne diese Regel bliebe die Hoehe bei 302px stehen, waehrend
+   das mitgelieferte max-width:100% die Breite staucht — das Siegel wuerde
+   verzerrt. Der Einbindungscode selbst bleibt dabei unangetastet. */
+.footer-siegel {
+  display: inline-flex;
+  padding: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.footer-siegel img { width: 112px; height: auto }
+
+/* In der schmalen Fusszeile der Unterseiten laeuft das Siegel mit der
+   Copyright-Zeile als ein Block. Als eigenstaendiges Flex-Kind rutschte es
+   sonst allein in eine eigene Zeile und stand dort verloren.
+   flex: 0 0 auto, damit die Scheibe nicht gestaucht wird, wenn der Text
+   daneben lang wird. */
+.legal-foot-marke {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.legal-foot .footer-siegel { padding: 5px; flex: 0 0 auto }
+.legal-foot .footer-siegel img { width: 42px }
 
 .footer-legal {
   max-width: 1180px;
