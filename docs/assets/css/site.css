@@ -187,6 +187,19 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   font-weight: 600;
 }
 
+/* Eroeffnungsangebot: helle Pille, hebt sich von den Textlinks ab, ohne mit
+   der gruenen Termin-CTA zu konkurrieren. */
+.nav-links a.nav-angebot {
+  color: var(--ink);
+  background: rgba(255, 255, 255, .9);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+}
+
+.nav-links a.nav-angebot:hover { background: #fff }
+
 .nav-burger {
   display: none;
   align-items: center;
@@ -281,7 +294,7 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   border-top: 0;
 }
 
-@media (max-width: 939px) {
+@media (max-width: 1099px) {
   .nav-links-d { display: none !important }
   .nav-burger { display: flex !important }
 }
@@ -380,13 +393,13 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 }
 
 /* Solange die Navigation zum Burger eingeklappt ist, gibt es im ersten
-   Bildschirm sonst keine Handlungsmoeglichkeit — ab 940px steht der Button
+   Bildschirm sonst keine Handlungsmoeglichkeit — ab 1100px steht der Button
    sichtbar in der Leiste und waere hier doppelt.
    (.btn steht weiter unten in der Datei; mit beiden Klassen gewinnt diese
    Regel, ohne dass die Reihenfolge eine Rolle spielt.) */
 .btn.hero-cta { display: none }
 
-@media (max-width: 939px) {
+@media (max-width: 1099px) {
   .btn.hero-cta {
     display: inline-flex;
     margin-top: 22px;
@@ -470,6 +483,43 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   font-size: var(--fs-lead);
   line-height: 1.7;
   color: var(--soft);
+}
+
+/* ── Eroeffnungsangebot ─────────────────────────────────────────────────── */
+
+/* Die Preise-Sektion ist weiss, deshalb hier der Seitenhintergrund. */
+.angebot {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 22px 26px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.angebot p { margin: 0; font-size: var(--fs-body); line-height: 1.65; color: var(--ink) }
+
+.angebot .angebot-titel {
+  margin-bottom: 8px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accentDeep);
+}
+
+.angebot s { color: var(--soft) }
+
+.legal-main .angebot-badge {
+  display: inline-block;
+  margin: -4px 0 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--tint);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--accentDeep);
 }
 
 /* ── Schaltflaechen ─────────────────────────────────────────────────────── */
