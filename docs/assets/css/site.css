@@ -198,7 +198,9 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
   font-weight: 600;
 }
 
-.nav-links a.nav-angebot:hover { background: #fff }
+/* Die allgemeine Hover-Regel der Textlinks faerbt weiss — hier die Schrift
+   ausdruecklich dunkel halten, sonst verschwindet sie auf der hellen Pille. */
+.nav-links a.nav-angebot:hover { background: #fff; color: var(--ink) }
 
 .nav-burger {
   display: none;
