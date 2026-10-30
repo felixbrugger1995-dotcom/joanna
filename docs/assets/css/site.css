@@ -1540,6 +1540,32 @@ h1, h2, h3 { overflow-wrap: break-word; hyphens: auto }
 .punkte ul { margin: 0; padding-left: 20px }
 .punkte li { color: #4a4d40 }
 
+/* Freiwillige Zustimmung zu Fotos (Punkt 9) — gruen abgesetzt wie im
+   gedruckten Bogen, mit leeren Kaestchen zum Ankreuzen. */
+.zustimmung {
+  margin-top: 14px;
+  padding: 18px 20px;
+  background: var(--tint);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+}
+
+.legal-main .zustimmung p { margin: 0; font-size: var(--fs-small); line-height: 1.6; color: #4a4d40 }
+.legal-main .zustimmung .zustimmung-titel { margin-bottom: 10px; font-weight: 600; color: var(--ink) }
+.legal-main .zustimmung .ankreuz { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px }
+
+.kaestchen {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  border: 1.5px solid var(--accentDeep);
+  border-radius: 3px;
+  background: var(--surface);
+}
+
+.legal-main .zustimmung .zustimmung-hinweis { margin-top: 12px; font-size: var(--fs-eyebrow); color: var(--soft) }
+
 .legal-main .feinabdruck { margin: 24px 0 0; font-size: var(--fs-eyebrow); color: #9a9c8e }
 
 /* Abschlussblock: beendet jede Unterseite auf dieselbe Weise. */
