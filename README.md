@@ -125,9 +125,12 @@ davon unabhängig 15 km als Radius, innerhalb dessen keine Fahrtkosten anfallen.
 | `tools/extract-images.mjs` | schneidet die Leistungs-Fotos aus dem image-slot-Sidecar |
 | `tools/fetch-fonts.mjs` | holt die Schriften zu `docs/assets/fonts/`, damit nichts von Google nachgeladen wird |
 | `tools/bump-assets.mjs` | setzt den Versionsstempel `?v=…` — nach jeder Änderung unter `assets/` ausführen |
+| `tools/vereinbarung-pdf.mjs` | erzeugt `docs/behandlungsvereinbarung.pdf` aus `tools/vereinbarung-pdf.html` (braucht Edge oder Chrome) |
 
-Die ersten drei werden nur beim Import gebraucht, `bump-assets.mjs` im
-laufenden Betrieb.
+Die ersten drei werden nur beim Import gebraucht, `bump-assets.mjs` und
+`vereinbarung-pdf.mjs` im laufenden Betrieb. Ändert sich der Text der
+Behandlungsvereinbarung, gehört er in `docs/vereinbarung.html` und in die
+Druckvorlage, danach die PDF neu erzeugen.
 
 ## Veröffentlichen
 

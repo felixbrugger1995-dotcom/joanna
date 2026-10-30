@@ -1,0 +1,214 @@
+<!doctype html>
+<!-- Druckvorlage fuer docs/behandlungsvereinbarung.pdf.
+     Erzeugen mit: node tools/vereinbarung-pdf.mjs
+     Der Text muss mit docs/vereinbarung.html uebereinstimmen — wer dort
+     etwas aendert, aendert es hier mit und erzeugt die PDF neu. -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Behandlungsvereinbarung – JOANNA Mobile Tierphysiotherapie</title>
+<style>
+@font-face { font-family: 'Outfit'; font-weight: 700; src: url('../docs/assets/fonts/outfit-700.woff2') format('woff2') }
+@font-face { font-family: 'Jakarta'; font-weight: 400; src: url('../docs/assets/fonts/plus-jakarta-sans-400.woff2') format('woff2') }
+@font-face { font-family: 'Jakarta'; font-weight: 500; src: url('../docs/assets/fonts/plus-jakarta-sans-500.woff2') format('woff2') }
+@font-face { font-family: 'Jakarta'; font-weight: 600; src: url('../docs/assets/fonts/plus-jakarta-sans-600.woff2') format('woff2') }
+@font-face { font-family: 'Jakarta'; font-weight: 700; src: url('../docs/assets/fonts/plus-jakarta-sans-700.woff2') format('woff2') }
+
+@page { size: A4; margin: 16mm 18mm 18mm }
+
+:root {
+  --ink: #2b2f26;
+  --text: #4a4d40;
+  --soft: #717466;
+  --line: #dcdcd0;
+  --accent: #7d9060;
+  --deep: #586d46;
+  --tint: #eaeadd;
+}
+
+* { box-sizing: border-box }
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact }
+
+body {
+  margin: 0;
+  font-family: 'Jakarta', sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Kopf: Wortmarke links, Kontakt rechts, olivgruene Linie darunter. */
+.kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 4mm;
+  border-bottom: 1.5pt solid var(--deep);
+  margin-bottom: 7mm;
+}
+
+.marke { display: flex; align-items: center; gap: 3mm }
+.marke svg { width: 8mm; height: 8mm; fill: var(--deep) }
+.marke-text { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 17pt; letter-spacing: .22em; color: var(--deep); line-height: 1 }
+.marke-zusatz { display: block; margin-top: 1.2mm; font-family: 'Jakarta', sans-serif; font-size: 7.4pt; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft) }
+
+.kontakt { text-align: right; font-size: 8pt; line-height: 1.55; color: var(--soft) }
+
+h1 { margin: 0 0 2mm; font-size: 16pt; font-weight: 600; line-height: 1.2; color: var(--ink) }
+.einleitung { margin: 0 0 5mm; color: var(--soft) }
+.bestaetige { margin: 0 0 4mm; font-weight: 600; color: var(--ink) }
+
+.punkt { break-inside: avoid; padding: 3mm 0; border-top: .6pt solid var(--line) }
+.punkt h2 { margin: 0 0 1.2mm; font-size: 8.2pt; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--deep) }
+.punkt ul { margin: 0; padding-left: 4.5mm }
+.punkt li { margin: 0 0 .6mm }
+.punkt li::marker { color: var(--accent) }
+
+.zustimmung {
+  break-inside: avoid;
+  margin-top: 2.5mm;
+  padding: 3.5mm 4.5mm;
+  background: var(--tint);
+  border-left: 2pt solid var(--accent);
+  border-radius: 2.5mm;
+}
+
+.zustimmung p { margin: 0 }
+.zustimmung .titel { margin-bottom: 2mm; font-weight: 600; color: var(--ink) }
+.ankreuz { display: flex; gap: 2.5mm; align-items: flex-start; margin-bottom: 1.6mm !important; color: var(--ink) }
+.kaestchen { flex: none; width: 3.8mm; height: 3.8mm; margin-top: .4mm; border: .9pt solid var(--deep); border-radius: .6mm; background: #fff }
+.zustimmung .hinweis { margin-top: 2mm; font-size: 8pt; line-height: 1.5; color: var(--soft) }
+
+/* Unterschriftenblock bleibt zusammen, notfalls auf der Folgeseite. */
+.unterschrift { break-inside: avoid; margin-top: 6mm; padding-top: 4mm; border-top: .6pt solid var(--line) }
+.unterschrift > p { margin: 0 0 13mm; font-weight: 600; color: var(--ink) }
+.felder { display: grid; grid-template-columns: 1fr 1fr; column-gap: 10mm; row-gap: 15mm }
+.feld { border-top: .8pt solid var(--ink); padding-top: 1.4mm; font-size: 7.8pt; color: var(--soft) }
+
+.fuss { margin-top: 8mm; font-size: 7.4pt; color: var(--soft); text-align: center }
+</style>
+</head>
+<body>
+
+<header class="kopf">
+  <div class="marke">
+    <svg viewBox="0 0 28 26" aria-hidden="true">
+      <ellipse cx="6" cy="11" rx="2.6" ry="3.1"/><ellipse cx="11.3" cy="7" rx="2.8" ry="3.4"/><ellipse cx="16.7" cy="7" rx="2.8" ry="3.4"/><ellipse cx="22" cy="11" rx="2.6" ry="3.1"/>
+      <path d="M14 12.2c-4 0-7 2.9-7 6 0 2.4 2 3.6 4.1 3.6 1.1 0 2-.5 2.9-.5s1.8.5 2.9.5c2.1 0 4.1-1.2 4.1-3.6 0-3.1-3-6-7-6z"/>
+    </svg>
+    <div>
+      <span class="marke-text">JOANNA</span>
+      <span class="marke-zusatz">Mobile Tierphysiotherapie für Kleintiere</span>
+    </div>
+  </div>
+  <div class="kontakt">
+    Thannhausen<br>
+    Tel. 0174 661 4553<br>
+    info@joanna-tierphysio.de · joanna-tierphysio.de
+  </div>
+</header>
+
+<h1>Behandlungsinformationen &amp; Einverständniserklärung</h1>
+<p class="einleitung">Damit die Behandlung für dich und deinen Liebling angenehm und sicher abläuft, findest du hier die wichtigsten Punkte.</p>
+<p class="bestaetige">Mit meiner Unterschrift bestätige ich:</p>
+
+<section class="punkt">
+  <h2>1 · Physiotherapeutische Behandlung</h2>
+  <ul>
+    <li>Tierphysiotherapie ist eine unterstützende Behandlung zur Förderung von Beweglichkeit, Regeneration und Wohlbefinden meines Tieres.</li>
+    <li>Sie ersetzt keine tierärztliche Diagnose oder Behandlung; bei Bedarf kann eine tierärztliche Abklärung sinnvoll sein.</li>
+    <li>Ich habe die Therapeutin über bekannte Erkrankungen, Operationen, Verletzungen oder aktuelle Medikamente meines Tieres informiert.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>2 · Mögliche Reaktionen nach der Behandlung</h2>
+  <ul>
+    <li>Kurzfristig können Reaktionen auftreten, zum Beispiel Müdigkeit, Muskelkater oder eine vorübergehende Verstärkung der Symptome.</li>
+    <li>Diese Reaktionen klingen meist innerhalb von 24–48 Stunden wieder ab.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>3 · Verhalten &amp; Sicherheit meines Tieres</h2>
+  <ul>
+    <li>Ich informiere die Therapeutin über besondere Verhaltensweisen meines Tieres (zum Beispiel Angst, Schmerzen, Unsicherheit oder Aggressivität).</li>
+    <li>Während der Behandlung bin ich weiterhin für mein Tier verantwortlich.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>4 · Behandlungsumgebung</h2>
+  <ul>
+    <li>Die Behandlung findet mobil bei mir zuhause statt.</li>
+    <li>Die Therapeutin bringt eine Behandlungsmatte mit. Ich sorge zusätzlich für einen ruhigen, möglichst rutschfesten und freien Bereich.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>5 · Ansteckende Krankheiten</h2>
+  <ul>
+    <li>Mein Tier hat zum Zeitpunkt der Behandlung keine mir bekannten ansteckenden Erkrankungen (zum Beispiel Pilzinfektionen, Parasiten, ansteckende Atemwegserkrankungen).</li>
+    <li>Bei bekanntem Verdacht informiere ich die Therapeutin vor dem Termin.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>6 · Haftung</h2>
+  <ul>
+    <li>Ein bestimmter Behandlungserfolg kann nicht garantiert werden, da jedes Tier individuell reagiert.</li>
+    <li>Ich hafte für Schäden, die durch mein Tier während der Behandlung entstehen.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>7 · Termine &amp; Absagen</h2>
+  <ul>
+    <li>Es handelt sich um eine mobile Praxis mit eingeplanter Anfahrt.</li>
+    <li>Termine sage ich mindestens 24 Stunden vorher ab oder verschiebe sie rechtzeitig.</li>
+    <li>Bei kurzfristigeren Absagen oder Nichterscheinen kann der Termin in Rechnung gestellt werden.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>8 · Bezahlung</h2>
+  <ul>
+    <li>Ich bezahle die Behandlung direkt nach dem Termin in bar oder nach Vereinbarung per Überweisung.</li>
+  </ul>
+</section>
+
+<section class="punkt">
+  <h2>9 · Foto- &amp; Videoaufnahmen</h2>
+  <ul>
+    <li>Während der Behandlung dürfen zur Dokumentation des Therapieverlaufs Foto- oder Videoaufnahmen gemacht werden. Diese bleiben in meiner Patientenakte und werden nicht veröffentlicht.</li>
+  </ul>
+  <div class="zustimmung">
+    <p class="titel">Darüber hinaus kann ich freiwillig zustimmen:</p>
+    <p class="ankreuz"><span class="kaestchen"></span>Aufnahmen meines Tieres dürfen auf der Website und in den sozialen Medien von JOANNA veröffentlicht werden.</p>
+    <p class="ankreuz"><span class="kaestchen"></span>Zusätzlich dürfen Aufnahmen veröffentlicht werden, auf denen ich selbst erkennbar bin.</p>
+    <p class="hinweis">Diese Zustimmung ist freiwillig und hat keinen Einfluss auf die Behandlung. Ich kann sie jederzeit formlos widerrufen; bereits veröffentlichte Aufnahmen werden dann entfernt, soweit das möglich ist. Ob überhaupt Aufnahmen entstehen, entscheidet die Therapeutin im Einzelfall – aus meinem Einverständnis ergibt sich kein Anspruch darauf.</p>
+  </div>
+</section>
+
+<section class="punkt">
+  <h2>10 · Datenschutz</h2>
+  <ul>
+    <li>Meine persönlichen Daten sowie Informationen über mein Tier werden vertraulich gespeichert und zur Behandlung genutzt – gemäß der Datenschutzerklärung (joanna-tierphysio.de/datenschutz).</li>
+  </ul>
+</section>
+
+<section class="unterschrift">
+  <p>Ich habe alle Punkte gelesen und bin mit der physiotherapeutischen Behandlung meines Tieres einverstanden.</p>
+  <div class="felder">
+    <div class="feld">Name der Halterin / des Halters</div>
+    <div class="feld">Name des Tieres</div>
+    <div class="feld">Ort, Datum</div>
+    <div class="feld">Unterschrift</div>
+  </div>
+</section>
+
+<p class="fuss">JOANNA · mobile Tierphysiotherapeutin für Kleintiere · Thannhausen</p>
+
+</body>
+</html>
